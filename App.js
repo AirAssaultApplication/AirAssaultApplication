@@ -5,16 +5,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-	  <View style={styles.bottomView}>
-          <Text style={styles.textStyle}>
-			Bottom View
-		  </Text>
-      </View>
       <StatusBar style="auto" />
     </View>
-	
-          
-    
   );
 }
 
@@ -24,14 +16,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  bottomView: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#EE5407',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute', //Here is the trick
-    bottom: 0, //Here is the trick
   },
 });
