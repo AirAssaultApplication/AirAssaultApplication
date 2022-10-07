@@ -16,7 +16,6 @@
     "expo": "~46.0.13",
     "expo-cli": "^4.3.0",
     "expo-status-bar": "~1.4.0",
-    "jest": "^29.1.2",
     "npm": "^8.19.2",
     "react": "18.0.0",
     "react-dom": "18.0.0",
@@ -27,7 +26,8 @@
     "shell-quote": "^1.7.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "jest": "^29.1.2"
   },
   "private": true
 }
