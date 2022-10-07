@@ -18,16 +18,18 @@
       "**/*"
     ],
     "ios": {
+      "versionCode": "0.0.1",
       "supportsTablet": true
     },
     "android": {
-      "versionCode": "51",
+      "versionCode": "0.0.1",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
+      "versionCode": null,
       "favicon": "./assets/favicon.png"
     }
   }
