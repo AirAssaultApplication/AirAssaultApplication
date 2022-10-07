@@ -23,7 +23,8 @@
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "~3.15.0",
     "react-native-web": "~0.18.7",
-    "shell-quote": "^1.7.3"
+    "shell-quote": "^1.7.3",
+    "expo-application": "~4.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
