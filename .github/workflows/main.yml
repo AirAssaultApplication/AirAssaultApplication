@@ -57,8 +57,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
           
       - name: Build with Gradle
-        run:         
-          cd android && ./gradlew assembleRelease
+      - uses: gradle/gradle-build-action@v2
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
