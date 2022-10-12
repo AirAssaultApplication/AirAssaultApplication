@@ -30,16 +30,48 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+
+  build-android:
+  
+    needs: build
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      - name: Checkout latest version
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
           
-      - name: Update Build Number    
-        uses: robertherber/github-action-bump-eas-buildnumber@0.1.1
-
-      # Runs a single command using the runners shell
-      # - name: Run a one-line script
-        # run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+          
+      - name: NPM CI
         run: |
           npm ci
           # npx jest
+          
+          cd android && ./gradlew assembleRelease
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
+
+#       # Runs a single command using the runners shell
+#       # - name: Run a one-line script
+#         # run: echo Hello, world!
+        
+
+#       # Runs a set of commands using the runners shell
+#       - name: Run a multi-line script
+#         run: |
+#           npm ci
+#           # npx jest
+          
+#       - name: React Native Android Build APK
+#         uses: realabbas/Github-Actions-React-Native@v1.1.2
+          
