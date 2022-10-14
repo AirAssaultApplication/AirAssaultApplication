@@ -18,6 +18,7 @@ elem.dispatchEvent(intro);
       <Text style={styles.buttonText}> I am a button! </Text>
       </TouchableHighlight>
 */
+
 export default function App() {
   return (
   <NavigationContainer>
