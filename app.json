@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "AirAssaultApp",
+    "slug": "AirAssaultApp",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "versionCode": "1",
+      "supportsTablet": true
+    },
+    "android": {
+      "versionCode": "1",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "versionCode": null,
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
