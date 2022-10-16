@@ -2,6 +2,7 @@
   "expo": {
     "name": "airassaultapplication",
     "slug": "airassaultapplication",
+    "owner": "fau-senior-capstone-group-8",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,16 +19,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alexsocial.airassaultapplication"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.alexsocial.airassaultapplication"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "580e8d2a-59eb-40a4-ad74-e32241d55f4d"
+      }
     }
   }
 }
