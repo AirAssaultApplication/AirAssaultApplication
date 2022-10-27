@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import toplogo from './assets/logo_top.png';
 import bottomlogo from './assets/logo_bottom.png';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function App() {
   return (
@@ -28,7 +31,7 @@ export default function App() {
         <Text style={{ fontSize: 20, color: '#000' }}>News</Text>
       </TouchableOpacity>
       <Image source={bottomlogo} style={styles.logo} /> 
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </View>
   );
 }
@@ -36,7 +39,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
   },
