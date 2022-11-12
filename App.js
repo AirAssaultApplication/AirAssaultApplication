@@ -1,12 +1,45 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import toplogo from './assets/logo_top.png';
 import bottomlogo from './assets/logo_bottom.png';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MD3DarkTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import {
+  Appbar,
+  MD3DarkTheme,
+  MD3LightTheme,
+  adaptNavigationTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 
 import {DetailsScreen} from './PathFinderHome.js';
+
+const { LightTheme, DarkTheme } = adaptNavigationTheme({
+  light: NavigationDefaultTheme,
+  dark: NavigationDarkTheme,
+});
+
+const CombinedDefaultTheme = {
+  ...MD3LightTheme,
+  ...LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
+  },
+};
+const CombinedDarkTheme = {
+  ...MD3DarkTheme,
+  ...DarkTheme,
+  colors: {
+    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
+  },
+};
 
 /*font stuff
 import { useFonts } from "expo-font";
@@ -18,14 +51,14 @@ const Home = () => {
 }
 */
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'tomato',
-    secondary: 'yellow',
-  },
-};
+function CustomNavigationBar({ navigation, back }) {
+  return (
+    <Appbar.Header mode='center-aligned'>
+      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      <Appbar.Content title="Air Assault Application" />
+    </Appbar.Header>
+  );
+}
 
 const Stack = createNativeStackNavigator();
 
@@ -58,7 +91,7 @@ function HomeScreen({ navigation }) {
         </TouchableOpacity>
 
         <Image source={bottomlogo} style={styles.logo} />
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
       </View>
   );
 }
@@ -66,16 +99,16 @@ function HomeScreen({ navigation }) {
 
 export default function App() {
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        
-        <Stack.Navigator initialRouteName="Home">
-
+    <PaperProvider theme={CombinedDarkTheme}>
+      <NavigationContainer theme={CombinedDarkTheme}>
+        <Stack.Navigator 
+          initialRouteName="Home"
+          screenOptions={{
+            header: (props) => <CustomNavigationBar {...props} />,
+          }}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
-
         </Stack.Navigator>
-
       </NavigationContainer>
     </PaperProvider>
     );
