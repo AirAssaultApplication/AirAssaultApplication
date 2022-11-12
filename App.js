@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import toplogo from './assets/logo_top.png';
 import bottomlogo from './assets/logo_bottom.png';
+import * as SplashScreen from 'expo-splash-screen'; //to be used
+
 /*font stuff
 import { useFonts } from "expo-font";
 
