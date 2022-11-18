@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import toplogo from './assets/logo_top.png';
 import bottomlogo from './assets/logo_bottom.png';
 import {
@@ -14,6 +14,16 @@ import {
   MD3DarkTheme,
   MD3LightTheme,
   adaptNavigationTheme,
+  Avatar, 
+  Card, 
+  Divider,
+  IconButton,
+  List,
+  Button, 
+  Title,
+  Text,
+  Paragraph,
+  TouchableRipple,
   Provider as PaperProvider,
 } from 'react-native-paper';
 
@@ -64,38 +74,124 @@ const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-        <Image source={toplogo} style={styles.logo} />
-        <TouchableOpacity /*BUTTON FUNC.*/
-          onPress={() => alert('To be implemented!')}
-          style={{ backgroundColor: '#212121' }}>
-          <Text style={styles.homebutton}>Air Assault Program</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Details')}
-          style={{ backgroundColor: '#212121' }}>
-          <Text style={styles.homebutton}>Pathfinder Program</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => alert('To be implemented!')}
-          style={{ backgroundColor: '#212121' }}>
-          <Text style={styles.homebutton}>Ranger Program</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => alert('To be implemented!')}
-          style={{ backgroundColor: '#212121' }}>
-          <Text style={styles.homebutton}>News</Text>
-        </TouchableOpacity>
-
-        <Image source={bottomlogo} style={styles.logo} />
-        <StatusBar style="light" />
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="light" />
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <View style={{marginTop: 8, marginBottom: 8}}>
+        <Text variant='headlineLarge'>Programs</Text>
       </View>
+      <View style={styles.card}>
+        <TouchableRipple
+          onPress={() => console.log('Pressed')}
+          borderless={true}
+        >
+          <Card mode='contained'>
+            <Card.Content>
+              <View style={{flexDirection:"row"}}>
+                <View style={{flex:1}}>
+                  <View style={{justifyContent: 'flex-start'}}>
+                    <Text variant="titleLarge">Air Assault Program</Text>
+                    <Paragraph>&quot;The Ten Toughest Days in the Army&quot;</Paragraph>
+                  </View>
+                </View>
+                <View>
+                  <View style={{justifyContent: 'flex-end', marginTop: 8}}>
+                    <Button icon='chevron-right' contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                    </Button>
+                  </View>
+                </View>
+              </View>
+            </Card.Content>
+          </Card>
+        </TouchableRipple>
+      </View>
+      <View style={styles.card}>
+        <TouchableRipple
+          onPress={() => navigation.navigate('Details')}
+          borderless={true}
+        >
+          <Card mode='contained'>
+            <Card.Content>
+              <View style={{flexDirection:"row"}}>
+                <View style={{flex:1}}>
+                  <View style={{justifyContent: 'flex-start'}}>
+                    <Text variant="titleLarge">Pathfinder Program</Text>
+                    <Paragraph>&quot;First In, Last Out&quot;</Paragraph>
+                  </View>
+                </View>
+                <View>
+                  <View style={{justifyContent: 'flex-end', marginTop: 8}}>
+                    <Button icon='chevron-right' contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                    </Button>
+                  </View>
+                </View>
+              </View>
+            </Card.Content>
+          </Card>
+        </TouchableRipple>
+      </View>
+      <View style={styles.card}>
+        <TouchableRipple
+          onPress={() => console.log('Pressed')}
+          borderless={true}
+        >
+          <Card mode='contained'>
+            <Card.Content>
+              <View style={{flexDirection:"row"}}>
+                <View style={{flex:1}}>
+                  <View style={{justifyContent: 'flex-start'}}>
+                    <Text variant="titleLarge">Ranger Program</Text>
+                    <Paragraph>&quot;Rangers lead the way&quot;</Paragraph>
+                  </View>
+                </View>
+                <View>
+                  <View style={{justifyContent: 'flex-end', marginTop: 8}}>
+                    <Button icon='chevron-right' contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                    </Button>
+                  </View>
+                </View>
+              </View>
+            </Card.Content>
+          </Card>
+        </TouchableRipple>
+      </View>
+      <View style={{marginTop: 48}}>
+        <Text variant='headlineLarge'>News</Text>
+        <List.Item
+          title="Interesting news title!"
+          description="Ranger News · 1h"
+          titleNumberOfLines={10}
+          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+        />
+        <Divider />
+        <List.Item
+          title="Interesting news title!"
+          description="Pathfinder News · 2d"
+          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+        />
+        <Divider />
+        <List.Item
+          title="Interesting news title!"
+          description="Air Assault News · 3d"
+          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+        />
+        <Divider />
+        <List.Item
+          title="Interesting news title!"
+          description="4d"
+          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+        />
+        <Divider />
+        <List.Item
+          title="Interesting news title!"
+          description="5d"
+          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+        />
+      </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
-
 
 export default function App() {
   return (
@@ -115,28 +211,22 @@ export default function App() {
   }
 
       const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          backgroundColor: '#212121',
-          alignItems: 'center',
+        card: {
+          marginTop: 16,
           justifyContent: 'center',
         },
-        logo: {
-          width: '100%',
-          height: 200,
-          resizeMode: 'contain',
+        container: {
+          flex: 1,
+          paddingTop: 8,
+          paddingLeft: 8,
+          paddingRight: 8,
         },
-        homebutton: {
-          fontSize: 20,
-          color: '#fff',
-          borderColor: '#EDB402',
+        scrollView: {
+          marginHorizontal: 20,
+        },
+        newsImage: {
           borderWidth: 2,
-          backgroundColor: '#2B2B2B',
-          borderRadius: 4,
-          width: 300,
-          height: 100,
-          textAlign: 'center',
-          textAlignVertical: 'center',
+          borderRadius: 8
         },
       });
 
