@@ -27,7 +27,7 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 
-import {DetailsScreen} from './PathFinderHome.js';
+import {AirAssaultScreen} from './AirAssaultHome.js';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   light: NavigationDefaultTheme,
@@ -52,20 +52,20 @@ const CombinedDarkTheme = {
 };
 
 /*font stuff
-import { useFonts } from "expo-font";
+import { useFonts } from 'expo-font';
 
 const Home = () => {
   let [fontsLoaded] = useFonts ({
-    "Arial-Black":  require("./assets/fontfam.ttf"),
+    'Arial-Black':  require('./assets/fontfam.ttf'),
   });
 }
 */
 
-function CustomNavigationBar({ navigation, back }) {
+function CustomNavigationBar({ navigation, back, route }) {
   return (
     <Appbar.Header mode='center-aligned'>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title="Air Assault Application" />
+      <Appbar.Content title={route.name} />
     </Appbar.Header>
   );
 }
@@ -75,22 +75,22 @@ const Stack = createNativeStackNavigator();
 function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
+      <StatusBar style='light' />
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={{marginTop: 8, marginBottom: 8}}>
         <Text variant='headlineLarge'>Programs</Text>
       </View>
       <View style={styles.card}>
         <TouchableRipple
-          onPress={() => console.log('Pressed')}
+          onPress={() => navigation.navigate('Air Assault Program')}
           borderless={true}
         >
           <Card mode='contained'>
             <Card.Content>
-              <View style={{flexDirection:"row"}}>
+              <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
                   <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant="titleLarge">Air Assault Program</Text>
+                    <Text variant='titleLarge'>Air Assault Program</Text>
                     <Paragraph>&quot;The Ten Toughest Days in the Army&quot;</Paragraph>
                   </View>
                 </View>
@@ -107,16 +107,16 @@ function HomeScreen({ navigation }) {
       </View>
       <View style={styles.card}>
         <TouchableRipple
-          onPress={() => navigation.navigate('Details')}
+          onPress={() => console.log('Pressed')}
           borderless={true}
         >
-          <Card mode='contained'>
+          <Card mode='outlined'>
             <Card.Content>
-              <View style={{flexDirection:"row"}}>
+              <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
                   <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant="titleLarge">Pathfinder Program</Text>
-                    <Paragraph>&quot;First In, Last Out&quot;</Paragraph>
+                    <Text variant='titleLarge'>Pathfinder Program</Text>
+                    <Paragraph>Coming soon</Paragraph>
                   </View>
                 </View>
                 <View>
@@ -135,13 +135,13 @@ function HomeScreen({ navigation }) {
           onPress={() => console.log('Pressed')}
           borderless={true}
         >
-          <Card mode='contained'>
+          <Card mode='outlined'>
             <Card.Content>
-              <View style={{flexDirection:"row"}}>
+              <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
                   <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant="titleLarge">Ranger Program</Text>
-                    <Paragraph>&quot;Rangers lead the way&quot;</Paragraph>
+                    <Text variant='titleLarge'>Ranger Program</Text>
+                    <Paragraph>Coming soon</Paragraph>
                   </View>
                 </View>
                 <View>
@@ -158,34 +158,34 @@ function HomeScreen({ navigation }) {
       <View style={{marginTop: 48}}>
         <Text variant='headlineLarge'>News</Text>
         <List.Item
-          title="Interesting news title!"
-          description="Ranger News · 1h"
+          title='Interesting news title!'
+          description='Ranger News · 1h'
           titleNumberOfLines={10}
-          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
         />
         <Divider />
         <List.Item
-          title="Interesting news title!"
-          description="Pathfinder News · 2d"
-          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+          title='Interesting news title!'
+          description='Pathfinder News · 2d'
+          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
         />
         <Divider />
         <List.Item
-          title="Interesting news title!"
-          description="Air Assault News · 3d"
-          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+          title='Interesting news title!'
+          description='Air Assault News · 3d'
+          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
         />
         <Divider />
         <List.Item
-          title="Interesting news title!"
-          description="4d"
-          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+          title='Interesting news title!'
+          description='4d'
+          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
         />
         <Divider />
         <List.Item
-          title="Interesting news title!"
-          description="5d"
-          right={props => <List.Image variant="image" style={styles.newsImage} resizeMode={"cover"} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
+          title='Interesting news title!'
+          description='5d'
+          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg'}} />}
         />
       </View>
       </ScrollView>
@@ -198,12 +198,12 @@ export default function App() {
     <PaperProvider theme={CombinedDarkTheme}>
       <NavigationContainer theme={CombinedDarkTheme}>
         <Stack.Navigator 
-          initialRouteName="Home"
+          initialRouteName='Air Assault Application'
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name='Air Assault Application' component={HomeScreen}/>
+          <Stack.Screen name='Air Assault Program' component={AirAssaultScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

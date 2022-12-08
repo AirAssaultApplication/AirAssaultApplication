@@ -13,7 +13,7 @@ const HomeRoute = () => <Text>Home</Text>;
 const ProfileRoute = () => <Text>Profile</Text>;
 
 
-export function DetailsScreen() {
+export function AirAssaultScreen() {
     const theme = useTheme();
     const [index, setIndex] = React.useState(1);
     const [routes] = React.useState([
