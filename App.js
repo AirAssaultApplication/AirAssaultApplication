@@ -46,8 +46,46 @@ const CombinedDarkTheme = {
   ...MD3DarkTheme,
   ...DarkTheme,
   colors: {
-    ...MD3DarkTheme.colors,
-    ...DarkTheme.colors,
+      "primary": "rgb(233, 196, 0)",
+      "onPrimary": "rgb(58, 48, 0)",
+      "primaryContainer": "rgb(84, 70, 0)",
+      "onPrimaryContainer": "rgb(255, 225, 109)",
+      "secondary": "rgb(210, 198, 161)",
+      "onSecondary": "rgb(55, 48, 22)",
+      "secondaryContainer": "rgb(78, 70, 42)",
+      "onSecondaryContainer": "rgb(239, 226, 188)",
+      "tertiary": "rgb(170, 208, 178)",
+      "onTertiary": "rgb(21, 55, 34)",
+      "tertiaryContainer": "rgb(45, 78, 55)",
+      "onTertiaryContainer": "rgb(198, 236, 205)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgb(29, 27, 22)",
+      "onBackground": "rgb(232, 226, 217)",
+      "surface": "rgb(29, 27, 22)",
+      "onSurface": "rgb(232, 226, 217)",
+      "surfaceVariant": "rgb(75, 71, 57)",
+      "onSurfaceVariant": "rgb(205, 198, 180)",
+      "outline": "rgb(151, 144, 128)",
+      "outlineVariant": "rgb(75, 71, 57)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(232, 226, 217)",
+      "inverseOnSurface": "rgb(51, 48, 42)",
+      "inversePrimary": "rgb(112, 93, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(39, 35, 21)",
+        "level2": "rgb(45, 41, 20)",
+        "level3": "rgb(51, 46, 20)",
+        "level4": "rgb(54, 47, 19)",
+        "level5": "rgb(58, 51, 19)"
+      },
+      "surfaceDisabled": "rgba(232, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(232, 226, 217, 0.38)",
+      "backdrop": "rgba(52, 48, 36, 0.4)"
   },
 };
 
@@ -85,7 +123,7 @@ function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate('Air Assault Program')}
           borderless={true}
         >
-          <Card mode='contained'>
+          <Card mode='outlined'>
             <Card.Content>
               <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
