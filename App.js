@@ -30,8 +30,8 @@ import {
 import {AirAssaultScreen} from './AirAssaultHome.js';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  light: NavigationDefaultTheme,
-  dark: NavigationDarkTheme,
+  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationdark: NavigationDarkTheme,
 });
 
 const CombinedDefaultTheme = {
