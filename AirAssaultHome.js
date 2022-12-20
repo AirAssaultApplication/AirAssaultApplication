@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     marginTop: 16,
     justifyContent: 'center',
   },
+  cardBtn: {
+    borderRadius: 10
+  },
   container: {
     flex: 1,
     paddingTop: 8,
@@ -63,6 +66,7 @@ export function AirAssaultScreen() {
         <TouchableRipple
           onPress={() => console.log('pressed')}
           borderless={true}
+          style={styles.cardBtn}
         >
           <Card mode='contained'>
             <Card.Content>
@@ -87,6 +91,7 @@ export function AirAssaultScreen() {
         <TouchableRipple
           onPress={() => console.log('pressed')}
           borderless={true}
+          style={styles.cardBtn}
         >
           <Card mode='contained'>
             <Card.Content>
@@ -111,6 +116,7 @@ export function AirAssaultScreen() {
         <TouchableRipple
           onPress={() => console.log('pressed')}
           borderless={true}
+          style={styles.cardBtn}
         >
           <Card mode='contained'>
             <Card.Content>

@@ -122,6 +122,7 @@ function HomeScreen({ navigation }) {
         <TouchableRipple
           onPress={() => navigation.navigate('Air Assault Program')}
           borderless={true}
+          style={styles.cardBtn}
         >
           <Card mode='outlined'>
             <Card.Content>
@@ -147,6 +148,7 @@ function HomeScreen({ navigation }) {
         <TouchableRipple
           onPress={() => console.log('Pressed')}
           borderless={true}
+          style={styles.cardBtn}
         >
           <Card mode='outlined'>
             <Card.Content>
@@ -172,6 +174,7 @@ function HomeScreen({ navigation }) {
         <TouchableRipple
           onPress={() => console.log('Pressed')}
           borderless={true}
+          style={styles.cardBtn}
         >
           <Card mode='outlined'>
             <Card.Content>
@@ -252,6 +255,9 @@ export default function App() {
         card: {
           marginTop: 16,
           justifyContent: 'center',
+        },
+        cardBtn: {
+          borderRadius: 10
         },
         container: {
           flex: 1,
