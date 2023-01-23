@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flashcards",
+  "info": {
+    "singularName": "flashcard",
+    "pluralName": "flashcards",
+    "displayName": "Flashcard"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question": {
+      "type": "json"
+    },
+    "answer": {
+      "type": "json"
+    }
+  }
+}
