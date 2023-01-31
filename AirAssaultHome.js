@@ -83,9 +83,41 @@ export function createFlashcard(flashcard){
   );
 }
 
-export function AirAssaultScreen() {
+export function AirAssaultScreen({ navigation }) {
   const theme = useTheme();
-  
+
+  return(
+    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <View style={{marginTop: 8, marginBottom: 8}}>
+        <Text variant='headlineSmall' style={{marginBottom:8, alignSelf: "center"}}>The Sabalauski Air Assault School</Text>
+        <View style={{ marginTop: 20, justifyContent: "space-between", flexDirection:"row"}}>
+          <View style={{width:'45%', marginHorizontal: 10}}>
+            <TouchableRipple
+              onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
+              borderless={true}
+              style={{borderRadius: 20}}
+            >
+              <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Phase I</Button>
+            </TouchableRipple>
+          </View>
+          <View style={{width:'45%', marginHorizontal: 10}}>
+            <TouchableRipple
+              onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
+              borderless={true}
+              style={{borderRadius: 20}}
+            >
+              <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Phase II</Button>
+            </TouchableRipple>
+          </View>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+export function Phase1Screen({ navigation }){
+  const theme = useTheme();
+
   let flashcards = [
     {
       "id": 0,
@@ -112,10 +144,40 @@ export function AirAssaultScreen() {
 
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-    <View style={{marginTop: 8, marginBottom: 8}}>
-      <Text variant='headlineSmall' style={{marginBottom:8}}>The Sabalauski Air Assault School</Text>
-      <Text variant='headlineMedium'>Phase I</Text>
-    </View>
+    {flashcardViews}
+    </ScrollView>
+  );
+}
+
+export function Phase2Screen({ navigation }){
+  const theme = useTheme();
+
+  let flashcards = [
+    {
+      "id": 0,
+      "question": "What is the allowable cargo load of the LUH-72A in its normal configuration when used for MEDEVAC operations?",
+      "answer": "2 litter, 1 medic, and 5 ambulatory."
+    },
+    {
+      "id": 1,
+      "question": "What is the primary use for the CH-47 when used during CASEVAC missions?",
+      "answer": "Mass Casualty Evacuation."
+    },
+    {
+      "id": 2,
+      "question": "What is the crew of a LUH- 72A when not being used for MEDEVAC operations?",
+      "answer": "(4) Pilot, Co Pilot, Crew Chief, and In-Flight Medic."
+    },
+  ];
+
+  let flashcardViews = [];
+
+  for(const item of flashcards){
+    flashcardViews.push(createFlashcard(item));
+  }
+
+  return (
+    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
     {flashcardViews}
     </ScrollView>
   );
