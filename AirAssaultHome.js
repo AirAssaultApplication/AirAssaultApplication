@@ -44,10 +44,20 @@ const styles = StyleSheet.create({
 
 export function createFlashcard(flashcard){
   const theme = useTheme();
+
+  const [flashcardText, setFlashcardText] = React.useState(flashcard.question);
+
   return(
     <View style={styles.card} key={flashcard.id}>
       <TouchableRipple
-        onPress={() => console.log('pressed')}
+        onPress={() => {
+          if(flashcardText != flashcard.answer){
+            setFlashcardText(flashcard.answer);
+          }
+          else{
+            setFlashcardText(flashcard.question);
+          }
+        }}
         borderless={true}
         style={styles.cardBtn}
       >
@@ -56,7 +66,7 @@ export function createFlashcard(flashcard){
             <View style={{flexDirection:'row'}}>
               <View style={{flex:1}}>
                 <View style={{justifyContent: 'flex-start'}}>
-                  <Text variant='titleMedium'>{flashcard.question}</Text>
+                  <Text variant='titleMedium'>{flashcardText}</Text>
                 </View>
               </View>
               <View>
@@ -75,7 +85,7 @@ export function createFlashcard(flashcard){
 
 export function AirAssaultScreen() {
   const theme = useTheme();
-
+  
   let flashcards = [
     {
       "id": 0,
