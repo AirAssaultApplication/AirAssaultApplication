@@ -1,24 +1,38 @@
 {
+    "cli": {
+      "promptToConfigurePushNotifications": false,
+      "appVersionSource": "remote" //"local" will store version based on builds
+    },
     "build": {
-      "development": {
-        "developmentClient": true,
-        "distribution": "internal"
-      },
+      //Android V1
       "preview": {
+        "extends": "production",
         "distribution": "internal",
         "android": {
           "buildType": "apk"
         }
       },
+      //untested
+      "development": {
+        "extends": "production",
+        "distribution": "internal"
+      },
+      //untested
       "preview2": {
+        "extends": "production",
         "android": {
           "gradleCommand": ":app:assembleRelease"
         }
       },
-      "preview3": {
-        "developmentClient": true
+      //iOS V1
+      "iOS": {
+        "extends": "production",
+        "distribution": "internal"
       },
-      "production": {}
+      //version incrementer
+      "production": {
+        "autoIncrement": true
+      }
     }
   }
   
