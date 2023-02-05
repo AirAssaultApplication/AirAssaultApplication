@@ -29,9 +29,6 @@ import {
 } from 'react-native-paper';
 
 import {AirAssaultScreen} from './AirAssaultHome.js';
-import {Phase1Screen} from './AirAssaultHome.js';
-import {Phase2Screen} from './AirAssaultHome.js';
-
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -249,8 +246,6 @@ export default function App() {
           }}>
           <Stack.Screen name='Air Assault Application' component={HomeScreen}/>
           <Stack.Screen name='Air Assault Program' component={AirAssaultScreen}/>
-          <Stack.Screen name='Air Assault Program: Phase I' component={Phase1Screen}/>
-          <Stack.Screen name='Air Assault Program: Phase II' component={Phase2Screen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
