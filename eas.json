@@ -7,7 +7,6 @@
       //Android V1
       "preview": {
         "extends": "production",
-        "distribution": "internal",
         "android": {
           "buildType": "apk"
         }
