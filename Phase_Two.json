@@ -1,82 +1,112 @@
 [
-    [
-        "1How does the missile know where it is?",
-        "1Because it knows where it isn't"
-    ],
-    [
-        "2 one",
-        "2 two"
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ],
-    [
-        "",
-        ""
-    ]
+  {
+    "id" : 0,
+    "question" : "What is the minimum weight for any sling load to fly?",
+    "answer" : "500 lbs"
+  },
+  {
+    "id" : 1,
+    "question" : "What is the hook capacity of the UH-60L/M?\n",
+    "answer" : "9,000 lbs"
+  },
+  {
+    "id" : 2,
+    "question" : "What are the three types of lacing ropes you can use with the A-22 cargo bag?",
+    "answer" : "Type III nylon, 3/8 inch hemp rope, 7/16 in nylon rope"
+  },
+  {
+    "id" : 3,
+    "question" : "What are the factors of in-flight stability?",
+    "answer" : "Humidity, Altitude and Temperature"
+  },
+  {
+    "id" : 4,
+    "question" : "What reference material covers single point rigging procedures?",
+    "answer" : "TM 4-48.10"
+  },
+  {
+    "id" : 5,
+    "question" : "What is the rank requirement for a qualified sling load inspector?",
+    "answer" : "SPC or above"
+  },
+  {
+    "id" : 6,
+    "question" : "What is the diameter of the 10k apex pin portion?",
+    "answer" : "1 1/8 in "
+  },
+  {
+    "id" : 7,
+    "question" : "What are the three units involved in a sling load operation?",
+    "answer" : "Supported unit, Aviation unit, Receiving unit"
+  },
+  {
+    "id" : 8,
+    "question" : "What is the primary lift point on the 500 gallon fuel blivet?",
+    "answer" : "5/8 screw pin clevis"
+  },
+  {
+    "id" : 9,
+    "question" : "What size landing point is required for a CH-47 with a long line sling load during nighttime operations?",
+    "answer" : "Size 7"
+  },
+  {
+    "id" : 10,
+    "question" : "Why must your sleeves be rolled down when working around aircraft?",
+    "answer" : "Protect from flying debris & flash fires."
+  },
+  {
+    "id" : 11,
+    "question" : "What reference material covers Aircraft Safety?",
+    "answer" : "FM 3-99"
+  },
+  {
+    "id" : 12,
+    "question" : "In the acronym DROP, what does the R stand for?",
+    "answer" : "Reduce Unnecessary Gear"
+  },
+  {
+    "id" : 13,
+    "question" : "What are the three portions of the aircraft that you must avoid at all times?",
+    "answer" : "Main rotor blade, tail rotor blade, and cargo hook (static electricity)."
+  },
+  {
+    "id" : 14,
+    "question" : "In case of a fire, when should you exit the aircraft?",
+    "answer" : "Immediately."
+  },
+  {
+    "id" : 15,
+    "question" : "Define an Air Assault Operation?",
+    "answer" : "Movement of friendly assault forces by rotary wing aircraft to engage enemy forces or to seize and hold key terrain."
+  },
+  {
+    "id" : 16,
+    "question" : "What is a chalk/load defined as?",
+    "answer" : "Personnel and equipment designated to be moved by a specific aircraft."
+  },
+  {
+    "id" : 17,
+    "question" : "What are the six factors that determine abort criteria?",
+    "answer" : "Weather, time, available aircraft, mission essential combat power, mission criticality, and enemy."
+  },
+  {
+    "id" : 18,
+    "question" : "What are the components of an Air Route?",
+    "answer" : "SP, RP, ACP, and flight path."
+  },
+  {
+    "id" : 19,
+    "question" : "What are the three terrain flight modes?",
+    "answer" : "Low level, contour, and NAP of the Earth."
+  },
+  {
+    "id" : 20,
+    "question" : "What reference material covers Aircraft Orientation?",
+    "answer" : "FM 3-04."
+  },
+  {
+    "id" : 21,
+    "question" : "What is the cruise speed of the AH-6J/MH-6J?",
+    "answer" : "135 knots."
+  }
 ]
