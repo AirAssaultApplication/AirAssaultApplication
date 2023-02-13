@@ -18,6 +18,8 @@ import {
   TouchableRipple,
   Provider as PaperProvider,
 } from 'react-native-paper';
+import phaseOneFlashcards from './Phase_One.json';
+import phaseTwoFlashcards from './Phase_Two.json';
 
 const styles = StyleSheet.create({
   card: {
@@ -117,28 +119,9 @@ export function AirAssaultScreen({ navigation }) {
 
 export function Phase1Screen({ navigation }){
   const theme = useTheme();
-
-  let flashcards = [
-    {
-      "id": 0,
-      "question": "What is the allowable cargo load of the LUH-72A in its normal configuration when used for MEDEVAC operations?",
-      "answer": "2 litter, 1 medic, and 5 ambulatory."
-    },
-    {
-      "id": 1,
-      "question": "What is the primary use for the CH-47 when used during CASEVAC missions?",
-      "answer": "Mass Casualty Evacuation."
-    },
-    {
-      "id": 2,
-      "question": "What is the crew of a LUH- 72A when not being used for MEDEVAC operations?",
-      "answer": "(4) Pilot, Co Pilot, Crew Chief, and In-Flight Medic."
-    },
-  ];
-
   let flashcardViews = [];
 
-  for(const item of flashcards){
+  for(const item of phaseOneFlashcards){
     flashcardViews.push(createFlashcard(item));
   }
 
@@ -151,28 +134,9 @@ export function Phase1Screen({ navigation }){
 
 export function Phase2Screen({ navigation }){
   const theme = useTheme();
-
-  let flashcards = [
-    {
-      "id": 0,
-      "question": "What is the allowable cargo load of the LUH-72A in its normal configuration when used for MEDEVAC operations?",
-      "answer": "2 litter, 1 medic, and 5 ambulatory."
-    },
-    {
-      "id": 1,
-      "question": "What is the primary use for the CH-47 when used during CASEVAC missions?",
-      "answer": "Mass Casualty Evacuation."
-    },
-    {
-      "id": 2,
-      "question": "What is the crew of a LUH- 72A when not being used for MEDEVAC operations?",
-      "answer": "(4) Pilot, Co Pilot, Crew Chief, and In-Flight Medic."
-    },
-  ];
-
   let flashcardViews = [];
 
-  for(const item of flashcards){
+  for(const item of phaseTwoFlashcards){
     flashcardViews.push(createFlashcard(item));
   }
 
