@@ -29,6 +29,9 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 
+import * as rssParser from 'react-native-rss-parser';
+
+
 import {AirAssaultScreen} from './AirAssaultHome.js';
 import {Phase1Screen} from './AirAssaultHome.js';
 import {Phase2Screen} from './AirAssaultHome.js';
