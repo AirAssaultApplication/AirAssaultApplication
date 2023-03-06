@@ -29,13 +29,15 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 
-import * as rssParser from 'react-native-rss-parser';
+/*import * as rssParser from 'react-native-rss-parser';*/
 
 
 import {AirAssaultScreen} from './AirAssaultHome.js';
 import {Phase1Screen} from './AirAssaultHome.js';
 import {Phase2Screen} from './AirAssaultHome.js';
 
+import {RangerScreen} from './RangerHome.js';
+import {TestScreen} from './AirAssaultHome.js';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -180,7 +182,7 @@ function HomeScreen({ navigation }) {
       </View>
       <View style={styles.card}>
         <TouchableRipple
-          onPress={() => console.log('Pressed')}
+          onPress={() => navigation.navigate('Ranger Program')}
           borderless={true}
           style={styles.cardBtn}
         >
@@ -266,6 +268,8 @@ export default function App() {
           <Stack.Screen name='Air Assault Program' component={AirAssaultScreen}/>
           <Stack.Screen name='Air Assault Program: Phase I' component={Phase1Screen}/>
           <Stack.Screen name='Air Assault Program: Phase II' component={Phase2Screen}/>
+          <Stack.Screen name='Ranger Program' component={RangerScreen}/>
+          <Stack.Screen name='Air Assault Program: Testing' component={TestScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

@@ -85,16 +85,16 @@ export function createFlashcard(flashcard){
   );
 }
 
-export function AirAssaultScreen({ navigation }) {
+export function RangerScreen({ navigation }) {
   const theme = useTheme();
 
   return(
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={{marginTop: 8, marginBottom: 8}}>
-        <Text variant='headlineSmall' style={{marginBottom:8, alignSelf: "center"}}>The Sabalauski Air Assault School</Text>
+        <Text variant='headlineSmall' style={{marginBottom:8, alignSelf: "center"}}>Ranger Program</Text>
         <View style={{ marginTop: 20, justifyContent: "space-between", flexDirection:"row"}}>
           <View style={{width:'45%', marginHorizontal: 10}}>
-            <TouchableRipple
+          <TouchableRipple
               onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
               borderless={true}
               style={{borderRadius: 20}}
@@ -109,69 +109,19 @@ export function AirAssaultScreen({ navigation }) {
               style={{borderRadius: 20}}
             >
               <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Phase II</Button>
-            </TouchableRipple>
+            </TouchableRipple>  
           </View>
         </View>
+        <View style={{marginTop: 8, marginBottom: 8}}>
+        <TouchableRipple
+          onPress={() => {navigation.navigate('Air Assault Program: Testing')}}
+          borderless={true}
+          style={{borderRadius: 20}}
+        >
+        <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Testing</Button>
+        </TouchableRipple> 
+        </View>
       </View>
-    </ScrollView>
-  );
-}
-
-export function Phase1Screen({ navigation }){
-  const theme = useTheme();
-  let flashcardViews = [];
-
-  for(const item of phaseOneFlashcards){
-    flashcardViews.push(createFlashcard(item));
-  }
-
-  return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-    {flashcardViews}
-    </ScrollView>
-  );
-}
-
-export function Phase2Screen({ navigation }){
-  const theme = useTheme();
-  let flashcardViews = [];
-
-  for(const item of phaseTwoFlashcards){
-    flashcardViews.push(createFlashcard(item));
-  }
-
-  return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-    {flashcardViews}
-    </ScrollView>
-  );
-}
-
-/*shuffle*/
-
-function shuffle(array) {
-  let currentIndex = array.length,  randomIndex;
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-  return array;
-}
-
-/*Test Screen*/
-export function TestScreen({ navigation }){
-  const theme = useTheme();
-  let flashcardViews = [];
-
-  for(const item of phaseTwoFlashcards){
-    flashcardViews.push(createFlashcard(item));
-  }
-
-  return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-    {shuffle(flashcardViews)}
     </ScrollView>
   );
 }
