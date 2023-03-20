@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import toplogo from './assets/logo_top.png';
 import bottomlogo from './assets/logo_bottom.png';
+import Constants from "expo-constants"
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -38,6 +39,10 @@ import {Phase2Screen} from './AirAssaultHome.js';
 
 import {RangerScreen} from './RangerHome.js';
 import {TestScreen} from './AirAssaultHome.js';
+
+//version output
+const version = Constants.manifest.version
+console.log("Version:", version)
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,

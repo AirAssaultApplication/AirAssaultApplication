@@ -168,9 +168,20 @@ export function TestScreen({ navigation }){
   for(const item of phaseTwoFlashcards){
     flashcardViews.push(createFlashcard(item));
   }
-
+  
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+    
+    <View style={{marginTop: 8, marginBottom: 8}}>
+      <TouchableRipple
+        onPress={() => {navigation.navigate('Air Assault Program: Testing')}}
+        borderless={true}
+        style={{borderRadius: 20}}
+      >
+      <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Shuffle</Button>
+      </TouchableRipple> 
+    </View>
+
     {shuffle(flashcardViews)}
     </ScrollView>
   );
