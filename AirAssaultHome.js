@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import {   
+  ActivityIndicator,
   Appbar,
   MD3DarkTheme,
   MD3LightTheme,
@@ -18,8 +19,24 @@ import {
   TouchableRipple,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import phaseOneFlashcards from './Phase_One.json';
-import phaseTwoFlashcards from './Phase_Two.json';
+import * as firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, child, get, onValue } from "firebase/database";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA_5_RK8ebZPrHAErXJS9oPWoXTSvVCVxc",
+  authDomain: "airassaultapp.firebaseapp.com",
+  databaseURL: "https://airassaultapp-default-rtdb.firebaseio.com",
+  projectId: "airassaultapp",
+  storageBucket: "airassaultapp.appspot.com",
+  messagingSenderId: "338517476325",
+  appId: "1:338517476325:web:83c26d9ec94afea080650c",
+  measurementId: "G-5704YDZHN9"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase();
 
 const styles = StyleSheet.create({
   card: {
@@ -44,37 +61,42 @@ const styles = StyleSheet.create({
   },
 });
 
-export function createFlashcard(flashcard){
-  const theme = useTheme();
-
+function Flashcard({ flashcard }) {
   const [flashcardText, setFlashcardText] = React.useState(flashcard.question);
 
-  return(
+  return (
     <View style={styles.card} key={flashcard.id}>
       <TouchableRipple
         onPress={() => {
-          if(flashcardText != flashcard.answer){
+          if (flashcardText != flashcard.answer) {
             setFlashcardText(flashcard.answer);
-          }
-          else{
+          } else {
             setFlashcardText(flashcard.question);
           }
         }}
         borderless={true}
         style={styles.cardBtn}
       >
-        <Card mode='contained'>
+        <Card mode="contained">
           <Card.Content>
-            <View style={{flexDirection:'row'}}>
-              <View style={{flex:1}}>
-                <View style={{justifyContent: 'flex-start'}}>
-                  <Text variant='titleMedium'>{flashcardText}</Text>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ flex: 1 }}>
+                <View style={{ justifyContent: "flex-start" }}>
+                  <Text variant="titleMedium">{flashcardText}</Text>
                 </View>
               </View>
               <View>
-                <View style={{justifyContent: 'flex-end', marginTop: 8}}>
-                  <Button icon='chevron-right' contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
-                  </Button>
+                <View
+                  style={{
+                    justifyContent: "flex-end",
+                    marginTop: 8,
+                  }}
+                >
+                  <Button
+                    icon="chevron-right"
+                    contentStyle={{ flexDirection: "row-reverse" }}
+                    style={{ marginHorizontal: -8 }}
+                  ></Button>
                 </View>
               </View>
             </View>
@@ -117,32 +139,84 @@ export function AirAssaultScreen({ navigation }) {
   );
 }
 
-export function Phase1Screen({ navigation }){
+export function Phase1Screen({ navigation }) {
   const theme = useTheme();
-  let flashcardViews = [];
+  const [flashcards, setFlashcards] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true); // add new state variable
+  const flashcardsRef = ref(getDatabase(), "airAssaultPhaseOne");
 
-  for(const item of phaseOneFlashcards){
-    flashcardViews.push(createFlashcard(item));
-  }
+  React.useEffect(() => {
+    // here onValue will get initialized once
+    // and on db changes its callback will get invoked
+    // resulting in changing your state value
+    onValue(flashcardsRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const flashcards = Object.keys(data).map((key) => {
+          return { ...data[key], id: key };
+        });
+        setFlashcards(flashcards);
+        setIsLoading(false); // set loading status to false once flashcards are loaded
+      } else {
+        console.log("No data available");
+      }
+    });
+    return () => {
+      // this is cleanup function, will call just on component will unmount
+      // you can clear your events listeners or any async calls here
+    }
+  }, [])
 
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-    {flashcardViews}
+      {isLoading ? ( // show loading indicator when isLoading is true
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+      ) : (
+        flashcards.map((flashcard) => (
+          <Flashcard key={flashcard.id} flashcard={flashcard} />
+        ))
+      )}
     </ScrollView>
   );
 }
 
-export function Phase2Screen({ navigation }){
+export function Phase2Screen({ navigation }) {
   const theme = useTheme();
-  let flashcardViews = [];
+  const [flashcards, setFlashcards] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true); // add new state variable
+  const flashcardsRef = ref(getDatabase(), "airAssaultPhaseTwo");
 
-  for(const item of phaseTwoFlashcards){
-    flashcardViews.push(createFlashcard(item));
-  }
+  React.useEffect(() => {
+    // here onValue will get initialized once
+    // and on db changes its callback will get invoked
+    // resulting in changing your state value
+    onValue(flashcardsRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const flashcards = Object.keys(data).map((key) => {
+          return { ...data[key], id: key };
+        });
+        setFlashcards(flashcards);
+        setIsLoading(false); // set loading status to false once flashcards are loaded
+      } else {
+        console.log("No data available");
+      }
+    });
+    return () => {
+      // this is cleanup function, will call just on component will unmount
+      // you can clear your events listeners or any async calls here
+    }
+  }, [])
 
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-    {flashcardViews}
+      {isLoading ? ( // show loading indicator when isLoading is true
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+      ) : (
+        flashcards.map((flashcard) => (
+          <Flashcard key={flashcard.id} flashcard={flashcard} />
+        ))
+      )}
     </ScrollView>
   );
 }
@@ -160,8 +234,8 @@ function shuffle(array) {
   return array;
 }
 
-/*Test Screen*/
-export function TestScreen({ navigation }){
+/*Test Screen DOES NOT WORK WITH FIREBASE, SINCE PULLING FLASHCARDS IS AN ASYNCHRONOUS TASK*/ 
+/*export function TestScreen({ navigation }){
   const theme = useTheme();
   let flashcardViews = [];
 
@@ -185,4 +259,4 @@ export function TestScreen({ navigation }){
     {shuffle(flashcardViews)}
     </ScrollView>
   );
-}
+}*/

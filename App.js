@@ -38,7 +38,7 @@ import {Phase1Screen} from './AirAssaultHome.js';
 import {Phase2Screen} from './AirAssaultHome.js';
 
 import {RangerScreen} from './RangerHome.js';
-import {TestScreen} from './AirAssaultHome.js';
+//import {TestScreen} from './AirAssaultHome.js';
 
 //version output
 const version = Constants.manifest.version
@@ -274,7 +274,7 @@ export default function App() {
           <Stack.Screen name='Air Assault Program: Phase I' component={Phase1Screen}/>
           <Stack.Screen name='Air Assault Program: Phase II' component={Phase2Screen}/>
           <Stack.Screen name='Ranger Program' component={RangerScreen}/>
-          <Stack.Screen name='Air Assault Program: Testing' component={TestScreen}/>
+          {/* <Stack.Screen name='Air Assault Program: Testing' component={TestScreen}/> */}
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

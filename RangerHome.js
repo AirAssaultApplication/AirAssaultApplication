@@ -18,8 +18,6 @@ import {
   TouchableRipple,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import phaseOneFlashcards from './Phase_One.json';
-import phaseTwoFlashcards from './Phase_Two.json';
 
 const styles = StyleSheet.create({
   card: {
@@ -114,7 +112,7 @@ export function RangerScreen({ navigation }) {
         </View>
         <View style={{marginTop: 8, marginBottom: 8}}>
         <TouchableRipple
-          onPress={() => {navigation.navigate('Air Assault Program: Testing')}}
+          onPress={() => {/*navigation.navigate('Air Assault Program: Testing')*/}}
           borderless={true}
           style={{borderRadius: 20}}
         >
