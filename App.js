@@ -14,6 +14,7 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   Appbar,
+  Menu,
   MD3DarkTheme,
   MD3LightTheme,
   adaptNavigationTheme,
@@ -39,6 +40,8 @@ import {Phase2Screen} from './AirAssaultHome.js';
 
 import {RangerScreen} from './RangerHome.js';
 //import {TestScreen} from './AirAssaultHome.js';
+
+import AssaultBadge from './assets/icon.png';
 
 //version output
 const version = Constants.manifest.version
@@ -77,9 +80,9 @@ const CombinedDarkTheme = {
       "onError": "rgb(105, 0, 5)",
       "errorContainer": "rgb(147, 0, 10)",
       "onErrorContainer": "rgb(255, 180, 171)",
-      "background": "rgb(29, 27, 22)",
+      "background": "rgb(255,255,255)",
       "onBackground": "rgb(232, 226, 217)",
-      "surface": "rgb(29, 27, 22)",
+      "surface": "rgb(229, 226, 219)",
       "onSurface": "rgb(232, 226, 217)",
       "surfaceVariant": "rgb(75, 71, 57)",
       "onSurfaceVariant": "rgb(205, 198, 180)",
@@ -114,11 +117,35 @@ const Home = () => {
 }
 */
 
+//Navbar
 function CustomNavigationBar({ navigation, back, route }) {
   return (
-    <Appbar.Header mode='center-aligned'>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={route.name} />
+    <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 40}}>
+      {back ? <Appbar.BackAction onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
+      <Appbar.Content 
+        style={{
+          height: 50,
+          marginRight: 70,
+          marginLeft: 70,
+          backgroundColor: "#221f20",
+          borderBottomWidth: 5,
+          borderBottomLeftRadius: 200,
+          borderBottomRightRadius: 200,
+        }}
+        title={
+          <TouchableRipple
+            onPress={() => navigation.navigate('Air Assault Application')}
+          >
+            <Image source={require("./assets/AssaultBadgeClear.png")}
+              style={{
+                width: 100,
+                height: 45,
+              }}
+            />
+          </TouchableRipple>
+        }
+        color= {"#FFFFFF"} 
+      />
     </Appbar.Header>
   );
 }
@@ -129,9 +156,11 @@ function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style='light' />
+      <View style={styles.card}></View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      <View style={{marginTop: 8, marginBottom: 8}}>
+      <View style={{marginTop: 10, marginBottom: 20}}>
         <Text variant='headlineLarge'>Programs</Text>
+        <View style={styles.rectangle}></View>
       </View>
       <View style={styles.card}>
         <TouchableRipple
@@ -140,17 +169,29 @@ function HomeScreen({ navigation }) {
           style={styles.cardBtn}
         >
           <Card mode='outlined'>
-            <Card.Content>
+            <Image source={require("./assets/Assault1.png")}
+              style={{
+                width: 'auto',
+                height: 140,
+              }}
+            />
+            <Card.Content style={{marginTop: 5, marginBottom: -10, marginHorizontal: -5}}>
               <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
                   <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant='titleLarge'>Air Assault Program</Text>
+                    <Text variant='titleLarge'>Air Assault</Text>
                     <Paragraph>&quot;The Ten Toughest Days in the Army&quot;</Paragraph>
                   </View>
                 </View>
                 <View>
-                  <View style={{justifyContent: 'flex-end', marginTop: 8}}>
-                    <Button icon='chevron-right' contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                  <View style={{justifyContent: 'flex-end', marginTop: 10}}>
+                    <Button contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                      <Image source={require("./assets/AssaultBadgeClear.png")}
+                        style={{
+                          width: 50,
+                          height: 25,
+                        }}
+                      />
                     </Button>
                   </View>
                 </View>
@@ -159,6 +200,7 @@ function HomeScreen({ navigation }) {
           </Card>
         </TouchableRipple>
       </View>
+      <View style = {{marginTop: 10}}></View>
       <View style={styles.card}>
         <TouchableRipple
           onPress={() => console.log('Pressed')}
@@ -166,17 +208,29 @@ function HomeScreen({ navigation }) {
           style={styles.cardBtn}
         >
           <Card mode='outlined'>
-            <Card.Content>
+            <Image source={require("./assets/Path1.jpg")}
+              style={{
+                width: 'auto',
+                height: 140,
+              }}
+            />
+            <Card.Content style={{marginTop: 5, marginBottom: -10, marginHorizontal: -5}}>
               <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
                   <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant='titleLarge'>Pathfinder Program</Text>
-                    <Paragraph>Coming soon</Paragraph>
+                    <Text variant='titleLarge'>Pathfinder</Text>
+                    <Paragraph>"First In, Last Out"</Paragraph>
                   </View>
                 </View>
                 <View>
                   <View style={{justifyContent: 'flex-end', marginTop: 8}}>
-                    <Button icon='chevron-right' contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                    <Button contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -7}}>
+                      <Image source={require("./assets/PathBadgeClear.png")}
+                        style={{
+                          width: 30,
+                          height: 25,
+                        }}
+                      />
                     </Button>
                   </View>
                 </View>
@@ -185,6 +239,7 @@ function HomeScreen({ navigation }) {
           </Card>
         </TouchableRipple>
       </View>
+      <View style = {{marginTop: 10}}></View>
       <View style={styles.card}>
         <TouchableRipple
           onPress={() => navigation.navigate('Ranger Program')}
@@ -192,17 +247,29 @@ function HomeScreen({ navigation }) {
           style={styles.cardBtn}
         >
           <Card mode='outlined'>
-            <Card.Content>
+            <Image source={require("./assets/Ranger1.png")}
+              style={{
+                width: 'auto',
+                height: 140,
+              }}
+            />
+            <Card.Content style={{marginTop: 5, marginBottom: -10, marginHorizontal: -5}}>
               <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
                   <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant='titleLarge'>Ranger Program</Text>
-                    <Paragraph>Coming soon</Paragraph>
+                    <Text variant='titleLarge'>Ranger</Text>
+                    <Paragraph>"Rangers Lead the Way"</Paragraph>
                   </View>
                 </View>
                 <View>
                   <View style={{justifyContent: 'flex-end', marginTop: 8}}>
-                    <Button icon='chevron-right' contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                    <Button contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
+                      <Image source={require("./assets/RangerBadgeClear.png")}
+                        style={{
+                          width: 50,
+                          height: 25,
+                        }}
+                      />
                     </Button>
                   </View>
                 </View>
@@ -212,7 +279,10 @@ function HomeScreen({ navigation }) {
         </TouchableRipple>
       </View>
       <View style={{marginTop: 48}}>
-        <Text variant='headlineLarge'>News</Text>
+        <View style={{marginTop: 1, marginBottom: 8}}>
+          <Text variant='headlineLarge'>News</Text>
+          <View style={styles.rectangle}></View>
+        </View>
         <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
           title="US Africa Command's Exercise Justified Accord 2023 begins in Kenya"
           description='By Capt. Joe Legros · Feb 9, 2023'
@@ -262,7 +332,7 @@ function HomeScreen({ navigation }) {
 
 export default function App() {
   return (
-    <PaperProvider theme={CombinedDarkTheme}>
+    <PaperProvider theme={CombinedDefaultTheme}>
       <NavigationContainer theme={CombinedDarkTheme}>
         <Stack.Navigator 
           initialRouteName='Air Assault Application'
@@ -283,7 +353,7 @@ export default function App() {
 
       const styles = StyleSheet.create({
         card: {
-          marginTop: 16,
+          marginTop: 0,
           justifyContent: 'center',
         },
         cardBtn: {
@@ -296,11 +366,18 @@ export default function App() {
           paddingRight: 8,
         },
         scrollView: {
-          marginHorizontal: 20,
+          marginHorizontal: 10,
         },
         newsImage: {
           borderWidth: 2,
           borderRadius: 8
+        },
+        rectangle: {
+          height: 8,
+          width: 140,
+          backgroundColor: '#ffcc01',
+          position: 'absolute', 
+          bottom: '-30%'
         },
       });
 
