@@ -127,9 +127,9 @@ function CustomNavigationBar({ navigation, back, route }) {
           height: 75,
           backgroundColor: "#221f20",
           borderColor: "#221f20",
-          borderBottomWidth: 20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
+          borderBottomWidth: 32,
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
           justifyContent: "flex-end"
         }}>
           <TouchableRipple
@@ -137,7 +137,9 @@ function CustomNavigationBar({ navigation, back, route }) {
           >
             <Image source={require("./assets/AssaultBadgeClear.png")}
               style={{
-                
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: -20,
                 width: 100,
                 height: 45,
               }}
