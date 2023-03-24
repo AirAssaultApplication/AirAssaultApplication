@@ -159,8 +159,10 @@ function HomeScreen({ navigation }) {
       <View style={styles.card}></View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={{marginTop: 10, marginBottom: 20}}>
-        <Text variant='headlineLarge'>Programs</Text>
-        <View style={styles.rectangle}></View>
+        <View style={{alignSelf: 'flex-start'}}>
+          <Text variant='headlineLarge'>Programs</Text>
+          <View style={styles.rectangle}></View>
+        </View>
       </View>
       <View style={styles.card}>
         <TouchableRipple
@@ -252,7 +254,7 @@ function HomeScreen({ navigation }) {
         </TouchableRipple>
       </View>
       <View style={{marginTop: 48}}>
-        <View style={{marginTop: 1, marginBottom: 8}}>
+        <View style={{marginTop: 1, marginBottom: 8, alignSelf: 'flex-start'}}>
           <Text variant='headlineLarge'>News</Text>
           <View style={styles.rectangle}></View>
         </View>
@@ -346,10 +348,8 @@ export default function App() {
         },
         rectangle: {
           height: 8,
-          width: 140,
           backgroundColor: '#ffcc01',
-          position: 'absolute', 
-          bottom: '-30%'
+          position: 'relative', 
         },
       });
 
