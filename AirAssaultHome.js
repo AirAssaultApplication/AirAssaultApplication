@@ -62,18 +62,16 @@ const styles = StyleSheet.create({
 });
 
 function Flashcard({ flashcard }) {
-  const [flashcardText, setFlashcardText] = React.useState(flashcard.question);
+  const [isFlipped, setIsFlipped] = React.useState(false);
+
+  const toggleFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
 
   return (
     <View style={styles.card} key={flashcard.id} title={flashcard.question}>
       <TouchableRipple
-        onPress={() => {
-          if (flashcardText != flashcard.question + "\n\n" + flashcard.answer) {
-            setFlashcardText(flashcard.question + "\n\n" + flashcard.answer);
-          } else {
-            setFlashcardText(flashcard.question);
-          }
-        }}
+        onPress={toggleFlip}
         borderless={true}
         style={styles.cardBtn}
       >
@@ -82,7 +80,13 @@ function Flashcard({ flashcard }) {
             <View style={{ flexDirection: "row" }}>
               <View style={{ flex: 1 }}>
                 <View style={{ justifyContent: "flex-start" }}>
-                  <Text variant="titleMedium">{flashcardText}</Text>
+                  <Text variant="titleMedium">{flashcard.question}</Text>
+                  {isFlipped && (
+                    <View>
+                      <Divider style={{marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
+                      <Text variant="titleMedium">{flashcard.answer}</Text>
+                    </View>
+                  )}
                 </View>
               </View>
               <View>
@@ -92,11 +96,6 @@ function Flashcard({ flashcard }) {
                     marginTop: 8,
                   }}
                 >
-                  <Button
-                    icon="chevron-right"
-                    contentStyle={{ flexDirection: "row-reverse" }}
-                    style={{ marginHorizontal: -8 }}
-                  ></Button>
                 </View>
               </View>
             </View>
