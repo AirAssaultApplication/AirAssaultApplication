@@ -56,14 +56,52 @@ const CombinedDefaultTheme = {
   ...MD3LightTheme,
   ...LightTheme,
   colors: {
-    ...MD3LightTheme.colors,
-    ...LightTheme.colors,
-  },
+      "primary": "rgb(112, 93, 0)",
+      "onPrimary": "rgb(255, 255, 255)",
+      "primaryContainer": "rgb(255, 225, 109)",
+      "onPrimaryContainer": "rgb(34, 27, 0)",
+      "secondary": "rgb(103, 94, 64)",
+      "onSecondary": "rgb(255, 255, 255)",
+      "secondaryContainer": "rgb(239, 226, 188)",
+      "onSecondaryContainer": "rgb(33, 27, 4)",
+      "tertiary": "rgb(68, 102, 78)",
+      "onTertiary": "rgb(255, 255, 255)",
+      "tertiaryContainer": "rgb(198, 236, 205)",
+      "onTertiaryContainer": "rgb(0, 33, 14)",
+      "error": "rgb(186, 26, 26)",
+      "onError": "rgb(255, 255, 255)",
+      "errorContainer": "rgb(255, 218, 214)",
+      "onErrorContainer": "rgb(65, 0, 2)",
+      "background": "rgb(255, 251, 255)",
+      "onBackground": "rgb(29, 27, 22)",
+      "surface": "rgb(255, 251, 255)",
+      "onSurface": "rgb(29, 27, 22)",
+      "surfaceVariant": "rgb(234, 226, 207)",
+      "onSurfaceVariant": "rgb(75, 71, 57)",
+      "outline": "rgb(124, 119, 103)",
+      "outlineVariant": "rgb(205, 198, 180)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(51, 48, 42)",
+      "inverseOnSurface": "rgb(246, 240, 231)",
+      "inversePrimary": "rgb(233, 196, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(248, 243, 242)",
+        "level2": "rgb(244, 238, 235)",
+        "level3": "rgb(239, 234, 227)",
+        "level4": "rgb(238, 232, 224)",
+        "level5": "rgb(235, 229, 219)"
+      },
+      "surfaceDisabled": "rgba(29, 27, 22, 0.12)",
+      "onSurfaceDisabled": "rgba(29, 27, 22, 0.38)",
+      "backdrop": "rgba(52, 48, 36, 0.4)"
+  }
 };
 const CombinedDarkTheme = {
   ...MD3DarkTheme,
   ...DarkTheme,
-  colors: {
+    colors: {
       "primary": "rgb(233, 196, 0)",
       "onPrimary": "rgb(58, 48, 0)",
       "primaryContainer": "rgb(84, 70, 0)",
@@ -80,9 +118,9 @@ const CombinedDarkTheme = {
       "onError": "rgb(105, 0, 5)",
       "errorContainer": "rgb(147, 0, 10)",
       "onErrorContainer": "rgb(255, 180, 171)",
-      "background": "rgb(255,255,255)",
+      "background": "rgb(29, 27, 22)",
       "onBackground": "rgb(232, 226, 217)",
-      "surface": "rgb(229, 226, 219)",
+      "surface": "rgb(29, 27, 22)",
       "onSurface": "rgb(232, 226, 217)",
       "surfaceVariant": "rgb(75, 71, 57)",
       "onSurfaceVariant": "rgb(205, 198, 180)",
@@ -104,7 +142,7 @@ const CombinedDarkTheme = {
       "surfaceDisabled": "rgba(232, 226, 217, 0.12)",
       "onSurfaceDisabled": "rgba(232, 226, 217, 0.38)",
       "backdrop": "rgba(52, 48, 36, 0.4)"
-  },
+  }
 };
 
 /*font stuff
@@ -122,6 +160,7 @@ function CustomNavigationBar({ navigation, back, route }) {
   return (
     <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 55, justifyContent: "space-around"}}>
       {back ? <Appbar.BackAction style={{position: "absolute", left: 0, bottom: 0}} onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
+      <Appbar.Action icon="magnify" style={{position: "absolute", right: 0, bottom: 0}} onPress={{}} color={"#FFFFFF"}/>
       <View
         style={{
           height: 75,
@@ -308,7 +347,7 @@ function HomeScreen({ navigation }) {
 export default function App() {
   return (
     <PaperProvider theme={CombinedDefaultTheme}>
-      <NavigationContainer theme={CombinedDarkTheme}>
+      <NavigationContainer theme={CombinedDefaultTheme}>
         <Stack.Navigator 
           initialRouteName='Air Assault Application'
           screenOptions={{
