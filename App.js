@@ -156,11 +156,16 @@ const Home = () => {
 */
 
 //Navbar
-function CustomNavigationBar({ navigation, back, route }) {
+function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMode }) {
   return (
     <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 55, justifyContent: "space-around"}}>
       {back ? <Appbar.BackAction style={{position: "absolute", left: 0, bottom: 0}} onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
-      <Appbar.Action icon="magnify" style={{position: "absolute", right: 0, bottom: 0}} onPress={{}} color={"#FFFFFF"}/>
+      <Appbar.Action
+  icon={isDarkMode ? 'white-balance-sunny' : 'brightness-2'}
+  style={{ position: 'absolute', right: 0, bottom: 0 }}
+  onPress={toggleDarkMode}
+  color={'#FFFFFF'}
+/>
       <View
         style={{
           height: 75,
@@ -345,13 +350,19 @@ function HomeScreen({ navigation }) {
 }
 
 export default function App() {
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <PaperProvider theme={CombinedDefaultTheme}>
-      <NavigationContainer theme={CombinedDefaultTheme}>
+    <PaperProvider theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
+      <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
         <Stack.Navigator 
           initialRouteName='Air Assault Application'
           screenOptions={{
-            header: (props) => <CustomNavigationBar {...props} />,
+            header: (props) => <CustomNavigationBar {...props} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />,
           }}>
           <Stack.Screen name='Air Assault Application' component={HomeScreen}/>
           <Stack.Screen name='Air Assault Program' component={AirAssaultScreen}/>
