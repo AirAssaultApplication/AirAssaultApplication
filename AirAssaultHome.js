@@ -65,11 +65,11 @@ function Flashcard({ flashcard }) {
   const [flashcardText, setFlashcardText] = React.useState(flashcard.question);
 
   return (
-    <View style={styles.card} key={flashcard.id}>
+    <View style={styles.card} key={flashcard.id} title={flashcard.question}>
       <TouchableRipple
         onPress={() => {
-          if (flashcardText != flashcard.answer) {
-            setFlashcardText(flashcard.answer);
+          if (flashcardText != flashcard.question + "\n\n" + flashcard.answer) {
+            setFlashcardText(flashcard.question + "\n\n" + flashcard.answer);
           } else {
             setFlashcardText(flashcard.question);
           }
