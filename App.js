@@ -120,42 +120,40 @@ const Home = () => {
 //Navbar
 function CustomNavigationBar({ navigation, back, route }) {
   return (
-    <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 40}}>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
-      <Appbar.Content 
+    <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 55, justifyContent: "space-around"}}>
+      {back ? <Appbar.BackAction style={{position: "absolute", left: 0, bottom: 0}} onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
+      <View
         style={{
-          height: 50,
-          marginRight: 70,
-          marginLeft: 70,
+          height: 75,
           backgroundColor: "#221f20",
-          borderBottomWidth: 5,
-          borderBottomLeftRadius: 200,
-          borderBottomRightRadius: 200,
-        }}
-        title={
+          borderColor: "#221f20",
+          borderBottomWidth: 20,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          justifyContent: "flex-end"
+        }}>
           <TouchableRipple
             onPress={() => navigation.navigate('Air Assault Application')}
           >
             <Image source={require("./assets/AssaultBadgeClear.png")}
               style={{
+                
                 width: 100,
                 height: 45,
               }}
             />
           </TouchableRipple>
-        }
-        color= {"#FFFFFF"} 
-      />
+      </View>
     </Appbar.Header>
   );
-}
+} 
 
 const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style='light' />
+      <StatusBar style="auto" translucent={true} />
       <View style={styles.card}></View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={{marginTop: 10, marginBottom: 20}}>
@@ -175,28 +173,19 @@ function HomeScreen({ navigation }) {
                 height: 140,
               }}
             />
-            <Card.Content style={{marginTop: 5, marginBottom: -10, marginHorizontal: -5}}>
-              <View style={{flexDirection:'row'}}>
-                <View style={{flex:1}}>
-                  <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant='titleLarge'>Air Assault</Text>
-                    <Paragraph>&quot;The Ten Toughest Days in the Army&quot;</Paragraph>
-                  </View>
-                </View>
-                <View>
-                  <View style={{justifyContent: 'flex-end', marginTop: 10}}>
-                    <Button contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
-                      <Image source={require("./assets/AssaultBadgeClear.png")}
-                        style={{
-                          width: 50,
-                          height: 25,
-                        }}
-                      />
-                    </Button>
-                  </View>
-                </View>
-              </View>
-            </Card.Content>
+            <Card.Title
+              title="Air Assault"
+              titleVariant="titleLarge"
+              subtitle="&quot;The Ten Toughest Days in the Army&quot;"
+              right={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
+                style={{
+                  width: 60,
+                  height: 60,
+                  marginEnd: 16,
+                  resizeMode:"contain"
+                }}
+              />}
+            />
           </Card>
         </TouchableRipple>
       </View>
@@ -214,28 +203,19 @@ function HomeScreen({ navigation }) {
                 height: 140,
               }}
             />
-            <Card.Content style={{marginTop: 5, marginBottom: -10, marginHorizontal: -5}}>
-              <View style={{flexDirection:'row'}}>
-                <View style={{flex:1}}>
-                  <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant='titleLarge'>Pathfinder</Text>
-                    <Paragraph>"First In, Last Out"</Paragraph>
-                  </View>
-                </View>
-                <View>
-                  <View style={{justifyContent: 'flex-end', marginTop: 8}}>
-                    <Button contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -7}}>
-                      <Image source={require("./assets/PathBadgeClear.png")}
-                        style={{
-                          width: 30,
-                          height: 25,
-                        }}
-                      />
-                    </Button>
-                  </View>
-                </View>
-              </View>
-            </Card.Content>
+            <Card.Title
+              title="Pathfinder"
+              titleVariant="titleLarge"
+              subtitle="&quot;First In, Last Out&quot;"
+              right={(props) => <Image source={require("./assets/PathBadgeClear.png")}
+                style={{
+                  width: 60,
+                  height: 60,
+                  marginEnd: 16,
+                  resizeMode:"contain"
+                }}
+              />}
+            />
           </Card>
         </TouchableRipple>
       </View>
@@ -253,28 +233,19 @@ function HomeScreen({ navigation }) {
                 height: 140,
               }}
             />
-            <Card.Content style={{marginTop: 5, marginBottom: -10, marginHorizontal: -5}}>
-              <View style={{flexDirection:'row'}}>
-                <View style={{flex:1}}>
-                  <View style={{justifyContent: 'flex-start'}}>
-                    <Text variant='titleLarge'>Ranger</Text>
-                    <Paragraph>"Rangers Lead the Way"</Paragraph>
-                  </View>
-                </View>
-                <View>
-                  <View style={{justifyContent: 'flex-end', marginTop: 8}}>
-                    <Button contentStyle={{flexDirection: 'row-reverse'}} style={{marginHorizontal: -8}}>
-                      <Image source={require("./assets/RangerBadgeClear.png")}
-                        style={{
-                          width: 50,
-                          height: 25,
-                        }}
-                      />
-                    </Button>
-                  </View>
-                </View>
-              </View>
-            </Card.Content>
+            <Card.Title
+              title="Ranger"
+              titleVariant="titleLarge"
+              subtitle="&quot;Rangers Lead the Way&quot;"
+              right={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
+                style={{
+                  width: 60,
+                  height: 60,
+                  marginEnd: 16,
+                  resizeMode:"contain"
+                }}
+              />}
+            />
           </Card>
         </TouchableRipple>
       </View>
@@ -361,7 +332,6 @@ export default function App() {
         },
         container: {
           flex: 1,
-          paddingTop: 8,
           paddingLeft: 8,
           paddingRight: 8,
         },
