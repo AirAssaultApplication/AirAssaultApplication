@@ -161,11 +161,11 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
     <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 55, justifyContent: "space-around"}}>
       {back ? <Appbar.BackAction style={{position: "absolute", left: 0, bottom: 0}} onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
       <Appbar.Action
-  icon={isDarkMode ? 'white-balance-sunny' : 'brightness-2'}
-  style={{ position: 'absolute', right: 0, bottom: 0 }}
-  onPress={toggleDarkMode}
-  color={'#FFFFFF'}
-/>
+        icon={isDarkMode ? 'white-balance-sunny' : 'brightness-2'}
+        style={{ position: 'absolute', right: 0, bottom: 0 }}
+        onPress={toggleDarkMode}
+        color={'#FFFFFF'}
+      />
       <View
         style={{
           height: 75,
@@ -219,6 +219,8 @@ function HomeScreen({ navigation }) {
               style={{
                 width: 'auto',
                 height: 140,
+                borderTopLeftRadius: 12,
+                borderTopRightRadius: 12
               }}
             />
             <Card.Title
@@ -249,6 +251,8 @@ function HomeScreen({ navigation }) {
               style={{
                 width: 'auto',
                 height: 140,
+                borderTopLeftRadius: 12,
+                borderTopRightRadius: 12
               }}
             />
             <Card.Title
@@ -279,6 +283,8 @@ function HomeScreen({ navigation }) {
               style={{
                 width: 'auto',
                 height: 140,
+                borderTopLeftRadius: 12,
+                borderTopRightRadius: 12
               }}
             />
             <Card.Title

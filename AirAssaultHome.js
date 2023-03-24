@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
 });
 
 function Flashcard({ flashcard }) {
+  const theme = useTheme();
+
   const [isFlipped, setIsFlipped] = React.useState(false);
 
   const toggleFlip = () => {
@@ -83,7 +85,7 @@ function Flashcard({ flashcard }) {
                   <Text variant="titleMedium">{flashcard.question}</Text>
                   {isFlipped && (
                     <View>
-                      <Divider style={{marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
+                      <Divider style={{backgroundColor:theme.colors.onBackground, marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
                       <Text variant="titleMedium">{flashcard.answer}</Text>
                     </View>
                   )}
@@ -111,7 +113,7 @@ export function AirAssaultScreen({ navigation }) {
 
   return(
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      <View style={{marginTop: 8, marginBottom: 8}}>
+      <View style={{marginTop: 32, marginBottom: 8}}>
         <Text variant='headlineSmall' style={{marginBottom:8, alignSelf: "center"}}>The Sabalauski Air Assault School</Text>
         <View style={{ marginTop: 20, justifyContent: "space-between", flexDirection:"row"}}>
           <View style={{width:'45%', marginHorizontal: 10}}>
@@ -169,7 +171,7 @@ export function Phase1Screen({ navigation }) {
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       {isLoading ? ( // show loading indicator when isLoading is true
-        <ActivityIndicator size="large" color={theme.colors.primary} />
+        <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
       ) : (
         flashcards.map((flashcard) => (
           <Flashcard key={flashcard.id} flashcard={flashcard} />
@@ -210,7 +212,7 @@ export function Phase2Screen({ navigation }) {
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       {isLoading ? ( // show loading indicator when isLoading is true
-        <ActivityIndicator size="large" color={theme.colors.primary} />
+        <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
       ) : (
         flashcards.map((flashcard) => (
           <Flashcard key={flashcard.id} flashcard={flashcard} />
