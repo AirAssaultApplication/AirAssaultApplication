@@ -166,7 +166,7 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
         onPress={toggleDarkMode}
         color={'#FFFFFF'}
       />
-      {(screen == ("Home") || screen == ("News")) && <TouchableRipple
+      {(screen == ("Home") || screen == ("News") || screen == ("About")) && <TouchableRipple
         onPress={() => navigation.navigate('Home')}
         style={{
           height: 75,
@@ -269,7 +269,7 @@ function HomeScreen({ navigation, route }) {
               <Text style={{color:"#ffcc01", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
             </TouchableRipple>
             <TouchableRipple
-              onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}>
+              onPress={() => {navigation.navigate('About')}}>
               <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
             </TouchableRipple>
             <TouchableRipple
@@ -436,7 +436,7 @@ function News({ navigation, route }) {
               <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
             </TouchableRipple>
             <TouchableRipple
-              onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}>
+              onPress={() => {navigation.navigate('About')}}>
               <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
             </TouchableRipple>
             <TouchableRipple
@@ -492,6 +492,124 @@ function News({ navigation, route }) {
     </View>
   );
 }
+function About({ navigation, route }) {
+  const screen = route.name
+  return(
+    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <View style={{marginTop: -10, marginBottom: 8}}>
+      <View  style={{justifyContent: "space-around", flexDirection: 'row', flex: 1, backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+            <TouchableRipple
+              onPress={() => {navigation.navigate('Home')}}>
+              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
+            </TouchableRipple>
+            <TouchableRipple
+              onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}>
+              <Text style={{color:"#ffcc01", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
+            </TouchableRipple>
+            <TouchableRipple
+              onPress={() => {navigation.navigate('News')}}>
+              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
+            </TouchableRipple>
+          </View>
+        <View style={styles.card}>
+          <Card style={{marginTop: 0, marginBottom: 20}}>
+            <View style={{borderBottomWidth: 3, borderBottomColor: "#ffcc01"}}>
+              <Image source={require("./assets/TSAAS.jpg")}
+                style={{
+                  width: 'auto',
+                  height: 230,
+                }}
+              />
+            </View>
+            <TouchableRipple
+              onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas');}}
+              borderless={true}
+              style={{borderRadius: 0}}
+            >
+              <Card.Title
+                title="Home"
+                subtitle="Main Page"
+                titleVariant="titleLarge"
+                right={(props) => <Image source={require("./assets/External_Link.png")}
+                  style={{
+                    marginRight: 43,
+                    width: 20,
+                    height: 20,
+                    resizeMode:"contain"
+                  }}
+                />}
+              />
+            </TouchableRipple>
+            <Divider></Divider>
+            <Card.Content>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Phone:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                TSAAS: (270) 798-4410 {"\n"}
+                Pre Ranger: (270) 412-1111
+              </Text>
+              <Divider></Divider>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Email:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                usarmy.campbell.101-abn-div.mbx.air-assault-school@army.mil
+              </Text>
+              <Divider></Divider>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Location:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                6883 Air Assault St. {"\n"}
+                Fort Campbell, KY 42223
+              </Text>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Hours of Operation:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                Class Report Times {"\n"}{"\n"}
+                Air Assault Day Zero - 6:00 a.m. {"\n"}{"\n"}
+                FRIES/SPIES Master Day One - 8:30 a.m. {"\n"}{"\n"}
+                Pathfinder Day One - 8:00 a.m. {"\n"}{"\n"}
+                Pre-Ranger Day Zero - 9:00 a.m. {"\n"}{"\n"}
+                Rappel Master Day One - 8:30 a.m. 
+              </Text>
+              <Divider></Divider>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Graduation Times:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+              Air Assault - 11 a.m.{"\n"}
+              Pathfinder - 11 a.m.
+              </Text>
+              <Divider></Divider>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Note:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                ATTENTION SERVICE MEMBERS AND ATRRS MANAGERS - Please coordinate directly with The 
+                Sabalauski Air Assault School (TSAAS) via phone or email on class availability and ATRRS 
+                reservations. Unit ATRRS Managers are NOT allowed to slot Service Members into any TSAAS 
+                courses through ATRRS, under any circumstances. TSAAS Operations executes all course 
+                ATRRS slotting – any course reservations made outside of TSAAS Operations are invalid and 
+                will be cancelled. Service Members attempting to “walk-on” to any course are NOT 
+                guaranteed a slot in the course.
+              </Text>
+              <Divider></Divider>
+            </Card.Content>
+          </Card>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 export default function App() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
@@ -508,6 +626,7 @@ export default function App() {
             header: (props) => <CustomNavigationBar {...props} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />,
           }}>
           <Stack.Screen name='Home' component={HomeScreen}/>
+          <Stack.Screen name='About' component={About}/>
           <Stack.Screen name='News' component={News}/>
           <Stack.Screen name='Air Assault Program' component={AirAssaultScreen}/>
           <Stack.Screen name='Air Assault Program: Phase I' component={Phase1Screen}/>
