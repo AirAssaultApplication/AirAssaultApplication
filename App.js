@@ -166,104 +166,90 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
         onPress={toggleDarkMode}
         color={'#FFFFFF'}
       />
-      {screen == "Home" && <View
+      {screen == "Home" && <TouchableRipple
+        onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas');}} 
         style={{
           height: 75,
           backgroundColor: "#221f20",
           borderColor: "#221f20",
-          borderBottomWidth: 32,
-          borderBottomLeftRadius: 32,
-          borderBottomRightRadius: 32,
           justifyContent: "flex-end",
-        }}>
-          <TouchableRipple
-            onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas');}}
-          >
-            <Image source={require("./assets/AllBadgesClear.png")}
-              style={{
-                marginLeft: 10,
-                marginRight: 10,
-                marginBottom: -20,
-                width: 100,
-                height: 45,
-                resizeMode:"contain"
-              }}
-            />
-          </TouchableRipple>
-      </View>}
-      {(screen == ("Air Assault Program") || screen == ("Air Assault Program: Phase I") || screen == ("Air Assault Program: Phase II")) && 
-        <View style={{
-          height: 75,
-          backgroundColor: "#221f20",
-          borderColor: "#221f20",
+          borderRadius: 0,
           borderBottomWidth: 32,
           borderBottomLeftRadius: 32,
           borderBottomRightRadius: 32,
-          justifyContent: "flex-end"
         }}>
-          <TouchableRipple
-            onPress={() => navigation.navigate('Home')}
-          >
-            <Image source={require("./assets/AssaultBadgeClear.png")}
-              style={{
-                marginLeft: 10,
-                marginRight: 10,
-                marginBottom: -20,
-                width: 100,
-                height: 45,
-              }}
-            />
-          </TouchableRipple>
-      </View>}
-      {screen == "Pathfinder Program" && <View
+        <Image source={require("./assets/AllBadgesClear.png")} style={{
+          marginLeft: 10,
+          marginRight: 10,
+          marginBottom: -20,
+          width: 100,
+          height: 45,
+          resizeMode:"contain"
+          }}/>
+      </TouchableRipple>}
+      {(screen == ("Air Assault Program") || screen == ("Air Assault Program: Phase I") || screen == ("Air Assault Program: Phase II")) && <TouchableRipple
+        onPress={() => navigation.navigate('Home')}
         style={{
           height: 75,
           backgroundColor: "#221f20",
           borderColor: "#221f20",
+          justifyContent: "flex-end",
+          borderRadius: 0,
           borderBottomWidth: 32,
           borderBottomLeftRadius: 32,
           borderBottomRightRadius: 32,
-          justifyContent: "flex-end"
         }}>
-          <TouchableRipple
-            onPress={() => navigation.navigate('Home')}
-          >
-            <Image source={require("./assets/PathBadgeClear.png")}
-              style={{
-                marginLeft: 10,
-                marginRight: 10,
-                marginBottom: -20,
-                width: 100,
-                height: 45,
-                resizeMode:"contain"
-              }}
-            />
-          </TouchableRipple>
-      </View>}
-      {screen == "Ranger Program" && <View
+        <Image source={require("./assets/AssaultBadgeClear.png")} style={{
+          marginLeft: 10,
+          marginRight: 10,
+          marginBottom: -20,
+          width: 100,
+          height: 45,
+          resizeMode:"contain"
+          }}/>
+      </TouchableRipple>}
+      {screen == "Pathfinder Program" && <TouchableRipple
+        onPress={() => navigation.navigate('Home')}
         style={{
           height: 75,
           backgroundColor: "#221f20",
           borderColor: "#221f20",
+          justifyContent: "flex-end",
+          borderRadius: 0,
           borderBottomWidth: 32,
           borderBottomLeftRadius: 32,
           borderBottomRightRadius: 32,
-          justifyContent: "flex-end"
         }}>
-          <TouchableRipple
-            onPress={() => navigation.navigate('Home')}
-          >
-            <Image source={require("./assets/RangerBadgeClear.png")}
-              style={{
-                marginLeft: 10,
-                marginRight: 10,
-                marginBottom: -20,
-                width: 100,
-                height: 45,
-              }}
-            />
-          </TouchableRipple>
-      </View>}
+        <Image source={require("./assets/PathBadgeClear.png")} style={{
+          marginLeft: 10,
+          marginRight: 10,
+          marginBottom: -20,
+          width: 100,
+          height: 45,
+          resizeMode:"contain"
+          }}/>
+      </TouchableRipple>}
+      {screen == "Ranger Program" && <TouchableRipple
+        onPress={() => navigation.navigate('Home')}
+        style={{
+          height: 75,
+          backgroundColor: "#221f20",
+          borderColor: "#221f20",
+          justifyContent: "flex-end",
+          borderRadius: 0,
+          borderBottomWidth: 32,
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
+        }}>
+        <Image source={require("./assets/RangerBadgeClear.png")} style={{
+          marginLeft: 10,
+          marginRight: 10,
+          marginBottom: -20,
+          width: 100,
+          height: 45,
+          resizeMode:"contain"
+          }}/>
+      </TouchableRipple>}
     </Appbar.Header>
   );
 } 
