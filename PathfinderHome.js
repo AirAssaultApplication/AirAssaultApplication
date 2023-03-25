@@ -108,21 +108,21 @@ function Flashcard({ flashcard }) {
   );
 }
 
-export function RangerScreen({ navigation }) {
+export function PathfinderScreen({ navigation }) {
   const theme = useTheme();
 
   return(
     <View style={{marginTop: -10, marginBottom: 8}}>
       <View style={styles.card}>
         <Card style={{marginTop: -15, marginBottom: 20}}>
-          <Image source={require("./assets/Ranger2.png")}
+          <Image source={require("./assets/Path2.png")}
             style={{
               width: 'auto',
               height: 230,
             }}
           />
           <TouchableRipple
-            onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pre-ranger');}}
+            onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pathfinder');}}
             borderless={true}
             style={{borderRadius: 0}}
           >
@@ -142,7 +142,7 @@ export function RangerScreen({ navigation }) {
               title="Phase 1"
               subtitle="Questions/Answers"
               titleVariant="titleLarge"
-              left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
+              left={(props) => <Image source={require("./assets/PathBadgeClear.png")}
                 style={{
                   width: 45,
                   height: 45,
@@ -161,7 +161,7 @@ export function RangerScreen({ navigation }) {
               title="Phase 2"
               subtitle="Questions/Answers"
               titleVariant="titleLarge"
-              left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
+              left={(props) => <Image source={require("./assets/PathBadgeClear.png")}
                 style={{
                   width: 45,
                   height: 45,
@@ -172,15 +172,16 @@ export function RangerScreen({ navigation }) {
           </TouchableRipple>
           <Divider></Divider>
           <Card.Content>
-            <Text style={{ fontSize: 12, marginTop: 10, marginBottom: 10}}>PURPOSE/COURSE SCOPE: {"\n"}{"\n"}
-            To train, assess, and select Ranger Candidates in order to send the most capable, qualified, and 
-            prepared Screaming Eagle Soldiers to the U.S. Army’s premier leadership school. This course covers 
-            the skills and concepts necessary to achieve success as a Ranger Student.  Candidates will be 
-            evaluated on their ability to complete an RPFT, 12-mile road march, CWSA, and Land Navigation. 
-            Training will cover individual Soldiers skills and Small Unit Tactics, including Ambushes, 
-            Reconnaissance operations, Formations and Movement techniques,  and Troop Leading Procedures. 
-            At the conclusion of the course, Candidates will be better prepared to represent the Division 
-            at the U.S. Army Ranger school.
+            <Text style={{ fontSize: 12, marginTop: 10, marginBottom: 10}}>PURPOSE: {"\n"}{"\n"}
+            Army Pathfinders are trained to provide navigational aid and advisory services to 
+            military aircraft in areas designated by supported unit commanders.  The Pathfinders’ 
+            secondary missions include providing advice and limited aid to units planning air 
+            assault or airdrop operations.  During the Pathfinder course students are instructed in 
+            aircraft orientation, aero-medical evacuation, close combat assault, ground to air 
+            communication procedures, Control Center operations, all three phases of a sling load 
+            operation, Helicopter Landing Zone and Pick Up Zone operations, and Drop Zone operations 
+            (Computed Air Release Point, Ground Marker Release System, and Verbally Initiated Release 
+            System), dealing with U.S. military fixed and rotary wing aircraft for personnel and equipment.
             </Text>
           </Card.Content>
         </Card>

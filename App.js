@@ -37,11 +37,9 @@ import {
 import {AirAssaultScreen} from './AirAssaultHome.js';
 import {Phase1Screen} from './AirAssaultHome.js';
 import {Phase2Screen} from './AirAssaultHome.js';
-
+import {PathfinderScreen} from './PathfinderHome.js';
 import {RangerScreen} from './RangerHome.js';
 //import {TestScreen} from './AirAssaultHome.js';
-
-import AssaultBadge from './assets/icon.png';
 
 //version output
 const version = Constants.manifest.version
@@ -157,8 +155,10 @@ const Home = () => {
 
 //Navbar
 function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMode }) {
+  const screen = route.name
   return (
     <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 55, justifyContent: "space-around"}}>
+      {screen == "Home" && <Appbar.Action icon="menu" style={{position: "absolute", left: 0, bottom: 0}} onPress={() => {}} color={"#FFFFFF"}/>}
       {back ? <Appbar.BackAction style={{position: "absolute", left: 0, bottom: 0}} onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
       <Appbar.Action
         icon={isDarkMode ? 'white-balance-sunny' : 'brightness-2'}
@@ -166,8 +166,33 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
         onPress={toggleDarkMode}
         color={'#FFFFFF'}
       />
-      <View
+      {screen == "Home" && <View
         style={{
+          height: 75,
+          backgroundColor: "#221f20",
+          borderColor: "#221f20",
+          borderBottomWidth: 32,
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
+          justifyContent: "flex-end",
+        }}>
+          <TouchableRipple
+            onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas');}}
+          >
+            <Image source={require("./assets/AllBadgesClear.png")}
+              style={{
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: -20,
+                width: 100,
+                height: 45,
+                resizeMode:"contain"
+              }}
+            />
+          </TouchableRipple>
+      </View>}
+      {(screen == ("Air Assault Program") || screen == ("Air Assault Program: Phase I") || screen == ("Air Assault Program: Phase II")) && 
+        <View style={{
           height: 75,
           backgroundColor: "#221f20",
           borderColor: "#221f20",
@@ -177,7 +202,7 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
           justifyContent: "flex-end"
         }}>
           <TouchableRipple
-            onPress={() => navigation.navigate('Air Assault Application')}
+            onPress={() => navigation.navigate('Home')}
           >
             <Image source={require("./assets/AssaultBadgeClear.png")}
               style={{
@@ -189,7 +214,56 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
               }}
             />
           </TouchableRipple>
-      </View>
+      </View>}
+      {screen == "Pathfinder Program" && <View
+        style={{
+          height: 75,
+          backgroundColor: "#221f20",
+          borderColor: "#221f20",
+          borderBottomWidth: 32,
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
+          justifyContent: "flex-end"
+        }}>
+          <TouchableRipple
+            onPress={() => navigation.navigate('Home')}
+          >
+            <Image source={require("./assets/PathBadgeClear.png")}
+              style={{
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: -20,
+                width: 100,
+                height: 45,
+                resizeMode:"contain"
+              }}
+            />
+          </TouchableRipple>
+      </View>}
+      {screen == "Ranger Program" && <View
+        style={{
+          height: 75,
+          backgroundColor: "#221f20",
+          borderColor: "#221f20",
+          borderBottomWidth: 32,
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
+          justifyContent: "flex-end"
+        }}>
+          <TouchableRipple
+            onPress={() => navigation.navigate('Home')}
+          >
+            <Image source={require("./assets/RangerBadgeClear.png")}
+              style={{
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: -20,
+                width: 100,
+                height: 45,
+              }}
+            />
+          </TouchableRipple>
+      </View>}
     </Appbar.Header>
   );
 } 
@@ -200,9 +274,8 @@ function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" translucent={true} />
-      <View style={styles.card}></View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      <View style={{marginTop: 10, marginBottom: 20}}>
+      <View style={{marginTop: 8, marginBottom: 16}}>
         <View style={{alignSelf: 'flex-start'}}>
           <Text variant='headlineLarge'>Programs</Text>
           <View style={styles.rectangle}></View>
@@ -224,7 +297,7 @@ function HomeScreen({ navigation }) {
               }}
             />
             <Card.Title
-              title="Air Assault"
+              title="Air Assault Program"
               titleVariant="titleLarge"
               subtitle="&quot;The Ten Toughest Days in the Army&quot;"
               right={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
@@ -242,7 +315,7 @@ function HomeScreen({ navigation }) {
       <View style = {{marginTop: 10}}></View>
       <View style={styles.card}>
         <TouchableRipple
-          onPress={() => console.log('Pressed')}
+          onPress={() => navigation.navigate('Pathfinder Program')}
           borderless={true}
           style={styles.cardBtn}
         >
@@ -256,7 +329,7 @@ function HomeScreen({ navigation }) {
               }}
             />
             <Card.Title
-              title="Pathfinder"
+              title="Pathfinder Program"
               titleVariant="titleLarge"
               subtitle="&quot;First In, Last Out&quot;"
               right={(props) => <Image source={require("./assets/PathBadgeClear.png")}
@@ -288,7 +361,7 @@ function HomeScreen({ navigation }) {
               }}
             />
             <Card.Title
-              title="Ranger"
+              title="Ranger Program"
               titleVariant="titleLarge"
               subtitle="&quot;Rangers Lead the Way&quot;"
               right={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
@@ -366,14 +439,15 @@ export default function App() {
     <PaperProvider theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
       <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
         <Stack.Navigator 
-          initialRouteName='Air Assault Application'
+          initialRouteName='Home'
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />,
           }}>
-          <Stack.Screen name='Air Assault Application' component={HomeScreen}/>
+          <Stack.Screen name='Home' component={HomeScreen}/>
           <Stack.Screen name='Air Assault Program' component={AirAssaultScreen}/>
           <Stack.Screen name='Air Assault Program: Phase I' component={Phase1Screen}/>
           <Stack.Screen name='Air Assault Program: Phase II' component={Phase2Screen}/>
+          <Stack.Screen name='Pathfinder Program' component={PathfinderScreen}/>
           <Stack.Screen name='Ranger Program' component={RangerScreen}/>
           {/* <Stack.Screen name='Air Assault Program: Testing' component={TestScreen}/> */}
         </Stack.Navigator>

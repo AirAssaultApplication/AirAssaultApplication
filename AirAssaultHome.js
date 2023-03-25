@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { Linking, Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import {   
   ActivityIndicator,
@@ -112,31 +112,80 @@ export function AirAssaultScreen({ navigation }) {
   const theme = useTheme();
 
   return(
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      <View style={{marginTop: 32, marginBottom: 8}}>
-        <Text variant='headlineSmall' style={{marginBottom:8, alignSelf: "center"}}>The Sabalauski Air Assault School</Text>
-        <View style={{ marginTop: 20, justifyContent: "space-between", flexDirection:"row"}}>
-          <View style={{width:'45%', marginHorizontal: 10}}>
-            <TouchableRipple
+    <View style={{marginTop: -10, marginBottom: 8}}>
+      <View style={styles.card}>
+        <Card style={{marginTop: -15, marginBottom: 20}}>
+          <Image source={require("./assets/Assault2.png")}
+            style={{
+              width: 'auto',
+              height: 230,
+            }}
+          />
+          <TouchableRipple
+            onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/air-assault');}}
+            borderless={true}
+            style={{borderRadius: 0}}
+          >
+            <Card.Title
+              title="Home"
+              subtitle="Main Page"
+              titleVariant="titleLarge"
+            />
+          </TouchableRipple>
+          <Divider></Divider>
+          <TouchableRipple
               onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
               borderless={true}
-              style={{borderRadius: 20}}
-            >
-              <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Phase I</Button>
-            </TouchableRipple>
-          </View>
-          <View style={{width:'45%', marginHorizontal: 10}}>
-            <TouchableRipple
+              style={{borderRadius: 0}}
+          >
+            <Card.Title 
+              title="Phase 1"
+              subtitle="Questions/Answers"
+              titleVariant="titleLarge"
+              left={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
+                style={{
+                  width: 45,
+                  height: 45,
+                  resizeMode:"contain"
+                }}
+              />}
+            />
+          </TouchableRipple>
+          <Divider></Divider>
+          <TouchableRipple
               onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
               borderless={true}
-              style={{borderRadius: 20}}
-            >
-              <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Phase II</Button>
-            </TouchableRipple>
-          </View>
-        </View>
+              style={{borderRadius: 0}}
+          >
+            <Card.Title 
+              title="Phase 2"
+              subtitle="Questions/Answers"
+              titleVariant="titleLarge"
+              left={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
+                style={{
+                  width: 45,
+                  height: 45,
+                  resizeMode:"contain"
+                }}
+              />}
+            />
+          </TouchableRipple>
+          <Divider></Divider>
+          <Card.Content>
+            <Text style={{ fontSize: 12, marginTop: 10, marginBottom: 10}}>PURPOSE/COURSE SCOPE: {"\n"}{"\n"}
+            To train Soldiers in Air Assault operations, sling-load operations, and rappelling. Upon graduation of 
+            the course each Soldier will be able to perform skills required to make maximum 
+            use of helicopter assets in training and in combat to support their unit operations. 
+            Soldiers are trained on the missions performed by rotary wing aircraft, aircraft safety, 
+            aero-medical evacuation procedures, pathfinder operations, principles and techniques of 
+            combat assaults, rappelling techniques, and sling-load operations. The core POI 
+            requires minimum support assets and is adaptable to organic aviation elements. Both the 
+            core instruction and the additional instruction are conducted in a classroom/field environment.
+            </Text>
+          </Card.Content>
+        </Card>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -222,8 +271,7 @@ export function Phase2Screen({ navigation }) {
   );
 }
 
-/*shuffle*/
-
+/*Test Screen DOES NOT WORK WITH FIREBASE, SINCE PULLING FLASHCARDS IS AN ASYNCHRONOUS TASK
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
   while (currentIndex != 0) {
@@ -235,8 +283,7 @@ function shuffle(array) {
   return array;
 }
 
-/*Test Screen DOES NOT WORK WITH FIREBASE, SINCE PULLING FLASHCARDS IS AN ASYNCHRONOUS TASK*/ 
-/*export function TestScreen({ navigation }){
+export function TestScreen({ navigation }){
   const theme = useTheme();
   let flashcardViews = [];
 
