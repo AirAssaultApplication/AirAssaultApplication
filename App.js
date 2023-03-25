@@ -375,10 +375,9 @@ function HomeScreen({ navigation, route }) {
               </Card>
             </TouchableRipple>
           </View>
-          <View style={{marginTop: 48, marginBottom: 8}}>
-            <View style={{marginTop: 1, alignSelf: 'flex-start'}}>
-              <Text variant='headlineLarge'>News</Text>
-              <View style={styles.rectangle}></View>
+          <View style={{marginTop: 10, marginBottom: 8}}>
+            <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
             </View>
             <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
               title="US Africa Command's Exercise Justified Accord 2023 begins in Kenya"
