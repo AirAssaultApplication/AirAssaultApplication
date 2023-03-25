@@ -53,11 +53,19 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   scrollView: {
-    marginHorizontal: 20,
+    marginHorizontal: 0,
+  },
+  scrollViewCards: {
+    marginHorizontal: 10,
   },
   newsImage: {
     borderWidth: 2,
     borderRadius: 8
+  },
+  rectangle: {
+    height: 5,
+    backgroundColor: '#ffcc01',
+    position: 'relative', 
   },
 });
 
@@ -108,90 +116,134 @@ function Flashcard({ flashcard }) {
   );
 }
 
-export function PathfinderScreen({ navigation }) {
+export function PathfinderScreen({ navigation, route }) {
   const theme = useTheme();
-
+  const screen = route.name
   return(
-    <View style={{marginTop: -10, marginBottom: 8}}>
-      <View style={styles.card}>
-        <Card style={{marginTop: -15, marginBottom: 20}}>
-          <Image source={require("./assets/Path2.png")}
-            style={{
-              width: 'auto',
-              height: 230,
-            }}
-          />
-          <TouchableRipple
-            onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pathfinder');}}
-            borderless={true}
-            style={{borderRadius: 0}}
-          >
-            <Card.Title
-              title="Home"
-              subtitle="Main Page"
-              titleVariant="titleLarge"
+    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <View style={{marginTop: -10, marginBottom: 8}}>
+        <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
+        </View>
+        <View style={styles.card}>
+          <Card style={{marginTop: -16, marginBottom: 20}}>
+            <Image source={require("./assets/Path2.png")}
+              style={{
+                width: 'auto',
+                height: 230,
+              }}
             />
-          </TouchableRipple>
-          <Divider></Divider>
-          <TouchableRipple
-              onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
+            <TouchableRipple
+              onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pathfinder');}}
               borderless={true}
               style={{borderRadius: 0}}
-          >
-            <Card.Title 
-              title="Phase 1"
-              subtitle="Questions/Answers"
-              titleVariant="titleLarge"
-              left={(props) => <Image source={require("./assets/PathBadgeClear.png")}
-                style={{
-                  width: 45,
-                  height: 45,
-                  resizeMode:"contain"
-                }}
-              />}
-            />
-          </TouchableRipple>
-          <Divider></Divider>
-          <TouchableRipple
-              onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
-              borderless={true}
-              style={{borderRadius: 0}}
-          >
-            <Card.Title 
-              title="Phase 2"
-              subtitle="Questions/Answers"
-              titleVariant="titleLarge"
-              left={(props) => <Image source={require("./assets/PathBadgeClear.png")}
-                style={{
-                  width: 45,
-                  height: 45,
-                  resizeMode:"contain"
-                }}
-              />}
-            />
-          </TouchableRipple>
-          <Divider></Divider>
-          <Card.Content>
-            <Text style={{ fontSize: 12, marginTop: 10, marginBottom: 10}}>PURPOSE: {"\n"}{"\n"}
-            Army Pathfinders are trained to provide navigational aid and advisory services to 
-            military aircraft in areas designated by supported unit commanders.  The Pathfinders’ 
-            secondary missions include providing advice and limited aid to units planning air 
-            assault or airdrop operations.  During the Pathfinder course students are instructed in 
-            aircraft orientation, aero-medical evacuation, close combat assault, ground to air 
-            communication procedures, Control Center operations, all three phases of a sling load 
-            operation, Helicopter Landing Zone and Pick Up Zone operations, and Drop Zone operations 
-            (Computed Air Release Point, Ground Marker Release System, and Verbally Initiated Release 
-            System), dealing with U.S. military fixed and rotary wing aircraft for personnel and equipment.
-            </Text>
-          </Card.Content>
-        </Card>
+            >
+              <Card.Title
+                title="Home"
+                subtitle="Main Page"
+                titleVariant="titleLarge"
+                right={(props) => <Image source={require("./assets/External_Link.png")}
+                  style={{
+                    marginRight: 43,
+                    width: 20,
+                    height: 20,
+                    resizeMode:"contain"
+                  }}
+                />}
+              />
+            </TouchableRipple>
+            <Divider></Divider>
+            <TouchableRipple
+                onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
+                borderless={true}
+                style={{borderRadius: 0}}
+            >
+              <Card.Title 
+                title="Phase 1"
+                subtitle="Questions/Answers"
+                titleVariant="titleLarge"
+                left={(props) => <Image source={require("./assets/PathBadgeClear.png")}
+                  style={{
+                    width: 45,
+                    height: 45,
+                    resizeMode:"contain"
+                  }}
+                />}
+                right={(props) => <Button 
+                  style={{
+                    color: "#ffcc01",
+                    marginRight: 15
+                  }}icon='chevron-right'></Button>
+                }
+              />
+            </TouchableRipple>
+            <Divider></Divider>
+            <TouchableRipple
+                onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
+                borderless={true}
+                style={{borderRadius: 0}}
+            >
+              <Card.Title 
+                title="Phase 2"
+                subtitle="Questions/Answers"
+                titleVariant="titleLarge"
+                left={(props) => <Image source={require("./assets/PathBadgeClear.png")}
+                  style={{
+                    width: 45,
+                    height: 45,
+                    resizeMode:"contain"
+                  }}
+                />}
+                right={(props) => <Button 
+                  style={{
+                    color: "#ffcc01",
+                    marginRight: 15
+                  }}icon='chevron-right'></Button>
+                }
+              />
+            </TouchableRipple>
+            <Divider></Divider>
+            <Card.Content>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>PURPOSE:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                Army Pathfinders are trained to provide navigational aid and advisory 
+                services to military aircraft in areas designated by supported unit 
+                commanders.  The Pathfinders’ secondary missions include providing 
+                advice and limited aid to units planning air assault or airdrop operations. 
+                During the Pathfinder course students are instructed in aircraft orientation, 
+                aero-medical evacuation, close combat assault, ground to air communication 
+                procedures, Control Center operations, all three phases of a sling load operation, 
+                Helicopter Landing Zone and Pick Up Zone operations, and Drop Zone operations 
+                (Computed Air Release Point, Ground Marker Release System, and Verbally Initiated 
+                Release System), dealing with U.S. military fixed and rotary wing aircraft for 
+                personnel and equipment.
+              </Text>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>NOTE:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                PACKETS MUST BE TURNED IN TO TSAAS 10 BUSINESS DAYS PRIOR TO 
+                THE COURSE START DATE. PACKETS WILL NOT BE ACCEPTED WITHIN THAT 10 DAY WINDOW. 
+                {'\n'}{'\n'}
+                It is recommended to only study the Sling Load Deficiency list on page 66-67 and the
+                Nomenclature's.  Do not study anything in the handbook for HLZ's or DZ's as this will
+                confuse you. Wait for the block of instruction from the PFDR cadre!
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
-export function Phase1Screen({ navigation }) {
+export function Phase1Screen({ navigation, route }) {
   const theme = useTheme();
+  const screen = route.name
   const [flashcards, setFlashcards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true); // add new state variable
   const flashcardsRef = ref(getDatabase(), "airAssaultPhaseOne");
@@ -219,20 +271,27 @@ export function Phase1Screen({ navigation }) {
   }, [])
 
   return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      {isLoading ? ( // show loading indicator when isLoading is true
-        <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
-      ) : (
-        flashcards.map((flashcard) => (
-          <Flashcard key={flashcard.id} flashcard={flashcard} />
-        ))
-      )}
+    <ScrollView style={{marginTop: -10, marginBottom: 0}} showsVerticalScrollIndicator={false}>
+      <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
+      </View>
+      <View style={styles.scrollViewCards}>
+        {isLoading ? ( // show loading indicator when isLoading is true
+          <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
+        ) : (
+          flashcards.map((flashcard) => (
+            <Flashcard key={flashcard.id} flashcard={flashcard} />
+          ))
+        )}
+      </View>
+      <View style={{marginBottom: 30}}></View>
     </ScrollView>
   );
 }
 
-export function Phase2Screen({ navigation }) {
+export function Phase2Screen({ navigation, route }) {
   const theme = useTheme();
+  const screen = route.name
   const [flashcards, setFlashcards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true); // add new state variable
   const flashcardsRef = ref(getDatabase(), "airAssaultPhaseTwo");
@@ -260,14 +319,20 @@ export function Phase2Screen({ navigation }) {
   }, [])
 
   return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      {isLoading ? ( // show loading indicator when isLoading is true
-        <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
-      ) : (
-        flashcards.map((flashcard) => (
-          <Flashcard key={flashcard.id} flashcard={flashcard} />
-        ))
-      )}
+    <ScrollView style={{marginTop: -10, marginBottom: 0}} showsVerticalScrollIndicator={false}>
+      <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
+      </View>
+      <View style={styles.scrollViewCards}>
+        {isLoading ? ( // show loading indicator when isLoading is true
+          <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
+        ) : (
+          flashcards.map((flashcard) => (
+            <Flashcard key={flashcard.id} flashcard={flashcard} />
+          ))
+        )}
+      </View>
+      <View style={{marginBottom: 30}}></View>
     </ScrollView>
   );
 }

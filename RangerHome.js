@@ -53,11 +53,19 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   scrollView: {
-    marginHorizontal: 20,
+    marginHorizontal: 0,
+  },
+  scrollViewCards: {
+    marginHorizontal: 10,
   },
   newsImage: {
     borderWidth: 2,
     borderRadius: 8
+  },
+  rectangle: {
+    height: 5,
+    backgroundColor: '#ffcc01',
+    position: 'relative', 
   },
 });
 
@@ -108,89 +116,135 @@ function Flashcard({ flashcard }) {
   );
 }
 
-export function RangerScreen({ navigation }) {
+export function RangerScreen({ navigation, route }) {
   const theme = useTheme();
-
+  const screen = route.name
   return(
-    <View style={{marginTop: -10, marginBottom: 8}}>
-      <View style={styles.card}>
-        <Card style={{marginTop: -15, marginBottom: 20}}>
-          <Image source={require("./assets/Ranger2.png")}
-            style={{
-              width: 'auto',
-              height: 230,
-            }}
-          />
-          <TouchableRipple
-            onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pre-ranger');}}
-            borderless={true}
-            style={{borderRadius: 0}}
-          >
-            <Card.Title
-              title="Home"
-              subtitle="Main Page"
-              titleVariant="titleLarge"
+    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <View style={{marginTop: -10, marginBottom: 8}}>
+        <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
+        </View>
+        <View style={styles.card}>
+          <Card style={{marginTop: -15, marginBottom: 20}}>
+            <Image source={require("./assets/Ranger2.png")}
+              style={{
+                width: 'auto',
+                height: 230,
+              }}
             />
-          </TouchableRipple>
-          <Divider></Divider>
-          <TouchableRipple
-              onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
+            <TouchableRipple
+              onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pre-ranger');}}
               borderless={true}
               style={{borderRadius: 0}}
-          >
-            <Card.Title 
-              title="Phase 1"
-              subtitle="Questions/Answers"
-              titleVariant="titleLarge"
-              left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
-                style={{
-                  width: 45,
-                  height: 45,
-                  resizeMode:"contain"
-                }}
-              />}
-            />
-          </TouchableRipple>
-          <Divider></Divider>
-          <TouchableRipple
-              onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
-              borderless={true}
-              style={{borderRadius: 0}}
-          >
-            <Card.Title 
-              title="Phase 2"
-              subtitle="Questions/Answers"
-              titleVariant="titleLarge"
-              left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
-                style={{
-                  width: 45,
-                  height: 45,
-                  resizeMode:"contain"
-                }}
-              />}
-            />
-          </TouchableRipple>
-          <Divider></Divider>
-          <Card.Content>
-            <Text style={{ fontSize: 12, marginTop: 10, marginBottom: 10}}>PURPOSE/COURSE SCOPE: {"\n"}{"\n"}
-            To train, assess, and select Ranger Candidates in order to send the most capable, qualified, and 
-            prepared Screaming Eagle Soldiers to the U.S. Army’s premier leadership school. This course covers 
-            the skills and concepts necessary to achieve success as a Ranger Student.  Candidates will be 
-            evaluated on their ability to complete an RPFT, 12-mile road march, CWSA, and Land Navigation. 
-            Training will cover individual Soldiers skills and Small Unit Tactics, including Ambushes, 
-            Reconnaissance operations, Formations and Movement techniques,  and Troop Leading Procedures. 
-            At the conclusion of the course, Candidates will be better prepared to represent the Division 
-            at the U.S. Army Ranger school.
-            </Text>
-          </Card.Content>
-        </Card>
+            >
+              <Card.Title
+                title="Home"
+                subtitle="Main Page"
+                titleVariant="titleLarge"
+                right={(props) => <Image source={require("./assets/External_Link.png")}
+                  style={{
+                    marginRight: 43,
+                    width: 20,
+                    height: 20,
+                    resizeMode:"contain"
+                  }}
+                />}
+              />
+            </TouchableRipple>
+            <Divider></Divider>
+            <TouchableRipple
+                onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
+                borderless={true}
+                style={{borderRadius: 0}}
+            >
+              <Card.Title 
+                title="Phase 1"
+                subtitle="Questions/Answers"
+                titleVariant="titleLarge"
+                left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
+                  style={{
+                    width: 45,
+                    height: 45,
+                    resizeMode:"contain"
+                  }}
+                />}
+                right={(props) => <Button 
+                  style={{
+                    color: "#ffcc01",
+                    marginRight: 15
+                  }}icon='chevron-right'></Button>
+                }
+              />
+            </TouchableRipple>
+            <Divider></Divider>
+            <TouchableRipple
+                onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
+                borderless={true}
+                style={{borderRadius: 0}}
+            >
+              <Card.Title 
+                title="Phase 2"
+                subtitle="Questions/Answers"
+                titleVariant="titleLarge"
+                left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
+                  style={{
+                    width: 45,
+                    height: 45,
+                    resizeMode:"contain"
+                  }}
+                />}
+                right={(props) => <Button 
+                  style={{
+                    color: "#ffcc01",
+                    marginRight: 15
+                  }}icon='chevron-right'></Button>
+                }
+              />
+            </TouchableRipple>
+            <Divider></Divider>
+            <Card.Content>
+            <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>PURPOSE:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                To train, assess, and select Ranger Candidates in order to send the most capable, 
+                qualified, and prepared Screaming Eagle Soldiers to the U.S. Army’s premier leadership school.
+              </Text>
+              <Divider></Divider>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>COURSE SCOPE:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                This course covers the skills and concepts necessary to achieve success as a Ranger Student. 
+                Candidates will be evaluated on their ability to complete an RPFT, 12-mile road march, CWSA, 
+                and Land Navigation.  Training will cover individual Soldiers skills and Small Unit Tactics, 
+                including Ambushes, Reconnaissance operations, Formations and Movement techniques,  and Troop 
+                Leading Procedures. At the conclusion of the course, Candidates will be better prepared to 
+                represent the Division at the U.S. Army Ranger school.
+              </Text>
+              <View style={{alignSelf: 'flex-start'}}>
+                <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>NOTE:</Text>
+                <View style={styles.rectangle}></View>
+              </View>
+              <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                Packets for entrance must consist of a digitally filled FC 4137 and a complete phase 1 physical 
+                dated within 120 days of course start date along with a dental memorandum. 
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
-export function Phase1Screen({ navigation }) {
+
+export function Phase1Screen({ navigation, route }) {
   const theme = useTheme();
+  const screen = route.name
   const [flashcards, setFlashcards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true); // add new state variable
   const flashcardsRef = ref(getDatabase(), "airAssaultPhaseOne");
@@ -218,20 +272,27 @@ export function Phase1Screen({ navigation }) {
   }, [])
 
   return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      {isLoading ? ( // show loading indicator when isLoading is true
-        <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
-      ) : (
-        flashcards.map((flashcard) => (
-          <Flashcard key={flashcard.id} flashcard={flashcard} />
-        ))
-      )}
+    <ScrollView style={{marginTop: -10, marginBottom: 0}} showsVerticalScrollIndicator={false}>
+      <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
+      </View>
+      <View style={styles.scrollViewCards}>
+        {isLoading ? ( // show loading indicator when isLoading is true
+          <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
+        ) : (
+          flashcards.map((flashcard) => (
+            <Flashcard key={flashcard.id} flashcard={flashcard} />
+          ))
+        )}
+      </View>
+      <View style={{marginBottom: 30}}></View>
     </ScrollView>
   );
 }
 
-export function Phase2Screen({ navigation }) {
+export function Phase2Screen({ navigation, route }) {
   const theme = useTheme();
+  const screen = route.name
   const [flashcards, setFlashcards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true); // add new state variable
   const flashcardsRef = ref(getDatabase(), "airAssaultPhaseTwo");
@@ -259,14 +320,20 @@ export function Phase2Screen({ navigation }) {
   }, [])
 
   return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      {isLoading ? ( // show loading indicator when isLoading is true
-        <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
-      ) : (
-        flashcards.map((flashcard) => (
-          <Flashcard key={flashcard.id} flashcard={flashcard} />
-        ))
-      )}
+    <ScrollView style={{marginTop: -10, marginBottom: 0}} showsVerticalScrollIndicator={false}>
+      <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
+      </View>
+      <View style={styles.scrollViewCards}>
+        {isLoading ? ( // show loading indicator when isLoading is true
+          <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
+        ) : (
+          flashcards.map((flashcard) => (
+            <Flashcard key={flashcard.id} flashcard={flashcard} />
+          ))
+        )}
+      </View>
+      <View style={{marginBottom: 30}}></View>
     </ScrollView>
   );
 }

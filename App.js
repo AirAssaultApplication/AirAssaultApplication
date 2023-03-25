@@ -270,161 +270,161 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation, route }) {
+  const screen = route.name
   return (
-    <SafeAreaView style={styles.container}>
+    <View>
       <StatusBar style="auto" translucent={true} />
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      <View style={{marginTop: 8, marginBottom: 16}}>
-        <View style={{alignSelf: 'flex-start'}}>
-          <Text variant='headlineLarge'>Programs</Text>
-          <View style={styles.rectangle}></View>
+        <View style={{marginTop: -10}}>
+          <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+            <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>{screen}</Text>
+          </View>
+          <View style={styles.card}>
+            <TouchableRipple
+              onPress={() => navigation.navigate('Air Assault Program')}
+              borderless={true}
+              style={styles.cardBtn}
+            >
+              <Card mode='outlined'>
+                <Image source={require("./assets/Assault1.png")}
+                  style={{
+                    width: 'auto',
+                    height: 135,
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12
+                  }}
+                />
+                <Card.Title
+                  title="Air Assault Program"
+                  titleVariant="titleLarge"
+                  subtitle="&quot;The Ten Toughest Days in the Army&quot;"
+                  right={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      marginEnd: 16,
+                      resizeMode:"contain"
+                    }}
+                  />}
+                />
+              </Card>
+            </TouchableRipple>
+          </View>
+          <View style = {{marginTop: 10}}></View>
+          <View style={styles.card}>
+            <TouchableRipple
+              onPress={() => navigation.navigate('Pathfinder Program')}
+              borderless={true}
+              style={styles.cardBtn}
+            >
+              <Card mode='outlined'>
+                <Image source={require("./assets/Path1.jpg")}
+                  style={{
+                    width: 'auto',
+                    height: 135,
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12
+                  }}
+                />
+                <Card.Title
+                  title="Pathfinder Program"
+                  titleVariant="titleLarge"
+                  subtitle="&quot;First In, Last Out&quot;"
+                  right={(props) => <Image source={require("./assets/PathBadgeClear.png")}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      marginEnd: 16,
+                      resizeMode:"contain"
+                    }}
+                  />}
+                />
+              </Card>
+            </TouchableRipple>
+          </View>
+          <View style = {{marginTop: 10}}></View>
+          <View style={styles.card}>
+            <TouchableRipple
+              onPress={() => navigation.navigate('Ranger Program')}
+              borderless={true}
+              style={styles.cardBtn}
+            >
+              <Card mode='outlined'>
+                <Image source={require("./assets/Ranger1.png")}
+                  style={{
+                    width: 'auto',
+                    height: 135,
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12
+                  }}
+                />
+                <Card.Title
+                  title="Ranger Program"
+                  titleVariant="titleLarge"
+                  subtitle="&quot;Rangers Lead the Way&quot;"
+                  right={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      marginEnd: 16,
+                      resizeMode:"contain"
+                    }}
+                  />}
+                />
+              </Card>
+            </TouchableRipple>
+          </View>
+          <View style={{marginTop: 48, marginBottom: 8}}>
+            <View style={{marginTop: 1, alignSelf: 'flex-start'}}>
+              <Text variant='headlineLarge'>News</Text>
+              <View style={styles.rectangle}></View>
+            </View>
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
+              title="US Africa Command's Exercise Justified Accord 2023 begins in Kenya"
+              description='By Capt. Joe Legros · Feb 9, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263876/all_domain_communications_focus_of_afcea_symposium');}}
+              title='All-domain communications focus of AFCEA symposium'
+              description='By Spc. Richard Carlisi · Feb 8, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/0194f7dd/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263834/resilience_intertwined_in_puerto_rico_guards_future_says_guard_chief');}}
+              title="Resilience intertwined in Puerto Rico Guard's future, says Guard Chief"
+              description='By Sgt. 1st Class Zach Sheely, National Guard Bureau · Feb 8, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/08/0e3cf8c4/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263789/secretary_of_the_army_discusses_modernization_efforts_during_scaap_visit');}}
+              title="Secretary of the Army discusses modernization efforts during  SCAAP visit"
+              description='By Matthew Wheaton · Feb 7, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/07/bcbd949c/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263781/ncaa_champion_sam_chelanga_finds_new_purpose_as_army_officer');}}
+              title='NCAA champion Sam Chelanga finds new purpose as Army officer'
+              description='By Alun Thomas · Feb 6, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/2fe87cf8/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263764/data_centric_exercise_showcases_joint_capabilities_lethality');}}
+              title='Data-centric exercise showcases joint capabilities, lethality'
+              description='By Spc. Osvaldo Fuentes · Feb 6, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
+            />
+          </View>
         </View>
-      </View>
-      <View style={styles.card}>
-        <TouchableRipple
-          onPress={() => navigation.navigate('Air Assault Program')}
-          borderless={true}
-          style={styles.cardBtn}
-        >
-          <Card mode='outlined'>
-            <Image source={require("./assets/Assault1.png")}
-              style={{
-                width: 'auto',
-                height: 140,
-                borderTopLeftRadius: 12,
-                borderTopRightRadius: 12
-              }}
-            />
-            <Card.Title
-              title="Air Assault Program"
-              titleVariant="titleLarge"
-              subtitle="&quot;The Ten Toughest Days in the Army&quot;"
-              right={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
-                style={{
-                  width: 60,
-                  height: 60,
-                  marginEnd: 16,
-                  resizeMode:"contain"
-                }}
-              />}
-            />
-          </Card>
-        </TouchableRipple>
-      </View>
-      <View style = {{marginTop: 10}}></View>
-      <View style={styles.card}>
-        <TouchableRipple
-          onPress={() => navigation.navigate('Pathfinder Program')}
-          borderless={true}
-          style={styles.cardBtn}
-        >
-          <Card mode='outlined'>
-            <Image source={require("./assets/Path1.jpg")}
-              style={{
-                width: 'auto',
-                height: 140,
-                borderTopLeftRadius: 12,
-                borderTopRightRadius: 12
-              }}
-            />
-            <Card.Title
-              title="Pathfinder Program"
-              titleVariant="titleLarge"
-              subtitle="&quot;First In, Last Out&quot;"
-              right={(props) => <Image source={require("./assets/PathBadgeClear.png")}
-                style={{
-                  width: 60,
-                  height: 60,
-                  marginEnd: 16,
-                  resizeMode:"contain"
-                }}
-              />}
-            />
-          </Card>
-        </TouchableRipple>
-      </View>
-      <View style = {{marginTop: 10}}></View>
-      <View style={styles.card}>
-        <TouchableRipple
-          onPress={() => navigation.navigate('Ranger Program')}
-          borderless={true}
-          style={styles.cardBtn}
-        >
-          <Card mode='outlined'>
-            <Image source={require("./assets/Ranger1.png")}
-              style={{
-                width: 'auto',
-                height: 140,
-                borderTopLeftRadius: 12,
-                borderTopRightRadius: 12
-              }}
-            />
-            <Card.Title
-              title="Ranger Program"
-              titleVariant="titleLarge"
-              subtitle="&quot;Rangers Lead the Way&quot;"
-              right={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
-                style={{
-                  width: 60,
-                  height: 60,
-                  marginEnd: 16,
-                  resizeMode:"contain"
-                }}
-              />}
-            />
-          </Card>
-        </TouchableRipple>
-      </View>
-      <View style={{marginTop: 48}}>
-        <View style={{marginTop: 1, marginBottom: 8, alignSelf: 'flex-start'}}>
-          <Text variant='headlineLarge'>News</Text>
-          <View style={styles.rectangle}></View>
-        </View>
-        <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
-          title="US Africa Command's Exercise Justified Accord 2023 begins in Kenya"
-          description='By Capt. Joe Legros · Feb 9, 2023'
-          titleNumberOfLines={10}
-          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
-        />
-        <Divider />
-        <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263876/all_domain_communications_focus_of_afcea_symposium');}}
-          title='All-domain communications focus of AFCEA symposium'
-          description='By Spc. Richard Carlisi · Feb 8, 2023'
-          titleNumberOfLines={10}
-          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/0194f7dd/size0-full.jpg'}} />}
-        />
-        <Divider />
-        <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263834/resilience_intertwined_in_puerto_rico_guards_future_says_guard_chief');}}
-          title="Resilience intertwined in Puerto Rico Guard's future, says Guard Chief"
-          description='By Sgt. 1st Class Zach Sheely, National Guard Bureau · Feb 8, 2023'
-          titleNumberOfLines={10}
-          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/08/0e3cf8c4/size0-full.jpg'}} />}
-        />
-        <Divider />
-        <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263789/secretary_of_the_army_discusses_modernization_efforts_during_scaap_visit');}}
-          title="Secretary of the Army discusses modernization efforts during  SCAAP visit"
-          description='By Matthew Wheaton · Feb 7, 2023'
-          titleNumberOfLines={10}
-          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/07/bcbd949c/size0-full.jpg'}} />}
-        />
-        <Divider />
-        <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263781/ncaa_champion_sam_chelanga_finds_new_purpose_as_army_officer');}}
-          title='NCAA champion Sam Chelanga finds new purpose as Army officer'
-          description='By Alun Thomas · Feb 6, 2023'
-          titleNumberOfLines={10}
-          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/2fe87cf8/size0-full.jpg'}} />}
-        />
-        <Divider />
-        <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263764/data_centric_exercise_showcases_joint_capabilities_lethality');}}
-          title='Data-centric exercise showcases joint capabilities, lethality'
-          description='By Spc. Osvaldo Fuentes · Feb 6, 2023'
-          titleNumberOfLines={10}
-          right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
-        />
-      </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -460,6 +460,7 @@ export default function App() {
         card: {
           marginTop: 0,
           justifyContent: 'center',
+          marginHorizontal: 8,
         },
         cardBtn: {
           borderRadius: 10
@@ -468,9 +469,10 @@ export default function App() {
           flex: 1,
           paddingLeft: 8,
           paddingRight: 8,
+          marginHorizontal: 0,
         },
         scrollView: {
-          marginHorizontal: 10,
+          marginHorizontal: 0,
         },
         newsImage: {
           borderWidth: 2,
