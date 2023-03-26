@@ -126,13 +126,15 @@ export function RangerScreen({ navigation, route }) {
           <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
         </View>
         <View style={styles.card}>
-          <Card style={{marginTop: -15, marginBottom: 20}}>
-            <Image source={require("./assets/Ranger2.png")}
-              style={{
-                width: 'auto',
-                height: 230,
-              }}
-            />
+          <Card style={{marginTop: -16, marginBottom: 20}}>
+            <View style={{borderBottomWidth: 3, borderBottomColor: "#ffcc01"}}>
+              <Image source={require("./assets/Ranger2.png")}
+                style={{
+                  width: 'auto',
+                  height: 230,
+                }}
+              />
+            </View>
             <TouchableRipple
               onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pre-ranger');}}
               borderless={true}

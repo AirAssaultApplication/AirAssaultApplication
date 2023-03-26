@@ -127,12 +127,14 @@ export function PathfinderScreen({ navigation, route }) {
         </View>
         <View style={styles.card}>
           <Card style={{marginTop: -16, marginBottom: 20}}>
-            <Image source={require("./assets/Path2.png")}
-              style={{
-                width: 'auto',
-                height: 230,
-              }}
-            />
+            <View style={{borderBottomWidth: 3, borderBottomColor: "#ffcc01"}}>
+              <Image source={require("./assets/Path2.png")}
+                style={{
+                  width: 'auto',
+                  height: 230,
+                }}
+              />
+            </View>
             <TouchableRipple
               onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/pathfinder');}}
               borderless={true}

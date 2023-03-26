@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { Linking } from 'react-native'
+import { ImageBackground, Linking } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import toplogo from './assets/logo_top.png';
@@ -318,8 +318,8 @@ function HomeScreen({ navigation, route }) {
               borderless={true}
               style={styles.cardBtn}
             >
-              <Card mode='outlined'>
-                <Image source={require("./assets/Assault1.png")}
+              <Card>
+              <Image source={require("./assets/Assault1.png")}
                   style={{
                     width: 'auto',
                     height: 145,
@@ -327,7 +327,17 @@ function HomeScreen({ navigation, route }) {
                     borderTopRightRadius: 12
                   }}
                 />
-                <Card.Title
+                <ImageBackground
+                  source={require("./assets/Assault1.png")}
+                  style={{
+                    width: 'auto',
+                    height: 70,
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                  }}
+                  blurRadius={50} // Set the blur radius to 5
+                >
+                  <Card.Title
                   title="Air Assault Program"
                   titleVariant="titleLarge"
                   subtitle="&quot;The Ten Toughest Days in the Army&quot;"
@@ -339,19 +349,21 @@ function HomeScreen({ navigation, route }) {
                       resizeMode:"contain"
                     }}
                   />}
+                  style={{position: "absolute", bottom: 0}}
                 />
+                </ImageBackground>
               </Card>
             </TouchableRipple>
           </View>
           <View style = {{marginTop: 10}}></View>
           <View style={styles.card}>
-            <TouchableRipple
+          <TouchableRipple
               onPress={() => navigation.navigate('Pathfinder Program')}
               borderless={true}
               style={styles.cardBtn}
             >
-              <Card mode='outlined'>
-                <Image source={require("./assets/Path1.jpg")}
+              <Card>
+              <Image source={require("./assets/Path1.jpg")}
                   style={{
                     width: 'auto',
                     height: 145,
@@ -359,7 +371,17 @@ function HomeScreen({ navigation, route }) {
                     borderTopRightRadius: 12
                   }}
                 />
-                <Card.Title
+                <ImageBackground
+                  source={require("./assets/Path1.jpg")}
+                  style={{
+                    width: 'auto',
+                    height: 70,
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                  }}
+                  blurRadius={50} // Set the blur radius to 5
+                >
+                  <Card.Title
                   title="Pathfinder Program"
                   titleVariant="titleLarge"
                   subtitle="&quot;First In, Last Out&quot;"
@@ -371,19 +393,21 @@ function HomeScreen({ navigation, route }) {
                       resizeMode:"contain"
                     }}
                   />}
+                  style={{position: "absolute", bottom: 0}}
                 />
+                </ImageBackground>
               </Card>
             </TouchableRipple>
           </View>
           <View style = {{marginTop: 10}}></View>
           <View style={styles.card}>
-            <TouchableRipple
+          <TouchableRipple
               onPress={() => navigation.navigate('Ranger Program')}
               borderless={true}
               style={styles.cardBtn}
             >
-              <Card mode='outlined'>
-                <Image source={require("./assets/Ranger1.png")}
+              <Card>
+              <Image source={require("./assets/Ranger1.png")}
                   style={{
                     width: 'auto',
                     height: 145,
@@ -391,10 +415,21 @@ function HomeScreen({ navigation, route }) {
                     borderTopRightRadius: 12
                   }}
                 />
-                <Card.Title
+                <ImageBackground
+                  source={require("./assets/Ranger1.png")}
+                  style={{
+                    width: 'auto',
+                    height: 70,
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                  }}
+                  blurRadius={50} // Set the blur radius to 5
+                >
+                  <Card.Title
                   title="Ranger Program"
                   titleVariant="titleLarge"
                   subtitle="&quot;Rangers Lead the Way&quot;"
+
                   right={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
                     style={{
                       width: 60,
@@ -403,13 +438,115 @@ function HomeScreen({ navigation, route }) {
                       resizeMode:"contain"
                     }}
                   />}
+                  style={{position: "absolute", bottom: 0}}
                 />
+                </ImageBackground>
               </Card>
             </TouchableRipple>
           </View>
           <View style={{marginTop: 10, marginBottom: 8}}>
             <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
-              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
+              <Text style={{color:"#ffcc01", fontSize: 20, top: 0}} variant='headlineLarge'>About</Text>
+            </View>
+            <View style={styles.card}>
+              <Card style={{marginTop: -5, marginBottom: 20}}>
+                <View style={{borderBottomWidth: 3, borderBottomColor: "#ffcc01"}}>
+                  <Image source={require("./assets/TSAAS.jpg")}
+                    style={{
+                      width: 'auto',
+                      height: 230,
+                    }}
+                  />
+                </View>
+                <TouchableRipple
+                  onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas');}}
+                  borderless={true}
+                  style={{borderRadius: 0}}
+                >
+                  <Card.Title
+                    title="Home"
+                    subtitle="Main Page"
+                    titleVariant="titleLarge"
+                    right={(props) => <Image source={require("./assets/External_Link.png")}
+                      style={{
+                        marginRight: 43,
+                        width: 20,
+                        height: 20,
+                        resizeMode:"contain"
+                      }}
+                    />}
+                  />
+                </TouchableRipple>
+                <Divider></Divider>
+                <Card.Content>
+                  <View style={{alignSelf: 'flex-start'}}>
+                    <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Phone:</Text>
+                    <View style={styles.rectangle}></View>
+                  </View>
+                  <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                    TSAAS: (270) 798-4410 {"\n"}
+                    Pre Ranger: (270) 412-1111
+                  </Text>
+                  <Divider></Divider>
+                  <View style={{alignSelf: 'flex-start'}}>
+                    <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Email:</Text>
+                    <View style={styles.rectangle}></View>
+                  </View>
+                  <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                    usarmy.campbell.101-abn-div.mbx.air-assault-school@army.mil
+                  </Text>
+                  <Divider></Divider>
+                  <View style={{alignSelf: 'flex-start'}}>
+                    <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Location:</Text>
+                    <View style={styles.rectangle}></View>
+                  </View>
+                  <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                    6883 Air Assault St. {"\n"}
+                    Fort Campbell, KY 42223
+                  </Text>
+                  <View style={{alignSelf: 'flex-start'}}>
+                    <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Hours of Operation:</Text>
+                    <View style={styles.rectangle}></View>
+                  </View>
+                  <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                    Class Report Times {"\n"}{"\n"}
+                    Air Assault Day Zero - 6:00 a.m. {"\n"}{"\n"}
+                    FRIES/SPIES Master Day One - 8:30 a.m. {"\n"}{"\n"}
+                    Pathfinder Day One - 8:00 a.m. {"\n"}{"\n"}
+                    Pre-Ranger Day Zero - 9:00 a.m. {"\n"}{"\n"}
+                    Rappel Master Day One - 8:30 a.m. 
+                  </Text>
+                  <Divider></Divider>
+                  <View style={{alignSelf: 'flex-start'}}>
+                    <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Graduation Times:</Text>
+                    <View style={styles.rectangle}></View>
+                  </View>
+                  <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                  Air Assault - 11 a.m.{"\n"}
+                  Pathfinder - 11 a.m.
+                  </Text>
+                  <Divider></Divider>
+                  <View style={{alignSelf: 'flex-start'}}>
+                    <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>Note:</Text>
+                    <View style={styles.rectangle}></View>
+                  </View>
+                  <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
+                    ATTENTION SERVICE MEMBERS AND ATRRS MANAGERS - Please coordinate directly with The 
+                    Sabalauski Air Assault School (TSAAS) via phone or email on class availability and ATRRS 
+                    reservations. Unit ATRRS Managers are NOT allowed to slot Service Members into any TSAAS 
+                    courses through ATRRS, under any circumstances. TSAAS Operations executes all course 
+                    ATRRS slotting – any course reservations made outside of TSAAS Operations are invalid and 
+                    will be cancelled. Service Members attempting to “walk-on” to any course are NOT 
+                    guaranteed a slot in the course.
+                  </Text>
+                  <Divider></Divider>
+                </Card.Content>
+              </Card>
+            </View>
+          </View>
+          <View style={{marginTop: 10, marginBottom: 8}}>
+            <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+              <Text style={{color:"#ffcc01", fontSize: 20, top: 0}} variant='headlineLarge'>News</Text>
             </View>
             <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
               title="US Africa Command's Exercise Justified Accord 2023 begins in Kenya"
@@ -532,22 +669,22 @@ function About({ navigation, route }) {
   return(
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={{marginTop: -10, marginBottom: 8}}>
-      <View  style={{justifyContent: "space-around", flexDirection: 'row', flex: 1, backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('Home')}}>
-              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
-            </TouchableRipple>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}>
-              <Text style={{color:"#ffcc01", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
-            </TouchableRipple>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('News')}}>
-              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
-            </TouchableRipple>
-          </View>
+        <View  style={{justifyContent: "space-around", flexDirection: 'row', flex: 1, backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
+          <TouchableRipple
+            onPress={() => {navigation.navigate('Home')}}>
+            <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
+          </TouchableRipple>
+          <TouchableRipple
+            onPress={() => {navigation.navigate('About')}}>
+            <Text style={{color:"#ffcc01", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
+          </TouchableRipple>
+          <TouchableRipple
+            onPress={() => {navigation.navigate('News')}}>
+            <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
+          </TouchableRipple>
+        </View>
         <View style={styles.card}>
-          <Card style={{marginTop: 0, marginBottom: 20}}>
+          <Card style={{marginTop: -5, marginBottom: 20}}>
             <View style={{borderBottomWidth: 3, borderBottomColor: "#ffcc01"}}>
               <Image source={require("./assets/TSAAS.jpg")}
                 style={{
@@ -679,7 +816,7 @@ export default function App() {
         card: {
           marginTop: 0,
           justifyContent: 'center',
-          marginHorizontal: 8,
+          marginHorizontal: 0,
         },
         cardBtn: {
           borderRadius: 10
