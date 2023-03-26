@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 import { Linking } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
@@ -156,10 +156,44 @@ const Home = () => {
 //Navbar
 function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMode }) {
   const screen = route.name
+  const [menuVisible, setMenuVisible] = useState(false);
+  const openMenu = () => setMenuVisible(true);
+  const closeMenu = () => setMenuVisible(false);
   return (
     <Appbar.Header style={{backgroundColor: "#221f20", borderBottomWidth: 5, borderColor: "#ffcc01", height: 55, justifyContent: "space-around"}}>
-      {screen == "Home" && <Appbar.Action icon="menu" style={{position: "absolute", left: 0, bottom: 0}} onPress={() => {}} color={"#FFFFFF"}/>}
-      {back ? <Appbar.BackAction style={{position: "absolute", left: 0, bottom: 0}} onPress={navigation.goBack} color={"#FFFFFF"}/> : null}
+      <View style={{position: "absolute", left: 0, justifyContent: "center"}}>
+        {(screen == ("Home") || screen == ("News") || screen == ("About")) &&
+        <Menu
+          visible={menuVisible}
+          onDismiss={closeMenu}
+          anchor={<Appbar.Action icon="menu" onPress={openMenu} color={"#FFFFFF"} />}
+          style={{position: "absolute", marginTop: 48, marginLeft: 0, backgroundColor: "#ffcc01"}}
+        >
+          <Image source={require("./assets/AirbornePatch.png")} style={{
+          marginLeft: 10,
+          marginRight: 10,
+          marginBottom: 5,
+          width: 100,
+          height: 100,
+          resizeMode:"contain"
+          }}/>
+          <Divider style= {{backgroundColor: "#ffcc01", height: 2}}></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('Home'); closeMenu(); }} title="Home" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('About'); closeMenu(); }} title="About" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('News'); closeMenu(); }} title="News" />
+          <Divider style= {{backgroundColor: "#ffcc01", height: 2}}></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('Air Assault Program'); closeMenu(); }} title="Air Assault" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('Ranger Program'); closeMenu(); }} title="Ranger" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('Pathfinder Program'); closeMenu(); }} title="Pathfinder" />
+        </Menu>}
+      </View>
+      {(screen != ("Home") && screen != ("About") && screen != ("News")) && <Appbar.BackAction 
+        style={{position: "absolute", left: 0, bottom: 0}} onPress={navigation.goBack} color={"#FFFFFF"}/>
+      }
       <Appbar.Action
         icon={isDarkMode ? 'brightness-2' : 'white-balance-sunny'}
         style={{ position: 'absolute', right: 0, bottom: 0 }}
