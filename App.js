@@ -819,7 +819,8 @@ export default function App() {
           marginHorizontal: 0,
         },
         cardBtn: {
-          borderRadius: 10
+          borderRadius: 10,
+          marginHorizontal: 10,
         },
         container: {
           flex: 1,
