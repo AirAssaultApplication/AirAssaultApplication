@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Linking, Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { LayoutAnimation, Linking, Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import {   
   ActivityIndicator,
@@ -75,6 +75,8 @@ function Flashcard({ flashcard }) {
   const [isFlipped, setIsFlipped] = React.useState(false);
 
   const toggleFlip = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); //this animates the flash cards when they are clicked
+
     setIsFlipped(!isFlipped);
   };
 
