@@ -22,6 +22,7 @@ import {
 import * as firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, child, get, onValue } from "firebase/database";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA_5_RK8ebZPrHAErXJS9oPWoXTSvVCVxc",
@@ -143,20 +144,13 @@ export function AirAssaultScreen({ navigation, route }) {
               style={{borderRadius: 0}}
             >
               <Card.Title
-                title="Home"
-                subtitle="Main Page"
+                title="Webpage"
                 titleVariant="titleLarge"
-                right={(props) => <Image source={require("./assets/External_Link.png")}
-                  style={{
-                    marginRight: 43,
-                    width: 20,
-                    height: 20,
-                    resizeMode:"contain"
-                  }}
-                />}
+                left={(props) => <Icon name='web' color={theme.colors.primary} size={24} style={{marginLeft:8}}/>}
+                right={(props) => <Icon name='open-in-new' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
-            <Divider></Divider>
+            <Divider bold={true}></Divider>
             <TouchableRipple
                 onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
                 borderless={true}
@@ -164,24 +158,12 @@ export function AirAssaultScreen({ navigation, route }) {
             >
               <Card.Title 
                 title="Phase 1"
-                subtitle="Questions/Answers"
+                subtitle="Flashcards"
                 titleVariant="titleLarge"
-                left={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
-                  style={{
-                    width: 45,
-                    height: 45,
-                    resizeMode:"contain"
-                  }}
-                />}
-                right={(props) => <Button 
-                  style={{
-                    color: "#ffcc01",
-                    marginRight: 15
-                  }}icon='chevron-right'></Button>
-                }
+                left={(props) => <Icon name='card-multiple-outline' color={theme.colors.primary} size={24} style={{marginLeft:8}}/>}
+                right={(props) => <Icon name='chevron-right' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
-            <Divider></Divider>
             <TouchableRipple
                 onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
                 borderless={true}
@@ -189,23 +171,12 @@ export function AirAssaultScreen({ navigation, route }) {
             >
               <Card.Title 
                 title="Phase 2"
-                subtitle="Questions/Answers"
+                subtitle="Flashcards"
                 titleVariant="titleLarge"
-                left={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
-                  style={{
-                    width: 45,
-                    height: 45,
-                    resizeMode:"contain"
-                  }}
-                />}
-                right={(props) => <Button 
-                  style={{
-                    marginRight: 15
-                  }}icon='chevron-right'></Button>
-                }
+                left={(props) => <Icon name='card-multiple-outline' color={theme.colors.primary} size={24} style={{marginLeft:8}}/>}
+                right={(props) => <Icon name='chevron-right' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
-            <Divider></Divider>
             <TouchableRipple
               onPress={() => {Linking.openURL('https://quizlet.com/AirAssaultSchool');}}
               borderless={true}
@@ -214,24 +185,10 @@ export function AirAssaultScreen({ navigation, route }) {
               <Card.Title 
                 title="Quizlet"
                 titleVariant="titleLarge"
-                left={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
-                  style={{
-                    width: 45,
-                    height: 45,
-                    resizeMode:"contain"
-                  }}
-                />}
-                right={(props) => <Image source={require("./assets/External_Link.png")}
-                  style={{
-                    marginRight: 43,
-                    width: 20,
-                    height: 20,
-                    resizeMode:"contain"
-                  }}
-                />}
+                left={(props) => <Icon name='card-multiple-outline' color={theme.colors.primary} size={24} style={{marginLeft:8}}/>}
+                right={(props) => <Icon name='open-in-new' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
-            <Divider></Divider>
             <Card.Content>
               <View style={{alignSelf: 'flex-start'}}>
                 <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>PURPOSE:</Text>

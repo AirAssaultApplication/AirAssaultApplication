@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { ImageBackground, Linking } from 'react-native'
+import { Platform, ImageBackground, Linking } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import toplogo from './assets/logo_top.png';
@@ -709,7 +709,7 @@ export default function App() {
         <Tab.Navigator
           initialRouteName='Home'
           screenOptions={{ headerShown: false }}
-          barStyle={{ backgroundColor: isDarkMode ? "#221f20" : "rgb(255, 251, 255)" }}
+          barStyle={{ backgroundColor: isDarkMode ? "#221f20" : "rgb(255, 251, 255)", height: Platform.OS === 'ios' ? 85 : 75 }}
         >
           <Tab.Screen
             name='HomeScreen'
