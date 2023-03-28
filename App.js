@@ -14,6 +14,7 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   Appbar,
+  BottomNavigation,
   Menu,
   MD3DarkTheme,
   MD3LightTheme,
@@ -29,7 +30,11 @@ import {
   Paragraph,
   TouchableRipple,
   Provider as PaperProvider,
+  useTheme,
 } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import * as NavigationBar from 'expo-navigation-bar';
 
 /*import * as rssParser from 'react-native-rss-parser';*/
 
@@ -287,7 +292,7 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
       </TouchableRipple>}
     </Appbar.Header>
   );
-} 
+}  
 
 const Stack = createNativeStackNavigator();
 
@@ -297,21 +302,7 @@ function HomeScreen({ navigation, route }) {
     <View>
       <StatusBar style="auto" translucent={true} />
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: -10}}>
-          <View  style={{justifyContent: "space-around", flexDirection: 'row', flex: 1, backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('Home')}}>
-              <Text style={{color:"#ffcc01", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
-            </TouchableRipple>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('About')}}>
-              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
-            </TouchableRipple>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('News')}}>
-              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
-            </TouchableRipple>
-          </View>
+        <View style={{marginTop: 20}}>
           <View style={styles.card}>
             <TouchableRipple
               onPress={() => navigation.navigate('Air Assault Program')}
@@ -601,21 +592,7 @@ function News({ navigation, route }) {
     <View>
       <StatusBar style="auto" translucent={true} />
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: -10, marginBottom: "100%"}}>
-          <View  style={{justifyContent: "space-around", flexDirection: 'row', flex: 1, backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('Home')}}>
-              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
-            </TouchableRipple>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('About')}}>
-              <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
-            </TouchableRipple>
-            <TouchableRipple
-              onPress={() => {navigation.navigate('News')}}>
-              <Text style={{color:"#ffcc01", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
-            </TouchableRipple>
-          </View>
+        <View style={{marginTop: 10}}>
           <View style={{marginBottom: 8}}>
             <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
               title="US Africa Command's Exercise Justified Accord 2023 begins in Kenya"
@@ -658,6 +635,34 @@ function News({ navigation, route }) {
               titleNumberOfLines={10}
               right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
             />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263834/resilience_intertwined_in_puerto_rico_guards_future_says_guard_chief');}}
+              title="Resilience intertwined in Puerto Rico Guard's future, says Guard Chief"
+              description='By Sgt. 1st Class Zach Sheely, National Guard Bureau · Feb 8, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/08/0e3cf8c4/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263789/secretary_of_the_army_discusses_modernization_efforts_during_scaap_visit');}}
+              title="Secretary of the Army discusses modernization efforts during  SCAAP visit"
+              description='By Matthew Wheaton · Feb 7, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/07/bcbd949c/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263781/ncaa_champion_sam_chelanga_finds_new_purpose_as_army_officer');}}
+              title='NCAA champion Sam Chelanga finds new purpose as Army officer'
+              description='By Alun Thomas · Feb 6, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/2fe87cf8/size0-full.jpg'}} />}
+            />
+            <Divider />
+            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263764/data_centric_exercise_showcases_joint_capabilities_lethality');}}
+              title='Data-centric exercise showcases joint capabilities, lethality'
+              description='By Spc. Osvaldo Fuentes · Feb 6, 2023'
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
+            />
           </View>
         </View>
       </ScrollView>
@@ -668,21 +673,7 @@ function About({ navigation, route }) {
   const screen = route.name
   return(
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-      <View style={{marginTop: -10, marginBottom: 8}}>
-        <View  style={{justifyContent: "space-around", flexDirection: 'row', flex: 1, backgroundColor: "#221f20", height: 45, marginBottom: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
-          <TouchableRipple
-            onPress={() => {navigation.navigate('Home')}}>
-            <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>Home</Text>
-          </TouchableRipple>
-          <TouchableRipple
-            onPress={() => {navigation.navigate('About')}}>
-            <Text style={{color:"#ffcc01", fontSize: 20, top: 5}} variant='headlineLarge'>About</Text>
-          </TouchableRipple>
-          <TouchableRipple
-            onPress={() => {navigation.navigate('News')}}>
-            <Text style={{color:"#FFFFFF", fontSize: 20, top: 5}} variant='headlineLarge'>News</Text>
-          </TouchableRipple>
-        </View>
+      <View style={{marginTop: 0}}>
         <View style={styles.card}>
           <Card style={{marginTop: -5, marginBottom: 20}}>
             <View style={{borderBottomWidth: 3, borderBottomColor: "#ffcc01"}}>
@@ -782,33 +773,116 @@ function About({ navigation, route }) {
     </ScrollView>
   );
 }
+
+const Tab = createMaterialBottomTabNavigator();
+
+// Create a context object to hold the state and function
+const AppContext = React.createContext({
+  isDarkMode: false,
+  toggleDarkMode: () => {},
+});
+
+function HomeStackScreen({navigation, route}) {
+  const theme = useTheme();
+  const { isDarkMode, toggleDarkMode } = React.useContext(AppContext);
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        header: (props) => <CustomNavigationBar {...props} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />,
+      }}
+    >
+      <Stack.Screen name='Home' component={HomeScreen} />
+      <Stack.Screen name='Air Assault Program' component={AirAssaultScreen} />
+      <Stack.Screen name='Air Assault Program: Phase I' component={Phase1Screen} />
+      <Stack.Screen name='Air Assault Program: Phase II' component={Phase2Screen} />
+      <Stack.Screen name='Pathfinder Program' component={PathfinderScreen}/>
+      <Stack.Screen name='Ranger Program' component={RangerScreen}/>
+    </Stack.Navigator>
+  );
+}
+
+function NewsStackScreen({navigation, route}) {
+  const { isDarkMode, toggleDarkMode } = React.useContext(AppContext);
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        header: (props) => <CustomNavigationBar {...props} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />,
+      }}
+    >
+      <Stack.Screen name='News' component={News} />
+    </Stack.Navigator>
+  );
+}
+
+function AboutStackScreen({navigation, route}) {
+  const { isDarkMode, toggleDarkMode } = React.useContext(AppContext);
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        header: (props) => <CustomNavigationBar {...props} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />,
+      }}
+    >
+      <Stack.Screen name='About' component={About} />
+    </Stack.Navigator>
+  );
+}
+
 export default function App() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  // Define the toggleDarkMode function
+  const toggleDarkMode = React.useCallback(() => {
+    setIsDarkMode((prevMode) => !prevMode);
+  }, []);
+
+  NavigationBar.setBackgroundColorAsync(isDarkMode ? "#221f20" : "rgb(255, 251, 255)");
 
   return (
-    <PaperProvider theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-      <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-        <Stack.Navigator 
+    <AppContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+      <PaperProvider theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
+        <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
+        <Tab.Navigator
           initialRouteName='Home'
-          screenOptions={{
-            header: (props) => <CustomNavigationBar {...props} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />,
-          }}>
-          <Stack.Screen name='Home' component={HomeScreen}/>
-          <Stack.Screen name='About' component={About}/>
-          <Stack.Screen name='News' component={News}/>
-          <Stack.Screen name='Air Assault Program' component={AirAssaultScreen}/>
-          <Stack.Screen name='Air Assault Program: Phase I' component={Phase1Screen}/>
-          <Stack.Screen name='Air Assault Program: Phase II' component={Phase2Screen}/>
-          <Stack.Screen name='Pathfinder Program' component={PathfinderScreen}/>
-          <Stack.Screen name='Ranger Program' component={RangerScreen}/>
-          {/* <Stack.Screen name='Air Assault Program: Testing' component={TestScreen}/> */}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+          screenOptions={{ headerShown: false }}
+          barStyle={{ backgroundColor: isDarkMode ? "#221f20" : "rgb(255, 251, 255)" }}
+        >
+          <Tab.Screen
+            name='HomeScreen'
+            component={HomeStackScreen}
+            options={{
+              tabBarLabel: 'Home',
+              tabBarIcon: ({ focused, color}) => (
+                <Icon name={focused ? 'home' : 'home-outline'} color={color} size={24} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name='NewsScreen'
+            component={NewsStackScreen}
+            options={{
+              tabBarLabel: 'News',
+              tabBarIcon: ({ focused, color }) => (
+                <Icon name={focused ? 'newspaper-variant' : 'newspaper-variant-outline'} color={color} size={24} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name='AboutScreen'
+            component={AboutStackScreen}
+            options={{
+              tabBarLabel: 'About',
+              tabBarIcon: ({ focused, color }) => (
+                <Icon name={focused ? 'information': 'information-outline'} color={color} size={24} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </AppContext.Provider>
     );
   }
 
