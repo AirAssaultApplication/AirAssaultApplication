@@ -315,6 +315,7 @@ function HomeScreen({ navigation, route }) {
                     width: 'auto',
                     height: 145,
                     borderTopLeftRadius: 12,
+                    marginBottom: -1,
                     borderTopRightRadius: 12
                   }}
                 />
@@ -331,6 +332,8 @@ function HomeScreen({ navigation, route }) {
                   <Card.Title
                   title="Air Assault Program"
                   titleVariant="titleLarge"
+                  titleStyle={{color: "#221f20"}}
+                  subtitleStyle={{color: "#221f20"}}
                   subtitle="&quot;The Ten Toughest Days in the Army&quot;"
                   right={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
                     style={{
@@ -358,6 +361,7 @@ function HomeScreen({ navigation, route }) {
                   style={{
                     width: 'auto',
                     height: 145,
+                    marginBottom: -1,
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12
                   }}
@@ -375,6 +379,8 @@ function HomeScreen({ navigation, route }) {
                   <Card.Title
                   title="Pathfinder Program"
                   titleVariant="titleLarge"
+                  titleStyle={{color: "#221f20"}}
+                  subtitleStyle={{color: "#221f20"}}
                   subtitle="&quot;First In, Last Out&quot;"
                   right={(props) => <Image source={require("./assets/PathBadgeClear.png")}
                     style={{
@@ -402,6 +408,7 @@ function HomeScreen({ navigation, route }) {
                   style={{
                     width: 'auto',
                     height: 145,
+                    marginBottom: -1,
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12
                   }}
@@ -419,8 +426,9 @@ function HomeScreen({ navigation, route }) {
                   <Card.Title
                   title="Ranger Program"
                   titleVariant="titleLarge"
+                  titleStyle={{color: "#221f20"}}
+                  subtitleStyle={{color: "#221f20"}}
                   subtitle="&quot;Rangers Lead the Way&quot;"
-
                   right={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
                     style={{
                       width: 60,
