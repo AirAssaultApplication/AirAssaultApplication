@@ -172,7 +172,7 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
           visible={menuVisible}
           onDismiss={closeMenu}
           anchor={<Appbar.Action icon="menu" onPress={openMenu} color={"#FFFFFF"} />}
-          style={{position: "absolute", marginTop: 48, marginLeft: -10, backgroundColor: "#ffcc01"}}
+          style={{position: "absolute", marginTop: 48, left: 0}}
         >
           <Image source={require("./assets/AirbornePatch.png")} style={{
           marginLeft: 10,
@@ -183,11 +183,11 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
           resizeMode:"contain"
           }}/>
           <Divider style= {{backgroundColor: "#ffcc01", height: 3}}></Divider>
-          <Menu.Item onPress={() => { navigation.navigate('Home'); closeMenu(); }} title="Home" />
+          <Menu.Item onPress={() => { navigation.navigate('HomeScreen'); closeMenu(); }} title="Home" />
           <Divider></Divider>
-          <Menu.Item onPress={() => { navigation.navigate('About'); closeMenu(); }} title="About" />
+          <Menu.Item onPress={() => { navigation.navigate('AboutScreen'); closeMenu(); }} title="About" />
           <Divider></Divider>
-          <Menu.Item onPress={() => { navigation.navigate('News'); closeMenu(); }} title="News" />
+          <Menu.Item onPress={() => { navigation.navigate('NewsScreen'); closeMenu(); }} title="News" />
           <Divider style= {{backgroundColor: "#ffcc01", height: 3}}></Divider>
           <Menu.Item onPress={() => { navigation.navigate('Air Assault Program'); closeMenu(); }} title="Air Assault" />
           <Divider></Divider>
