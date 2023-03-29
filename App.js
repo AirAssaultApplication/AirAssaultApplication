@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { Platform, ImageBackground, Linking } from 'react-native'
+import { Platform, Appearance, ImageBackground, Linking } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import toplogo from './assets/logo_top.png';
@@ -300,7 +300,7 @@ function HomeScreen({ navigation, route }) {
   const screen = route.name
   return (
     <View>
-      <StatusBar style="auto" translucent={true} />
+      <StatusBar style="light" translucent={true} />
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={{marginTop: 20}}>
           <View style={styles.card}>
@@ -693,7 +693,7 @@ function AboutStackScreen({navigation, route}) {
 }
 
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const [isDarkMode, setIsDarkMode] = React.useState(Appearance.getColorScheme() === 'dark');
 
   // Define the toggleDarkMode function
   const toggleDarkMode = React.useCallback(() => {
