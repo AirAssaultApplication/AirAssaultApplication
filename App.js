@@ -693,7 +693,9 @@ export default function App() {
     setIsDarkMode((prevMode) => !prevMode);
   }, []);
 
-  NavigationBar.setBackgroundColorAsync(isDarkMode ? "#221f20" : "rgb(255, 251, 255)");
+  if (Platform.OS === 'android') {
+    NavigationBar.setBackgroundColorAsync(isDarkMode ? "#221f20" : "rgb(255, 251, 255)");
+  }
 
   return (
     <AppContext.Provider value={{ isDarkMode, toggleDarkMode }}>
