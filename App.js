@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { Platform, ImageBackground, Linking } from 'react-native'
+import { Platform, Appearance, ImageBackground, Linking, Dimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import toplogo from './assets/logo_top.png';
@@ -185,15 +185,15 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
           <Divider style= {{backgroundColor: "#ffcc01", height: 3}}></Divider>
           <Menu.Item onPress={() => { navigation.navigate('HomeScreen'); closeMenu(); }} title="Home" />
           <Divider></Divider>
-          <Menu.Item onPress={() => { navigation.navigate('AboutScreen'); closeMenu(); }} title="About" />
-          <Divider></Divider>
           <Menu.Item onPress={() => { navigation.navigate('NewsScreen'); closeMenu(); }} title="News" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('AboutScreen'); closeMenu(); }} title="About" />
           <Divider style= {{backgroundColor: "#ffcc01", height: 3}}></Divider>
           <Menu.Item onPress={() => { navigation.navigate('Air Assault Program'); closeMenu(); }} title="Air Assault" />
           <Divider></Divider>
-          <Menu.Item onPress={() => { navigation.navigate('Ranger Program'); closeMenu(); }} title="Ranger" />
-          <Divider></Divider>
           <Menu.Item onPress={() => { navigation.navigate('Pathfinder Program'); closeMenu(); }} title="Pathfinder" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('Ranger Program'); closeMenu(); }} title="Ranger" />
           <Divider style= {{backgroundColor: "#ffcc01", height: 3, marginBottom: -10}}></Divider>
         </Menu>}
       </View>
@@ -298,11 +298,11 @@ const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation, route }) {
   const screen = route.name
+  const screenHeight = Dimensions.get('screen').height - 50;
   return (
-    <View>
-      <StatusBar style="auto" translucent={true} />
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: 20}}>
+    <View style={{justifyContent: "center", flex: 1}}>
+      <StatusBar style="light" translucent={true} />
+        <View style={{marginTop: 10}}>
           <View style={styles.card}>
             <TouchableRipple
               onPress={() => navigation.navigate('Air Assault Program')}
@@ -313,7 +313,7 @@ function HomeScreen({ navigation, route }) {
               <Image source={require("./assets/Assault1.png")}
                   style={{
                     width: 'auto',
-                    height: 145,
+                    height: screenHeight*0.15,
                     borderTopLeftRadius: 12,
                     marginBottom: -1,
                     borderTopRightRadius: 12
@@ -360,7 +360,7 @@ function HomeScreen({ navigation, route }) {
               <Image source={require("./assets/Path1.jpg")}
                   style={{
                     width: 'auto',
-                    height: 145,
+                    height: screenHeight*0.15,
                     marginBottom: -1,
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12
@@ -407,7 +407,7 @@ function HomeScreen({ navigation, route }) {
               <Image source={require("./assets/Ranger1.png")}
                   style={{
                     width: 'auto',
-                    height: 145,
+                    height: screenHeight*0.15,
                     marginBottom: -1,
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12
@@ -444,7 +444,6 @@ function HomeScreen({ navigation, route }) {
             </TouchableRipple>
           </View>
         </View>
-      </ScrollView>
     </View>
   );
 }
@@ -532,6 +531,7 @@ function News({ navigation, route }) {
   );
 }
 function About({ navigation, route }) {
+  const theme = useTheme();
   const screen = route.name
   return(
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -552,17 +552,10 @@ function About({ navigation, route }) {
               style={{borderRadius: 0}}
             >
               <Card.Title
-                title="Home"
-                subtitle="Main Page"
+                title="Webpage"
                 titleVariant="titleLarge"
-                right={(props) => <Image source={require("./assets/External_Link.png")}
-                  style={{
-                    marginRight: 43,
-                    width: 20,
-                    height: 20,
-                    resizeMode:"contain"
-                  }}
-                />}
+                left={(props) => <Icon name='web' color={theme.colors.primary} size={24} style={{marginLeft:8}}/>}
+                right={(props) => <Icon name='open-in-new' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
             <Divider></Divider>
@@ -693,14 +686,16 @@ function AboutStackScreen({navigation, route}) {
 }
 
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const [isDarkMode, setIsDarkMode] = React.useState(Appearance.getColorScheme() === 'dark');
 
   // Define the toggleDarkMode function
   const toggleDarkMode = React.useCallback(() => {
     setIsDarkMode((prevMode) => !prevMode);
   }, []);
 
-  NavigationBar.setBackgroundColorAsync(isDarkMode ? "#221f20" : "rgb(255, 251, 255)");
+  if (Platform.OS === 'android') {
+    NavigationBar.setBackgroundColorAsync(isDarkMode ? "#221f20" : "rgb(255, 251, 255)");
+  }
 
   return (
     <AppContext.Provider value={{ isDarkMode, toggleDarkMode }}>
