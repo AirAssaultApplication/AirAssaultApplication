@@ -185,15 +185,15 @@ function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMo
           <Divider style= {{backgroundColor: "#ffcc01", height: 3}}></Divider>
           <Menu.Item onPress={() => { navigation.navigate('HomeScreen'); closeMenu(); }} title="Home" />
           <Divider></Divider>
-          <Menu.Item onPress={() => { navigation.navigate('AboutScreen'); closeMenu(); }} title="About" />
-          <Divider></Divider>
           <Menu.Item onPress={() => { navigation.navigate('NewsScreen'); closeMenu(); }} title="News" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('AboutScreen'); closeMenu(); }} title="About" />
           <Divider style= {{backgroundColor: "#ffcc01", height: 3}}></Divider>
           <Menu.Item onPress={() => { navigation.navigate('Air Assault Program'); closeMenu(); }} title="Air Assault" />
           <Divider></Divider>
-          <Menu.Item onPress={() => { navigation.navigate('Ranger Program'); closeMenu(); }} title="Ranger" />
-          <Divider></Divider>
           <Menu.Item onPress={() => { navigation.navigate('Pathfinder Program'); closeMenu(); }} title="Pathfinder" />
+          <Divider></Divider>
+          <Menu.Item onPress={() => { navigation.navigate('Ranger Program'); closeMenu(); }} title="Ranger" />
           <Divider style= {{backgroundColor: "#ffcc01", height: 3, marginBottom: -10}}></Divider>
         </Menu>}
       </View>
