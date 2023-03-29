@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { Platform, Appearance, ImageBackground, Linking } from 'react-native'
+import { Platform, Appearance, ImageBackground, Linking, Dimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import toplogo from './assets/logo_top.png';
@@ -298,11 +298,11 @@ const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation, route }) {
   const screen = route.name
+  const screenHeight = Dimensions.get('screen').height - 50;
   return (
-    <View>
+    <View style={{justifyContent: "center", flex: 1}}>
       <StatusBar style="light" translucent={true} />
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: 20}}>
+        <View style={{marginTop: 10}}>
           <View style={styles.card}>
             <TouchableRipple
               onPress={() => navigation.navigate('Air Assault Program')}
@@ -313,7 +313,7 @@ function HomeScreen({ navigation, route }) {
               <Image source={require("./assets/Assault1.png")}
                   style={{
                     width: 'auto',
-                    height: 145,
+                    height: screenHeight*0.15,
                     borderTopLeftRadius: 12,
                     marginBottom: -1,
                     borderTopRightRadius: 12
@@ -360,7 +360,7 @@ function HomeScreen({ navigation, route }) {
               <Image source={require("./assets/Path1.jpg")}
                   style={{
                     width: 'auto',
-                    height: 145,
+                    height: screenHeight*0.15,
                     marginBottom: -1,
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12
@@ -407,7 +407,7 @@ function HomeScreen({ navigation, route }) {
               <Image source={require("./assets/Ranger1.png")}
                   style={{
                     width: 'auto',
-                    height: 145,
+                    height: screenHeight*0.15,
                     marginBottom: -1,
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12
@@ -444,7 +444,6 @@ function HomeScreen({ navigation, route }) {
             </TouchableRipple>
           </View>
         </View>
-      </ScrollView>
     </View>
   );
 }
