@@ -532,6 +532,7 @@ function News({ navigation, route }) {
   );
 }
 function About({ navigation, route }) {
+  const theme = useTheme();
   const screen = route.name
   return(
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -552,17 +553,10 @@ function About({ navigation, route }) {
               style={{borderRadius: 0}}
             >
               <Card.Title
-                title="Home"
-                subtitle="Main Page"
+                title="Webpage"
                 titleVariant="titleLarge"
-                right={(props) => <Image source={require("./assets/External_Link.png")}
-                  style={{
-                    marginRight: 43,
-                    width: 20,
-                    height: 20,
-                    resizeMode:"contain"
-                  }}
-                />}
+                left={(props) => <Icon name='web' color={theme.colors.primary} size={24} style={{marginLeft:8}}/>}
+                right={(props) => <Icon name='open-in-new' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
             <Divider></Divider>
