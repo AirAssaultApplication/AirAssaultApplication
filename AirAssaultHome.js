@@ -267,7 +267,8 @@ export function Phase1Screen({ navigation, route }) {
       // this is cleanup function, will call just on component will unmount
       // you can clear your events listeners or any async calls here
     }
-  }, [])
+  },
+   [])
 
   return (
     <ScrollView style={{marginTop: -10, marginBottom: 0}} showsVerticalScrollIndicator={false}>

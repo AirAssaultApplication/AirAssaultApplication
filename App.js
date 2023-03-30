@@ -47,6 +47,8 @@ import {PathfinderScreen} from './PathfinderHome.js';
 import {RangerScreen} from './RangerHome.js';
 //import {TestScreen} from './AirAssaultHome.js';
 
+
+
 //version output
 const version = Constants.manifest.version
 console.log("Version: ", version)
@@ -292,6 +294,23 @@ const Stack = createNativeStackNavigator();
 function HomeScreen({ navigation, route }) {
   const screen = route.name
   const screenHeight = Dimensions.get('screen').height - 50;
+
+
+  const [articles, setArticles] = React.useState([]);
+
+fetch("https://www.army.mil/rss/static/143.xml")
+.then((response) => response.text())
+.then((responseData) => rssParser.parse(responseData))
+.then((rss) => {
+
+  setArticles(rss.items);
+  console.log(articles);
+  console.log("retrieved articles");
+  
+  //this is probably not where this code should go, but it's here to show how to use the rss parser
+})
+
+
   return (
     <View style={{justifyContent: "center", flex: 1}}>
       <StatusBar style="light" translucent={true} />
@@ -441,55 +460,72 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function Article ({ Article, ArticleIndex }) {
-  fetch("https://www.army.mil/rss/static/143.xml")
-  .then((response) => response.text())
-  .then((responseData) => rssParser.parse(responseData))
-  .then((rss) => {
-    console.log(rss.title);
-    console.log(rss.items.length);
-    console.log(rss.items[0].title);
-    console.log(rss.items[0].description);
+function Article ({ articleItem }) {
+
+  console.log(articleItem);
+  console.log("got an article");
+  
+
+  return (
+    <View style={styles.card} key={articleItem.id} >
+      {console.log(articleItem.id)}
+      <TouchableRipple
+      borderless={true}
+      style={styles.cardBtn}>
+        <Card>
+          <Card.Content>
+            <View style={{flexDirection: "row"}}>
+
+            <Text variant='titleMedium'>{articleItem.title}</Text>
+
+            <Divider style={{backgroundColor:theme.colors.onBackground, marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
+            
+            <Text variant='titleMedium'>{articleItem.description}</Text>
+
+            </View>
+            </Card.Content>
+            {console.log(articleItem.title)}
+        </Card>
+
+      </TouchableRipple>
+      
+      </View>
+
+  )
+  
 
     //this is probably not where this code should go, but it's here to show how to use the rss parser
-});
-
-return (
-  <View>
-    <text>{rss.items[articleIndex].title}</text>
-    <text>{rss.items[articleIndex].description}</text>
-    <a href={Article.link} target="_blank" rel="noopener noreferrer">{Article.link}</a>
-
-  </View>
-
-)
-
-}
+};
 
 
-function News({ navigation, route }) {
+
+function News({ navigation, route, articles }) {
   const screen = route.name
+  
+  const [loading, isLoading] = React.useState(true);
 
-  fetch("https://www.army.mil/rss/static/143.xml")
+  console.log(articles);
+  console.log("got no article");
+
+ 
+ 
+  
+    
+
+  
+
+  {fetch("https://www.army.mil/rss/static/143.xml")
   .then((response) => response.text())
   .then((responseData) => rssParser.parse(responseData))
   .then((rss) => {
-    console.log(rss.title);
-    console.log(rss.items.length);
+    const articles = rss.items;
 
-    const articles = rss.items.map((article, index) => {
-      console.log(article.title);
-      console.log(article.description);
-    })
-
-    // while () {
-    // console.log(rss.items[item].title);
-    // console.log(rss.items[item].description);
-    // console.log(rss.items[item]);
-    // };
-
+    setArticles(rss.items);
+    console.log(articles);
+    console.log("retrieved articles");
+    
     //this is probably not where this code should go, but it's here to show how to use the rss parser
-});
+})};
 
   
   return (
@@ -505,68 +541,13 @@ function News({ navigation, route }) {
               right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
             />
             <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263876/all_domain_communications_focus_of_afcea_symposium');}}
-              title='All-domain communications focus of AFCEA symposium'
-              description='By Spc. Richard Carlisi · Feb 8, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/0194f7dd/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263834/resilience_intertwined_in_puerto_rico_guards_future_says_guard_chief');}}
-              title="Resilience intertwined in Puerto Rico Guard's future, says Guard Chief"
-              description='By Sgt. 1st Class Zach Sheely, National Guard Bureau · Feb 8, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/08/0e3cf8c4/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263789/secretary_of_the_army_discusses_modernization_efforts_during_scaap_visit');}}
-              title="Secretary of the Army discusses modernization efforts during  SCAAP visit"
-              description='By Matthew Wheaton · Feb 7, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/07/bcbd949c/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263781/ncaa_champion_sam_chelanga_finds_new_purpose_as_army_officer');}}
-              title='NCAA champion Sam Chelanga finds new purpose as Army officer'
-              description='By Alun Thomas · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/2fe87cf8/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263764/data_centric_exercise_showcases_joint_capabilities_lethality');}}
-              title='Data-centric exercise showcases joint capabilities, lethality'
-              description='By Spc. Osvaldo Fuentes · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263834/resilience_intertwined_in_puerto_rico_guards_future_says_guard_chief');}}
-              title="Resilience intertwined in Puerto Rico Guard's future, says Guard Chief"
-              description='By Sgt. 1st Class Zach Sheely, National Guard Bureau · Feb 8, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/08/0e3cf8c4/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263789/secretary_of_the_army_discusses_modernization_efforts_during_scaap_visit');}}
-              title="Secretary of the Army discusses modernization efforts during  SCAAP visit"
-              description='By Matthew Wheaton · Feb 7, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/07/bcbd949c/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263781/ncaa_champion_sam_chelanga_finds_new_purpose_as_army_officer');}}
-              title='NCAA champion Sam Chelanga finds new purpose as Army officer'
-              description='By Alun Thomas · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/2fe87cf8/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263764/data_centric_exercise_showcases_joint_capabilities_lethality');}}
-              title='Data-centric exercise showcases joint capabilities, lethality'
-              description='By Spc. Osvaldo Fuentes · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
-            />
+
+            {articles.map((articleData) => (
+              <Article key={articleData.id}/> 
+               
+            ))}
+            
+            
           </View>
         </View>
       </ScrollView>
