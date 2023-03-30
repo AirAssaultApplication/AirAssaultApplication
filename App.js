@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { Platform, Appearance, ImageBackground, Linking, Dimensions } from 'react-native'
+import { Platform, Appearance, ImageBackground, Linking, Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import * as rssParser from 'react-native-rss-parser';
 import toplogo from './assets/logo_top.png';
 import bottomlogo from './assets/logo_bottom.png';
 import Constants from "expo-constants"
@@ -447,8 +448,34 @@ function HomeScreen({ navigation, route }) {
     </View>
   );
 }
+
+function Article ({ Article }) {
+  fetch("https://www.army.mil/rss/static/143.xml")
+  .then((response) => response.text())
+  .then((responseData) => rssParser.parse(responseData))
+  .then((rss) => {
+    console.log(rss.title);
+    console.log(rss.items.length);
+});
+
+return (
+  <View>
+    <text>{Article.title}</text>
+    <text>{Article.description}</text>
+    <a href={Article.link} target="_blank" rel="noopener noreferrer">{Article.link}</a>
+
+  </View>
+
+)
+
+}
+
+
 function News({ navigation, route }) {
   const screen = route.name
+
+  
+  
   return (
     <View>
       <StatusBar style="auto" translucent={true} />
