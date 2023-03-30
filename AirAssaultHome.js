@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { LayoutAnimation, Linking, Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import {  
+          LayoutAnimation,
+          Linking,
+          Image,
+          StyleSheet,
+          View,
+          TouchableOpacity,
+          SafeAreaView,
+          ScrollView
+        } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import {   
   ActivityIndicator,
@@ -77,7 +86,7 @@ function Flashcard({ flashcard }) {
 
   const toggleFlip = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); //this animates the flash cards when they are clicked
-
+                                                                          //unfortunately the animation is skipped on web browsers
     setIsFlipped(!isFlipped);
   };
 
@@ -94,7 +103,7 @@ function Flashcard({ flashcard }) {
               <View style={{ flex: 1 }}>
                 <View style={{ justifyContent: "flex-start" }}>
                   <Text variant="titleMedium">{flashcard.question}</Text>
-                  {isFlipped && (
+                  {isFlipped && ( //isFlipped is a boolean that determines if the card shows the answer or not
                     <View>
                       <Divider style={{backgroundColor:theme.colors.onBackground, marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
                       <Text variant="titleMedium">{flashcard.answer}</Text>
