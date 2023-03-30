@@ -448,6 +448,8 @@ function Article ({ Article }) {
   .then((rss) => {
     console.log(rss.title);
     console.log(rss.items.length);
+
+    //this is probably not where this code should go, but it's here to show how to use the rss parser
 });
 
 return (
