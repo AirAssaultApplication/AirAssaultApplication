@@ -49,7 +49,7 @@ import {RangerScreen} from './RangerHome.js';
 
 //version output
 const version = Constants.manifest.version
-console.log("Version:", version)
+console.log("Version: ", version)
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -149,15 +149,7 @@ const CombinedDarkTheme = {
   }
 };
 
-/*font stuff
-import { useFonts } from 'expo-font';
 
-const Home = () => {
-  let [fontsLoaded] = useFonts ({
-    'Arial-Black':  require('./assets/fontfam.ttf'),
-  });
-}
-*/
 
 //Navbar
 function CustomNavigationBar({ navigation, back, route, isDarkMode, toggleDarkMode }) {
