@@ -441,21 +441,23 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function Article ({ Article }) {
+function Article ({ Article, ArticleIndex }) {
   fetch("https://www.army.mil/rss/static/143.xml")
   .then((response) => response.text())
   .then((responseData) => rssParser.parse(responseData))
   .then((rss) => {
     console.log(rss.title);
     console.log(rss.items.length);
+    console.log(rss.items[0].title);
+    console.log(rss.items[0].description);
 
     //this is probably not where this code should go, but it's here to show how to use the rss parser
 });
 
 return (
   <View>
-    <text>{Article.title}</text>
-    <text>{Article.description}</text>
+    <text>{rss.items[articleIndex].title}</text>
+    <text>{rss.items[articleIndex].description}</text>
     <a href={Article.link} target="_blank" rel="noopener noreferrer">{Article.link}</a>
 
   </View>
@@ -468,7 +470,27 @@ return (
 function News({ navigation, route }) {
   const screen = route.name
 
-  
+  fetch("https://www.army.mil/rss/static/143.xml")
+  .then((response) => response.text())
+  .then((responseData) => rssParser.parse(responseData))
+  .then((rss) => {
+    console.log(rss.title);
+    console.log(rss.items.length);
+
+    const articles = rss.items.map((article, index) => {
+      console.log(article.title);
+      console.log(article.description);
+    })
+
+    // while () {
+    // console.log(rss.items[item].title);
+    // console.log(rss.items[item].description);
+    // console.log(rss.items[item]);
+    // };
+
+    //this is probably not where this code should go, but it's here to show how to use the rss parser
+});
+
   
   return (
     <View>
