@@ -459,7 +459,11 @@ function Article ({ articleItem }) {
   
 
   return (
-    <View style={styles.card} key={articleItem.id} >
+    <QueryClientProvider client={queryClient}>
+    <View style={styles.card} key={articleItem.index} >
+      {/* yes I know using index as a key is bad practice but we're not editing the articles
+          so any damage this garbage produces is limited in scope, unless you want to dismiss stuff
+          in which case I'm genuinely sorry... --Eric*/}
       {console.log(articleItem.id)}
       <TouchableRipple
       borderless={true}
@@ -482,18 +486,18 @@ function Article ({ articleItem }) {
       </TouchableRipple>
       
       </View>
+      </QueryClientProvider>
 
   )
   
 
-    //this is probably not where this code should go, but it's here to show how to use the rss parser
 };
 
-async function FetchRSS(articlesInput) {
+function FetchRSS(articlesInput) {
   const [articles, setArticles] = React.useState([]);
   if (articlesInput.length == 0){
   try {
-    await fetch(
+    fetch(
       "https://www.army.mil/rss/static/143.xml"
       )
       .then((response) => response.text())
@@ -502,7 +506,7 @@ async function FetchRSS(articlesInput) {
 
       console.log("got download!")
     
-      return articles;
+     setTimeout(() => {console.log("got download!")}, 1000)
       
       }
     )
@@ -513,12 +517,30 @@ async function FetchRSS(articlesInput) {
   return articlesInput;
 }
 
+function ArticleList(){
+
+
+}
+
 
 
 
 function News({ navigation, route }) {
   const screen = route.name
   const [retrieved, setRetrieved] = React.useState([]);
+   
+  
+   
+
+  console.log("loadiing"); //these typos are on purpose to track what code is being run
+
+  
+  
+  console.log("length is " + retrieved.length);
+
+  
+
+  console.log("zero length");
   fetch(
     "https://www.army.mil/rss/static/143.xml"
     )
@@ -528,17 +550,17 @@ function News({ navigation, route }) {
 
     console.log(rss.items)
     let articles = rss.items;
-
-    return articles;
+    let index = 0;
     
+
+    articles.map(article => article.index = index++);
+    console.log("id change");
+    setRetrieved(articles);
+
+
     }
   );
-
-
-  console.log("got no articles yet");
- 
-
-
+  
 
  
  
@@ -558,10 +580,11 @@ function News({ navigation, route }) {
   
     
     //this is probably not where this code should go, but it's here to show how to use the rss parser
-;
 
 
-  return (
+
+    return (
+  
 
 
     <View>
@@ -577,39 +600,18 @@ function News({ navigation, route }) {
               right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
             />
             <Divider />
-            {console.log ("looking for articles")}
-
-           
-            
-
-            { fetch(
-    "https://www.army.mil/rss/static/143.xml"
-    )
-    .then((response) => response.text())
-    .then((responseData) => rssParser.parse(responseData))
-    .then((rss) => {
-
-    console.log(rss.items);
-    setRetrieved(rss.items);
-
-   
-    
-    }
-  )}
+            {FetchRSS(retrieved)}
               
-            retrieved.map(retrieved => (
+             
 
-              
-              
-                
-                  <Article key={retrieved.id}/> 
+
 
               
                
                
            
             
-            ))
+            
             
           </View>
         </View>
@@ -617,6 +619,7 @@ function News({ navigation, route }) {
     </View>
   );
 }
+
 function About({ navigation, route }) {
   const theme = useTheme();
   const screen = route.name
