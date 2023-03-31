@@ -36,6 +36,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import * as NavigationBar from 'expo-navigation-bar';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 /*import * as rssParser from 'react-native-rss-parser';*/
 
@@ -57,6 +58,8 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
   reactNavigationdark: NavigationDarkTheme,
 });
+
+const queryClient = new QueryClient()
 
 const CombinedDefaultTheme = {
   ...MD3LightTheme,
@@ -298,17 +301,7 @@ function HomeScreen({ navigation, route }) {
 
   const [articles, setArticles] = React.useState([]);
 
-fetch("https://www.army.mil/rss/static/143.xml")
-.then((response) => response.text())
-.then((responseData) => rssParser.parse(responseData))
-.then((rss) => {
 
-  setArticles(rss.items);
-  console.log(articles);
-  console.log("retrieved articles");
-  
-  //this is probably not where this code should go, but it's here to show how to use the rss parser
-})
 
 
   return (
@@ -462,8 +455,7 @@ fetch("https://www.army.mil/rss/static/143.xml")
 
 function Article ({ articleItem }) {
 
-  console.log(articleItem);
-  console.log("got an article");
+  
   
 
   return (
@@ -497,40 +489,84 @@ function Article ({ articleItem }) {
     //this is probably not where this code should go, but it's here to show how to use the rss parser
 };
 
+async function FetchRSS(articlesInput) {
+  const [articles, setArticles] = React.useState([]);
+  if (articlesInput.length == 0){
+  try {
+    await fetch(
+      "https://www.army.mil/rss/static/143.xml"
+      )
+      .then((response) => response.text())
+      .then((responseData) => rssParser.parse(responseData))
+      .then((rss) => {
 
-
-function News({ navigation, route, articles }) {
-  const screen = route.name
-  
-  const [loading, isLoading] = React.useState(true);
-
-  console.log(articles);
-  console.log("got no article");
-
- 
- 
-  
+      console.log("got download!")
     
+      return articles;
+      
+      }
+    )
+  } catch (error) {
+    console.log(error);
+  }}
 
+  return articlesInput;
+}
+
+
+
+
+function News({ navigation, route }) {
+  const screen = route.name
+  const [retrieved, setRetrieved] = React.useState([]);
+  fetch(
+    "https://www.army.mil/rss/static/143.xml"
+    )
+    .then((response) => response.text())
+    .then((responseData) => rssParser.parse(responseData))
+    .then((rss) => {
+
+    console.log(rss.items)
+    let articles = rss.items;
+
+    return articles;
+    
+    }
+  );
+
+
+  console.log("got no articles yet");
+ 
+
+
+
+ 
+ 
+  
+   
+// { fetch("https://www.army.mil/rss/static/143.xml")
+// .then((response) => response.text())
+// .then((responseData) => rssParser.parse(responseData))
+// .then((rss) => {
+  
+  //this is probably not where this code should go, but it's here to show how to use the rss parser
+// }
+// )
+// }
   
 
-  {fetch("https://www.army.mil/rss/static/143.xml")
-  .then((response) => response.text())
-  .then((responseData) => rssParser.parse(responseData))
-  .then((rss) => {
-    const articles = rss.items;
-
-    setArticles(rss.items);
-    console.log(articles);
-    console.log("retrieved articles");
+  
     
     //this is probably not where this code should go, but it's here to show how to use the rss parser
-})};
+;
 
-  
+
   return (
+
+
     <View>
-      <StatusBar style="auto" translucent={true} />
+      <StatusBar style="auto" translucent={true}/>
+      
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={{marginTop: 10}}>
           <View style={{marginBottom: 8}}>
@@ -541,12 +577,39 @@ function News({ navigation, route, articles }) {
               right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
             />
             <Divider />
+            {console.log ("looking for articles")}
 
-            {articles.map((articleData) => (
-              <Article key={articleData.id}/> 
-               
-            ))}
+           
             
+
+            { fetch(
+    "https://www.army.mil/rss/static/143.xml"
+    )
+    .then((response) => response.text())
+    .then((responseData) => rssParser.parse(responseData))
+    .then((rss) => {
+
+    console.log(rss.items);
+    setRetrieved(rss.items);
+
+   
+    
+    }
+  )}
+              
+            retrieved.map(retrieved => (
+
+              
+              
+                
+                  <Article key={retrieved.id}/> 
+
+              
+               
+               
+           
+            
+            ))
             
           </View>
         </View>
@@ -722,6 +785,7 @@ export default function App() {
   }
 
   return (
+    <QueryClientProvider client={queryClient}>
     <AppContext.Provider value={{ isDarkMode, toggleDarkMode }}>
       <PaperProvider theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
         <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
@@ -764,6 +828,7 @@ export default function App() {
         </NavigationContainer>
       </PaperProvider>
     </AppContext.Provider>
+    </QueryClientProvider>
     );
   }
 
