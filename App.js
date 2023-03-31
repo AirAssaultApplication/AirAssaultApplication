@@ -462,7 +462,7 @@ function Article ({ articleItem }) {
     <QueryClientProvider client={queryClient}>
     <View style={styles.card} key={articleItem.index} >
       {/* yes I know using index as a key is bad practice but we're not editing the articles
-          so any damage this garbage produces is limited in scope, unless you want to dismiss stuff
+          so any damage this garbage produces is limited in scope, unless you want to change stuff
           in which case I'm genuinely sorry... --Eric*/}
       {console.log(articleItem.id)}
       <TouchableRipple
