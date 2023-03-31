@@ -517,17 +517,13 @@ function FetchRSS(articlesInput) {
   return articlesInput;
 }
 
-function ArticleList(){
-
-
-}
-
 
 
 
 function News({ navigation, route }) {
   const screen = route.name
   const [retrieved, setRetrieved] = React.useState([]);
+  const [index, setIndex] = React.useState(Number(0));
    
   
    
@@ -537,10 +533,14 @@ function News({ navigation, route }) {
   
   
   console.log("length is " + retrieved.length);
-
   
 
-  console.log("zero length");
+  
+  while (index <= 1) 
+  {
+    console.log("index is " + index);
+    setIndex(index + 1);
+    console.log("index is incremented to " + index);
   fetch(
     "https://www.army.mil/rss/static/143.xml"
     )
@@ -550,16 +550,19 @@ function News({ navigation, route }) {
 
     console.log(rss.items)
     let articles = rss.items;
-    let index = 0;
+    
     
 
-    articles.map(article => article.index = index++);
-    console.log("id change");
+    articles.map(article => article.index = index);
+
+    console.log("id change: " + index);
     setRetrieved(articles);
+    console.log("retrieved set");
+
 
 
     }
-  );
+  );}
   
 
  
