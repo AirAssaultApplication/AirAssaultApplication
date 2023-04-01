@@ -523,6 +523,7 @@ function FetchRSS(articlesInput) {
 function News({ navigation, route }) {
   const screen = route.name
   const [retrieved, setRetrieved] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [index, setIndex] = React.useState(Number(0));
    
   
@@ -605,15 +606,16 @@ function News({ navigation, route }) {
             <Divider />
             {FetchRSS(retrieved)}
               
-             
+            {isLoading ? ( // show loading indicator when isLoading is true
+          <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
+        ) : (
+          articles.map((article) => (
+            <Flashcard key={article.id} article={article} />
+          ))
+        )}
+        {/* not working code, just basis for us to use  --Eric */}
 
 
-
-              
-               
-               
-           
-            
             
             
           </View>
