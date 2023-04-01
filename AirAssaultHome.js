@@ -33,7 +33,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, child, get, onValue } from "firebase/database";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// this code below is for firebase
+// this const below is for firebase
 // for future maintainers, please get a new apiKey
 // this github has been public for a while  --Eric
 
@@ -51,6 +51,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
+
+//  below is a stylesheet, you can change it to whatever you like
+//  if a refresh is needed --Eric
 
 const styles = StyleSheet.create({
   card: {
@@ -83,20 +86,24 @@ const styles = StyleSheet.create({
   },
 });
 
+//  Below is the flashcard display function. It's fed a flashcard object
+//  and then it will display the flashcard on the screen
+
 function Flashcard({ flashcard }) {
   const theme = useTheme();
 
   const [isFlipped, setIsFlipped] = React.useState(false);
 
   const toggleFlip = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); //this animates the flash cards when they are clicked
-                                                                          //unfortunately the animation is skipped on web browsers
-                                                                          //  --Eric
-    setIsFlipped(!isFlipped);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); //LayoutAnimation animates the flash cards when they are clicked.
+                                                                          //unfortunately the animation is skipped on web browsers  --Eric
+
+    setIsFlipped(!isFlipped); //sets flipped to the opposite of what it was before being clicked
   };
 
   return (
     <View style={styles.card} key={flashcard.id} title={flashcard.question}>
+      
       <TouchableRipple
         onPress={toggleFlip}
         borderless={true}
@@ -111,7 +118,8 @@ function Flashcard({ flashcard }) {
                   {isFlipped && ( //isFlipped is a boolean that determines if the card shows the answer or not  --Eric
                     <View>
                       <Divider style={{backgroundColor:theme.colors.onBackground, marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
-                      <Text variant="titleMedium">{flashcard.answer}</Text>
+                      <Text variant="titleMedium">{flashcard.answer}</Text>   
+                      {/* when isFlipped is true, the card expands to show flashcard.answer.  --Eric */}
                     </View>
                   )}
                 </View>
