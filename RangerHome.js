@@ -22,6 +22,7 @@ import {
 import * as firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, child, get, onValue } from "firebase/database";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA_5_RK8ebZPrHAErXJS9oPWoXTSvVCVxc",
@@ -141,70 +142,13 @@ export function RangerScreen({ navigation, route }) {
               style={{borderRadius: 0}}
             >
               <Card.Title
-                title="Home"
-                subtitle="Main Page"
+                title="Webpage"
                 titleVariant="titleLarge"
-                right={(props) => <Image source={require("./assets/External_Link.png")}
-                  style={{
-                    marginRight: 43,
-                    width: 20,
-                    height: 20,
-                    resizeMode:"contain"
-                  }}
-                />}
+                left={(props) => <Icon name='web' color={theme.colors.primary} size={24} style={{marginLeft:8}}/>}
+                right={(props) => <Icon name='open-in-new' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
-            <Divider></Divider>
-            <TouchableRipple
-                onPress={() => {navigation.navigate('Air Assault Program: Phase I')}}
-                borderless={true}
-                style={{borderRadius: 0}}
-            >
-              <Card.Title 
-                title="Phase 1"
-                subtitle="Questions/Answers"
-                titleVariant="titleLarge"
-                left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
-                  style={{
-                    width: 45,
-                    height: 45,
-                    resizeMode:"contain"
-                  }}
-                />}
-                right={(props) => <Button 
-                  style={{
-                    color: "#ffcc01",
-                    marginRight: 15
-                  }}icon='chevron-right'></Button>
-                }
-              />
-            </TouchableRipple>
-            <Divider></Divider>
-            <TouchableRipple
-                onPress={() => {navigation.navigate('Air Assault Program: Phase II')}}
-                borderless={true}
-                style={{borderRadius: 0}}
-            >
-              <Card.Title 
-                title="Phase 2"
-                subtitle="Questions/Answers"
-                titleVariant="titleLarge"
-                left={(props) => <Image source={require("./assets/RangerBadgeClear.png")}
-                  style={{
-                    width: 45,
-                    height: 45,
-                    resizeMode:"contain"
-                  }}
-                />}
-                right={(props) => <Button 
-                  style={{
-                    color: "#ffcc01",
-                    marginRight: 15
-                  }}icon='chevron-right'></Button>
-                }
-              />
-            </TouchableRipple>
-            <Divider></Divider>
+            <Divider bold={true}></Divider>
             <Card.Content>
             <View style={{alignSelf: 'flex-start'}}>
                 <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>PURPOSE:</Text>
@@ -242,138 +186,3 @@ export function RangerScreen({ navigation, route }) {
     </ScrollView>
   );
 }
-
-
-export function Phase1Screen({ navigation, route }) {
-  const theme = useTheme();
-  const screen = route.name
-  const [flashcards, setFlashcards] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true); // add new state variable
-  const flashcardsRef = ref(getDatabase(), "airAssaultPhaseOne");
-
-  React.useEffect(() => {
-    // here onValue will get initialized once
-    // and on db changes its callback will get invoked
-    // resulting in changing your state value
-    onValue(flashcardsRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        const flashcards = Object.keys(data).map((key) => {
-          return { ...data[key], id: key };
-        });
-        setFlashcards(flashcards);
-        setIsLoading(false); // set loading status to false once flashcards are loaded
-      } else {
-        console.log("No data available");
-      }
-    });
-    return () => {
-      // this is cleanup function, will call just on component will unmount
-      // you can clear your events listeners or any async calls here
-    }
-  }, [])
-
-  return (
-    <ScrollView style={{marginTop: -10, marginBottom: 0}} showsVerticalScrollIndicator={false}>
-      <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
-          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
-      </View>
-      <View style={styles.scrollViewCards}>
-        {isLoading ? ( // show loading indicator when isLoading is true
-          <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
-        ) : (
-          flashcards.map((flashcard) => (
-            <Flashcard key={flashcard.id} flashcard={flashcard} />
-          ))
-        )}
-      </View>
-      <View style={{marginBottom: 30}}></View>
-    </ScrollView>
-  );
-}
-
-export function Phase2Screen({ navigation, route }) {
-  const theme = useTheme();
-  const screen = route.name
-  const [flashcards, setFlashcards] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true); // add new state variable
-  const flashcardsRef = ref(getDatabase(), "airAssaultPhaseTwo");
-
-  React.useEffect(() => {
-    // here onValue will get initialized once
-    // and on db changes its callback will get invoked
-    // resulting in changing your state value
-    onValue(flashcardsRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        const flashcards = Object.keys(data).map((key) => {
-          return { ...data[key], id: key };
-        });
-        setFlashcards(flashcards);
-        setIsLoading(false); // set loading status to false once flashcards are loaded
-      } else {
-        console.log("No data available");
-      }
-    });
-    return () => {
-      // this is cleanup function, will call just on component will unmount
-      // you can clear your events listeners or any async calls here
-    }
-  }, [])
-
-  return (
-    <ScrollView style={{marginTop: -10, marginBottom: 0}} showsVerticalScrollIndicator={false}>
-      <View style={{alignItems: 'center', backgroundColor: "#221f20", height: 45, borderTopWidth: 5, borderBottomWidth: 3, borderColor: "#ffcc01"}}>
-          <Text style={{color:"#FFFFFF", fontSize: 20}} variant='headlineLarge'>{screen}</Text>
-      </View>
-      <View style={styles.scrollViewCards}>
-        {isLoading ? ( // show loading indicator when isLoading is true
-          <ActivityIndicator size="large" style={{marginTop:50}} color={theme.colors.primary} />
-        ) : (
-          flashcards.map((flashcard) => (
-            <Flashcard key={flashcard.id} flashcard={flashcard} />
-          ))
-        )}
-      </View>
-      <View style={{marginBottom: 30}}></View>
-    </ScrollView>
-  );
-}
-
-/*Test Screen DOES NOT WORK WITH FIREBASE, SINCE PULLING FLASHCARDS IS AN ASYNCHRONOUS TASK
-function shuffle(array) {
-  let currentIndex = array.length,  randomIndex;
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-  return array;
-}
-
-export function TestScreen({ navigation }){
-  const theme = useTheme();
-  let flashcardViews = [];
-
-  for(const item of phaseTwoFlashcards){
-    flashcardViews.push(createFlashcard(item));
-  }
-  
-  return (
-    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-    
-    <View style={{marginTop: 8, marginBottom: 8}}>
-      <TouchableRipple
-        onPress={() => {navigation.navigate('Air Assault Program: Testing')}}
-        borderless={true}
-        style={{borderRadius: 20}}
-      >
-      <Button mode="contained-tonal" labelStyle={{fontSize: 20, marginTop: 30}} style={{height: 80}}>Shuffle</Button>
-      </TouchableRipple> 
-    </View>
-
-    {shuffle(flashcardViews)}
-    </ScrollView>
-  );
-}*/
