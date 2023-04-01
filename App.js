@@ -441,24 +441,35 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function Article ({ Article, ArticleIndex }) {
-  fetch("https://www.army.mil/rss/static/143.xml")
-  .then((response) => response.text())
-  .then((responseData) => rssParser.parse(responseData))
-  .then((rss) => {
-    console.log(rss.title);
-    console.log(rss.items.length);
-    console.log(rss.items[0].title);
-    console.log(rss.items[0].description);
+function Article ({ Article }) {
 
-    //this is probably not where this code should go, but it's here to show how to use the rss parser
-});
+  //the reason for this abomination is that I forgot this was for each article
+  //oh wow this is literally O(N^2) 
+
+  console.log("please fix the Article function I forgot how bad I made this")
+
+//   fetch("https://www.army.mil/rss/static/143.xml")
+//   .then((response) => response.text())
+//   .then((responseData) => rssParser.parse(responseData))
+//   .then((rss) => {
+
+//     console.log("just fetched");
+//     console.log(rss.title);
+//     console.log(rss.items.length);
+//     console.log(rss.items[0].title);
+//     console.log(rss.items[0].description);
+
+//     //this is probably not where this code should go, but it's here to show how to use the rss parser
+// });
 
 return (
   <View>
+    {/* {console.log("Article function call: View")}
     <text>{rss.items[articleIndex].title}</text>
     <text>{rss.items[articleIndex].description}</text>
-    <a href={Article.link} target="_blank" rel="noopener noreferrer">{Article.link}</a>
+    <a href={Article.link} target="_blank" rel="noopener noreferrer">{Article.link}</a> */}
+
+    <text>Article function doesn't work right now</text>
 
   </View>
 
@@ -479,10 +490,24 @@ function News({ navigation, route }) {
     console.log(rss.title);
     console.log(rss.items.length);
 
-    const articles = rss.items.map((article, index) => {
+    //  how it works:
+    //  first, the code fetches the RSS file.
+    //  then, the code parses the RSS file.
+    //  then, the code creates an array of articles
+    //  That array is RSS.items.
+    //  RSS.items[0] is the first article in the RSS file.
+    //  each RSS.items[i] has several properties:
+    //  .title is the title of the article.
+    //  .
+
+    const articles = rss.items.map((article) => {
       console.log(article.title);
       console.log(article.description);
     })
+
+    //  above code shows that the RSS parser is working.
+    //  However, actually rendering the articles has given me an actual migraine.
+    //  --Eric
 
     // while () {
     // console.log(rss.items[item].title);
@@ -493,8 +518,8 @@ function News({ navigation, route }) {
     //this is probably not where this code should go, but it's here to show how to use the rss parser
 });
 
-  // these are basically placeholders until someone
-  // manages to implement the rss parser  --Eric
+  // these are hardcoded placeholders until someone
+  // manages to implement the rss parser. --Eric
   return (
     <View>
       <StatusBar style="auto" translucent={true} />
