@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
 });
 
 //  Below is the flashcard display function. It's fed a flashcard object
-//  and then it will display the flashcard on the screen
+//  and then it will display that flashcard. It's called using a map function
+//  which iterates through an array of flashcard objects. --Eric
 
 function Flashcard({ flashcard }) {
   const theme = useTheme();
