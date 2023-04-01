@@ -470,6 +470,8 @@ return (
 function News({ navigation, route }) {
   const screen = route.name
 
+  // current RSS parser code --Eric
+
   fetch("https://www.army.mil/rss/static/143.xml")
   .then((response) => response.text())
   .then((responseData) => rssParser.parse(responseData))
@@ -491,7 +493,8 @@ function News({ navigation, route }) {
     //this is probably not where this code should go, but it's here to show how to use the rss parser
 });
 
-  
+  // these are basically placeholders until someone
+  // manages to implement the rss parser  --Eric
   return (
     <View>
       <StatusBar style="auto" translucent={true} />

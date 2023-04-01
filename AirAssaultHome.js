@@ -33,6 +33,10 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, child, get, onValue } from "firebase/database";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// this code below is for firebase
+// for future maintainers, please get a new apiKey
+// this github has been public for a while  --Eric
+
 const firebaseConfig = {
   apiKey: "AIzaSyA_5_RK8ebZPrHAErXJS9oPWoXTSvVCVxc",
   authDomain: "airassaultapp.firebaseapp.com",
@@ -87,6 +91,7 @@ function Flashcard({ flashcard }) {
   const toggleFlip = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); //this animates the flash cards when they are clicked
                                                                           //unfortunately the animation is skipped on web browsers
+                                                                          //  --Eric
     setIsFlipped(!isFlipped);
   };
 
@@ -103,7 +108,7 @@ function Flashcard({ flashcard }) {
               <View style={{ flex: 1 }}>
                 <View style={{ justifyContent: "flex-start" }}>
                   <Text variant="titleMedium">{flashcard.question}</Text>
-                  {isFlipped && ( //isFlipped is a boolean that determines if the card shows the answer or not
+                  {isFlipped && ( //isFlipped is a boolean that determines if the card shows the answer or not  --Eric
                     <View>
                       <Divider style={{backgroundColor:theme.colors.onBackground, marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
                       <Text variant="titleMedium">{flashcard.answer}</Text>
