@@ -99,7 +99,7 @@ function Flashcard({ flashcard }) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); //LayoutAnimation animates the flash cards when they are clicked.
                                                                           //unfortunately the animation is skipped on web browsers  --Eric
 
-    setIsFlipped(!isFlipped); //sets flipped to the opposite of what it was before being clicked
+    setIsFlipped(!isFlipped); //sets isFlipped to the opposite of what it was before being clicked
   };
 
   return (
@@ -161,6 +161,8 @@ export function AirAssaultScreen({ navigation, route }) {
                 }}
               />
             </View>
+            {/* The URL is hard-coded because there is not a high chance it'll change in the future.
+                If the URL does change, then just paste the updated URL down here.   --Eric */}
             <TouchableRipple
               onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/air-assault');}}
               borderless={true}
@@ -200,6 +202,7 @@ export function AirAssaultScreen({ navigation, route }) {
                 right={(props) => <Icon name='chevron-right' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
+              {/* There's a link to quizlet down here in case users want to use it. --Eric*/}
             <TouchableRipple
               onPress={() => {Linking.openURL('https://quizlet.com/AirAssaultSchool');}}
               borderless={true}
@@ -217,6 +220,7 @@ export function AirAssaultScreen({ navigation, route }) {
                 <Text style={{ fontSize: 17, marginTop: 10, marginBottom: 10}}>PURPOSE:</Text>
                 <View style={styles.rectangle}></View>
               </View>
+
               <Text style={{ fontSize: 15, marginTop: 10, marginBottom: 10}}>
                 To train Soldiers in Air Assault operations, sling-load operations, and rappelling. Upon graduation of 
                 the course each Soldier will be able to perform skills required to make maximum 
@@ -271,7 +275,7 @@ export function Phase1Screen({ navigation, route }) {
         const flashcards = Object.keys(data).map((key) => {
           return { ...data[key], id: key };
         });
-        setFlashcards(flashcards);
+        setFlashcards(flashcards);  //  This updates the Flashcards const to load the flashcards from the database  --Eric
         setIsLoading(false); // set loading status to false once flashcards are loaded
       } else {
         console.log("No data available");
