@@ -444,7 +444,7 @@ function HomeScreen({ navigation, route }) {
 function Article ({ Article }) {
 
   //the reason for this abomination is that I forgot this was for each article
-  //oh wow this is literally O(N^2) 
+  //oh wow this is literally O(N^2) --Eric
 
   console.log("please fix the Article function I forgot how bad I made this")
 
@@ -500,7 +500,8 @@ function News({ navigation, route }) {
     //  .title is the title of the article.
     //  .
 
-    const articles = rss.items.map((article) => {
+    const articles = rss.items;
+    articles.map((article) => {
       console.log(article.title);
       console.log(article.description);
     })
