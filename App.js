@@ -1,12 +1,11 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
-import { Platform, Appearance, ImageBackground, Linking, Dimensions } from 'react-native';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { Animated, Platform, Appearance, ImageBackground, Linking, Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import * as rssParser from 'react-native-rss-parser';
-import toplogo from './assets/logo_top.png';
-import bottomlogo from './assets/logo_bottom.png';
 import Constants from "expo-constants"
+import * as SplashScreen from 'expo-splash-screen';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -294,7 +293,6 @@ function HomeScreen({ navigation, route }) {
   const screenHeight = Dimensions.get('screen').height - 50;
   return (
     <View style={{justifyContent: "center", flex: 1}}>
-      <StatusBar style="light" translucent={true} />
         <View style={{marginTop: 10}}>
           <View style={styles.card}>
             <TouchableRipple
@@ -523,7 +521,6 @@ function News({ navigation, route }) {
   // manages to implement the rss parser. --Eric
   return (
     <View>
-      <StatusBar style="auto" translucent={true} />
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={{marginTop: 10}}>
           <View style={{marginBottom: 8}}>
@@ -757,6 +754,68 @@ function AboutStackScreen({navigation, route}) {
   );
 }
 
+//SplashScreen.preventAutoHideAsync(); // Prevents the splash screen from hiding automatically, for debugging
+
+function AnimatedSplashScreen({ children }) {
+  const theme = useTheme();
+  const animation = useMemo(() => new Animated.Value(1), []);
+  const [isAppReady, setAppReady] = useState(false);
+  const [isSplashAnimationComplete, setAnimationComplete] = useState(false);
+
+  useEffect(() => {
+    if (isAppReady) {
+      Animated.timing(animation, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start(() => setAnimationComplete(true));
+    }
+  }, [isAppReady]);
+
+  const onImageLoaded = useCallback(async () => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Change this to force minimum splash time
+      await SplashScreen.hideAsync();
+      // Load stuff
+      await Promise.all([]);
+    } catch (e) {
+      // handle errors
+    } finally {
+      setAppReady(true);
+    }
+  }, []);
+
+  return (
+    <View style={{ flex: 1 }}>
+      {isAppReady && children}
+      {!isSplashAnimationComplete && (
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundColor: theme.colors.background,
+              opacity: animation,
+            },
+          ]}
+        >
+          <Animated.Image
+            style={{
+              width: "100%",
+              height: "100%",
+              resizeMode: "cover",
+            }}
+            //source={splash}
+            source={require('./assets/splash_screen_500.gif')}
+            onLoadEnd={onImageLoaded}
+            //fadeDuration={0}
+          />
+        </Animated.View>
+      )}
+    </View>
+  );
+}
+
 export default function App() {
   const [isDarkMode, setIsDarkMode] = React.useState(Appearance.getColorScheme() === 'dark');
 
@@ -770,48 +829,51 @@ export default function App() {
   }
 
   return (
-    <AppContext.Provider value={{ isDarkMode, toggleDarkMode }}>
-      <PaperProvider theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-        <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-        <Tab.Navigator
-          initialRouteName='Home'
-          screenOptions={{ headerShown: false }}
-          barStyle={{ backgroundColor: isDarkMode ? "#221f20" : "rgb(255, 251, 255)", height: Platform.OS === 'ios' ? 85 : 75 }}
-        >
-          <Tab.Screen
-            name='HomeScreen'
-            component={HomeStackScreen}
-            options={{
-              tabBarLabel: 'Home',
-              tabBarIcon: ({ focused, color}) => (
-                <Icon name={focused ? 'home' : 'home-outline'} color={color} size={24} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name='NewsScreen'
-            component={NewsStackScreen}
-            options={{
-              tabBarLabel: 'News',
-              tabBarIcon: ({ focused, color }) => (
-                <Icon name={focused ? 'newspaper-variant' : 'newspaper-variant-outline'} color={color} size={24} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name='AboutScreen'
-            component={AboutStackScreen}
-            options={{
-              tabBarLabel: 'About',
-              tabBarIcon: ({ focused, color }) => (
-                <Icon name={focused ? 'information': 'information-outline'} color={color} size={24} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
-    </AppContext.Provider>
+      <AppContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+        <PaperProvider theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
+          <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
+          <StatusBar style="light" translucent={true} />
+          <AnimatedSplashScreen>
+          <Tab.Navigator
+            initialRouteName='Home'
+            screenOptions={{ headerShown: false }}
+            barStyle={{ backgroundColor: isDarkMode ? "#221f20" : "rgb(255, 251, 255)", height: Platform.OS === 'ios' ? 85 : 75 }}
+          >
+            <Tab.Screen
+              name='HomeScreen'
+              component={HomeStackScreen}
+              options={{
+                tabBarLabel: 'Home',
+                tabBarIcon: ({ focused, color}) => (
+                  <Icon name={focused ? 'home' : 'home-outline'} color={color} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name='NewsScreen'
+              component={NewsStackScreen}
+              options={{
+                tabBarLabel: 'News',
+                tabBarIcon: ({ focused, color }) => (
+                  <Icon name={focused ? 'newspaper-variant' : 'newspaper-variant-outline'} color={color} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name='AboutScreen'
+              component={AboutStackScreen}
+              options={{
+                tabBarLabel: 'About',
+                tabBarIcon: ({ focused, color }) => (
+                  <Icon name={focused ? 'information': 'information-outline'} color={color} size={24} />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+          </AnimatedSplashScreen>
+          </NavigationContainer>
+        </PaperProvider>
+      </AppContext.Provider>
     );
   }
 
