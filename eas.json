@@ -8,7 +8,7 @@
       "preview": {
         "extends": "production",
         "android": {
-          "buildType": "apk"
+          "buildType": "app-bundle"
         }
       },
       //untested
