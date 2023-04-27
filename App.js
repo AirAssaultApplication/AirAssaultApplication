@@ -13,6 +13,7 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
+  ActivityIndicator,
   Appbar,
   BottomNavigation,
   Menu,
@@ -508,7 +509,7 @@ function News({ navigation, route }) {
       //  .
   
       const articles = rss.items;
-      setFeed({articles });
+      setFeed({articles});
 
       console.log("setFeed called!")
       
@@ -527,6 +528,11 @@ function News({ navigation, route }) {
       // console.log(rss.items[item].description);
       // console.log(rss.items[item]);
       // };
+
+      return () => {
+        // this is cleanup function, will call just on component will unmount
+        // you can clear your events listeners or any async calls here
+      }
   
       //this is probably not where this code should go, but it's here to show how to use the rss parser
     });
@@ -547,15 +553,19 @@ function News({ navigation, route }) {
           <View style={{marginBottom: 8}}>
 
          {console.log("loaded is", loaded)}
+
+         {loaded ? (feed.items?.map((article, index) => (
+          <List.Item key={index}
+              title = {article.title}
+              description = {article.description}
+              titleNumberOfLines={10}
+              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
+          />
+      ))) : ( // show loading indicator when isLoading is true
+      <ActivityIndicator size="large" style={{marginTop:50}} />
+    )}
     
-      {feed.items?.map((article, index) => (
-            <List.Item key={index}
-                title = {article.title}
-                description = {article.description}
-                titleNumberOfLines={10}
-                right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
-            />
-        ))}
+     
             
 
             <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
