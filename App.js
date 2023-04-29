@@ -555,12 +555,14 @@ function News({ navigation, route }) {
 
          {console.log("LOADED: ", loaded)}
 
-         {loaded ? (console.log(feed.articles)) : (console.log("what"))}
+         {loaded ? (console.log(feed.articles[0])) : (console.log("what"))}
+
+         {/* Above will print an article into the console, so you know how to access feed.articles[i].whatever */}
 
          {loaded ? (feed.articles?.map((article, index) => (
           <><List.Item key={index}
              title={article.title}
-             description={article.description}
+             description={article.published}
              titleNumberOfLines={10}
              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{ uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg' }} />} /><Divider /></>
       ))) : ( // show loading indicator when isLoading is true
