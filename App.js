@@ -559,11 +559,12 @@ function News({ navigation, route }) {
          {/* Above will print an article into the console, so you know how to access feed.articles[i].whatever */}
 
          {loaded ? (feed.articles?.map((article, index) => (
-          <><List.Item key={index}
+          <><List.Item button onPress={() => {Linking.openURL(article.links[0].url);}}
+           key={index}
+          
              title={article.title}
              description={article.published}
-             titleNumberOfLines={10}
-             right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{ uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg' }} />} /><Divider /></>
+             titleNumberOfLines={10} /><Divider /></>
       ))) : ( // show loading indicator when isLoading is true
       <ActivityIndicator size="large" style={{marginTop:50}} />
     )}
@@ -584,6 +585,7 @@ function News({ navigation, route }) {
         </View>
       </ScrollView>
   );
+  
 }
 function About({ navigation, route }) {
   const theme = useTheme();
