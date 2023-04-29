@@ -548,7 +548,6 @@ function News({ navigation, route }) {
   // these are hardcoded placeholders until someone
   // manages to implement the rss parser. --Eric
   return (
-    <View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
         <View style={{marginTop: 10}}>
           <View style={{marginBottom: 8}}>
@@ -584,7 +583,6 @@ function News({ navigation, route }) {
           </View>
         </View>
       </ScrollView>
-    </View>
   );
 }
 function About({ navigation, route }) {
