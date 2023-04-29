@@ -483,7 +483,7 @@ function News({ navigation, route }) {
   const articles = []
 
     
-      const [feed, setFeed] = useState({ items: []})
+      const [feed, setFeed] = useState({ items: [""]})
       const [loaded, setLoaded] = useState(false)
 
      
@@ -511,13 +511,13 @@ function News({ navigation, route }) {
       const articles = rss.items;
       setFeed({articles});
 
+      // FIXED!!! You access using feed.articles[i]
+      if (setFeed != [""]) {setLoaded(true);};
+      
+
       console.log("setFeed called!")
       
-      articles.map((article) => {
-        console.log(article.title);
-        console.log(article.description);
-        setLoaded(true);
-        })
+     
   
       //  above code shows that the RSS parser is working.
       //  However, actually rendering the articles has given me an actual migraine.
@@ -529,13 +529,14 @@ function News({ navigation, route }) {
       // console.log(rss.items[item]);
       // };
 
-      return () => {
-        // this is cleanup function, will call just on component will unmount
-        // you can clear your events listeners or any async calls here
-      }
+     
   
       //this is probably not where this code should go, but it's here to show how to use the rss parser
     });
+    return () => {
+      // this is cleanup function, will call just on component will unmount
+      // you can clear your events listeners or any async calls here
+    }
 
   }, []);
 
@@ -548,19 +549,20 @@ function News({ navigation, route }) {
   // manages to implement the rss parser. --Eric
   return (
     <View>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
         <View style={{marginTop: 10}}>
           <View style={{marginBottom: 8}}>
 
-         {console.log("loaded is", loaded)}
+         {console.log("LOADED: ", loaded)}
 
-         {loaded ? (feed.items?.map((article, index) => (
-          <List.Item key={index}
-              title = {article.title}
-              description = {article.description}
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
-          />
+         {loaded ? (console.log(feed.articles)) : (console.log("what"))}
+
+         {loaded ? (feed.articles?.map((article, index) => (
+          <><List.Item key={index}
+             title={article.title}
+             description={article.description}
+             titleNumberOfLines={10}
+             right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{ uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg' }} />} /><Divider /></>
       ))) : ( // show loading indicator when isLoading is true
       <ActivityIndicator size="large" style={{marginTop:50}} />
     )}
@@ -575,68 +577,7 @@ function News({ navigation, route }) {
               right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
             />
             <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263876/all_domain_communications_focus_of_afcea_symposium');}}
-              title='All-domain communications focus of AFCEA symposium'
-              description='By Spc. Richard Carlisi · Feb 8, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/0194f7dd/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263834/resilience_intertwined_in_puerto_rico_guards_future_says_guard_chief');}}
-              title="Resilience intertwined in Puerto Rico Guard's future, says Guard Chief"
-              description='By Sgt. 1st Class Zach Sheely, National Guard Bureau · Feb 8, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/08/0e3cf8c4/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263789/secretary_of_the_army_discusses_modernization_efforts_during_scaap_visit');}}
-              title="Secretary of the Army discusses modernization efforts during  SCAAP visit"
-              description='By Matthew Wheaton · Feb 7, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/07/bcbd949c/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263781/ncaa_champion_sam_chelanga_finds_new_purpose_as_army_officer');}}
-              title='NCAA champion Sam Chelanga finds new purpose as Army officer'
-              description='By Alun Thomas · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/2fe87cf8/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263764/data_centric_exercise_showcases_joint_capabilities_lethality');}}
-              title='Data-centric exercise showcases joint capabilities, lethality'
-              description='By Spc. Osvaldo Fuentes · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263834/resilience_intertwined_in_puerto_rico_guards_future_says_guard_chief');}}
-              title="Resilience intertwined in Puerto Rico Guard's future, says Guard Chief"
-              description='By Sgt. 1st Class Zach Sheely, National Guard Bureau · Feb 8, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/08/0e3cf8c4/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263789/secretary_of_the_army_discusses_modernization_efforts_during_scaap_visit');}}
-              title="Secretary of the Army discusses modernization efforts during  SCAAP visit"
-              description='By Matthew Wheaton · Feb 7, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/07/bcbd949c/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263781/ncaa_champion_sam_chelanga_finds_new_purpose_as_army_officer');}}
-              title='NCAA champion Sam Chelanga finds new purpose as Army officer'
-              description='By Alun Thomas · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/2fe87cf8/size0-full.jpg'}} />}
-            />
-            <Divider />
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263764/data_centric_exercise_showcases_joint_capabilities_lethality');}}
-              title='Data-centric exercise showcases joint capabilities, lethality'
-              description='By Spc. Osvaldo Fuentes · Feb 6, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/06/8cc05b8f/size0-full.jpg'}} />}
-            />
+            
            
           </View>
         </View>

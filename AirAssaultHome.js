@@ -269,6 +269,8 @@ export function Phase1Screen({ navigation, route }) {
     // here onValue will get initialized once
     // and on db changes its callback will get invoked
     // resulting in changing your state value
+
+    
     onValue(flashcardsRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
@@ -281,6 +283,8 @@ export function Phase1Screen({ navigation, route }) {
         console.log("No data available");
       }
     });
+
+
     return () => {
       // this is cleanup function, will call just on component will unmount
       // you can clear your events listeners or any async calls here
