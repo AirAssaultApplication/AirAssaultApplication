@@ -531,11 +531,11 @@ function News({ navigation, route }) {
         <View style={{marginTop: 10}}>
           <View style={{marginBottom: 8}}>
 
-         {console.log("LOADED: ", loaded)}
 
-         {loaded ? (console.log((feed.articles[0].links[0].url))) : (console.log("News Return Function: Loaded is false"))}
 
-         {/* Above will print an article into the console, so you know how to access
+         {loaded ? (console.log((feed.articles[0]))) : (console.log("News not Loaded yet"))}
+
+         {/* Above will print the newest article into the console, so you know how to access
          feed.articles[i].whateverVariable you're accessing for each article --Eric*/}
 
          {loaded ? (feed.articles?.map((article, index) => (

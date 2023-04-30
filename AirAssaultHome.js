@@ -53,7 +53,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
 //  below is a stylesheet, you can change it to whatever you like
-//  if a refresh is needed --Eric
+//  if a refresh is needed
 
 const styles = StyleSheet.create({
   card: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
 //  Below is the flashcard display function. It's fed a flashcard object
 //  and then it will display that flashcard. It's called using a map function
-//  which iterates through an array of flashcard objects. --Eric
+//  which iterates through an array of flashcard objects.
 
 function Flashcard({ flashcard }) {
   const theme = useTheme();
@@ -97,7 +97,8 @@ function Flashcard({ flashcard }) {
 
   const toggleFlip = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); //LayoutAnimation animates the flash cards when they are clicked.
-                                                                          //unfortunately the animation is skipped on web browsers  --Eric
+                                                                          //unfortunately the animation is skipped on web browsers, so changes
+                                                                          //need to be previewed with mobile versions  --Eric
 
     setIsFlipped(!isFlipped); //sets isFlipped to the opposite of what it was before being clicked
   };
@@ -120,7 +121,7 @@ function Flashcard({ flashcard }) {
                     <View>
                       <Divider style={{backgroundColor:theme.colors.onBackground, marginTop:16, marginBottom: 16, marginHorizontal: -16}} bold={true}/>
                       <Text variant="titleMedium">{flashcard.answer}</Text>   
-                      {/* when isFlipped is true, the card expands to show flashcard.answer.  --Eric */}
+                      {/* when isFlipped becomes true, the card expands to show flashcard.answer.  --Eric */}
                     </View>
                   )}
                 </View>
@@ -162,7 +163,7 @@ export function AirAssaultScreen({ navigation, route }) {
               />
             </View>
             {/* The URL is hard-coded because there is not a high chance it'll change in the future.
-                If the URL does change, then just paste the updated URL down here.   --Eric */}
+                If the URL does change, then just paste the updated URL down here. --Eric */}
             <TouchableRipple
               onPress={() => {Linking.openURL('https://home.army.mil/campbell/index.php/tsaas/air-assault');}}
               borderless={true}
@@ -202,7 +203,7 @@ export function AirAssaultScreen({ navigation, route }) {
                 right={(props) => <Icon name='chevron-right' color={theme.colors.primary} size={24} style={{marginRight: 32}}/>}
               />
             </TouchableRipple>
-              {/* There's a link to quizlet down here in case users want to use it. --Eric*/}
+              {/* There's a link to quizlet down here in case users want to use it.*/}
             <TouchableRipple
               onPress={() => {Linking.openURL('https://quizlet.com/AirAssaultSchool');}}
               borderless={true}
