@@ -482,6 +482,23 @@ function News({ navigation, route }) {
 
   const articles = []
 
+  async function loadGraphicCards(desiredlink) {
+    const searchUrl = `desiredlink`;
+    const response = await fetch(searchUrl);   // fetch page
+  
+    const htmlString = await response.text();  // get response text
+  
+    console.log (htmlString);
+    return htmlString;
+  }
+
+// made this function to help work out how to get first image from each link.
+// We can get the links from each RSS article, but we
+// need a way to get the first rich-text-img-link image 
+// from each webpage. --Eric
+  
+  
+
     
       const [feed, setFeed] = useState({ items: [""]})
       const [loaded, setLoaded] = useState(false)
@@ -500,18 +517,28 @@ function News({ navigation, route }) {
   
       //  how it works:
       //  first, the code fetches the RSS file.
-      //  then, the code parses the RSS file.
-      //  then, the code creates an array of articles
-      //  That array is RSS.items.
+      //  then, the code parses the RSS file which is referred to as response.
+      //  then, the code creates an array of articles from the textified data ResponseData.
+      //  ResponseData is now called rss and is passed to an arrow function.
+      // The arrow function sets feed to contain the array of articles.
+
+      //  That array is RSS.items. When accessing feed, you use feed.articles[i].someVariable for each respective article
+
       //  RSS.items[0] is the first article in the RSS file.
       //  each RSS.items[i] has several properties:
       //  .title is the title of the article.
       //  .
+      //  RSS.title aka feed.articles[i].title is the title of the article.
+      //  --Eric
   
       const articles = rss.items;
       setFeed({articles});
 
       // FIXED!!! You access using feed.articles[i]
+      // You access each article using feed.articles[i] --Eric
+
+      
+
       if (setFeed != [""]) {setLoaded(true);};
       
 
@@ -532,6 +559,9 @@ function News({ navigation, route }) {
      
   
       //this is probably not where this code should go, but it's here to show how to use the rss parser
+      //above is here to show how to use the rss parser
+
+
     });
     return () => {
       // this is cleanup function, will call just on component will unmount
@@ -549,14 +579,17 @@ function News({ navigation, route }) {
   // manages to implement the rss parser. --Eric
   return (
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
+        {/* don't encapsulate ScrollView, apparently that turns it into a standard View instead and you can't scroll */}
         <View style={{marginTop: 10}}>
           <View style={{marginBottom: 8}}>
 
          {console.log("LOADED: ", loaded)}
 
          {loaded ? (console.log(feed.articles[0])) : (console.log("what"))}
+         {loaded ? (console.log((feed.articles[0].links[0].url))) : (console.log("News Return Function: Loaded is false"))}
 
-         {/* Above will print an article into the console, so you know how to access feed.articles[i].whatever */}
+         {/* Above will print an article into the console, so you know how to access
+         feed.articles[i].whateverVariable you're accessing for each article --Eric*/}
 
          {loaded ? (feed.articles?.map((article, index) => (
           <><List.Item button onPress={() => {Linking.openURL(article.links[0].url);}}
@@ -566,21 +599,9 @@ function News({ navigation, route }) {
              description={article.published}
              titleNumberOfLines={10} /><Divider /></>
       ))) : ( // show loading indicator when isLoading is true
+      ))) : ( // while Loaded is false, this will show the ActivityIndicator below. --Eric
       <ActivityIndicator size="large" style={{marginTop:50}} />
     )}
-    
-     
-            
-
-            <List.Item button onPress={() => {Linking.openURL('https://www.army.mil/article/263877/us_africa_commands_exercise_justified_accord_2023_begins_in_kenya');}}
-              title="US Africa Command's Exercise Justified Accord 2023 begins in Kenya"
-              description='By Capt. Joe Legros · Feb 9, 2023'
-              titleNumberOfLines={10}
-              right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{uri: 'https://api.army.mil/e2/c/images/2023/02/09/7f4f1fc4/size0-full.jpg'}} />}
-            />
-            <Divider />
-            
-           
           </View>
         </View>
       </ScrollView>
