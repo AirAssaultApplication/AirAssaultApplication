@@ -544,7 +544,12 @@ function News({ navigation, route }) {
           
              title={article.title}
              description={article.published}
-             titleNumberOfLines={10} /><Divider /></>
+             titleNumberOfLines={10}
+            //  In order for an article to have an image, a url must be placed in an item's enclosure property.
+            //  <enclosure url="https://www.w3schools.com/images/w3schools_green.jpg"
+            //  type="image/jpg" />
+             right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{ uri: article.enclosure?.url }} />} /><Divider /></>
+
       ))) : ( // while Loaded is false, this will show the ActivityIndicator below. --Eric
       <ActivityIndicator size="large" style={{marginTop:50}} />
     )}
