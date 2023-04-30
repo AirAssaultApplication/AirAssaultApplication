@@ -440,41 +440,6 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function Article ({ Article }) {
-
-  //the reason for this abomination is that I forgot this was for each article
-  //oh wow this is literally O(N^2) --Eric
-
-  console.log("please fix the Article function I forgot how bad I made this")
-
-//   fetch("https://www.army.mil/rss/static/143.xml")
-//   .then((response) => response.text())
-//   .then((responseData) => rssParser.parse(responseData))
-//   .then((rss) => {
-
-//     console.log("just fetched");
-//     console.log(rss.title);
-//     console.log(rss.items.length);
-//     console.log(rss.items[0].title);
-//     console.log(rss.items[0].description);
-
-//     //this is probably not where this code should go, but it's here to show how to use the rss parser
-// });
-
-return (
-  <View>
-    {/* {console.log("Article function call: View")}
-    <text>{rss.items[articleIndex].title}</text>
-    <text>{rss.items[articleIndex].description}</text>
-    <a href={Article.link} target="_blank" rel="noopener noreferrer">{Article.link}</a> */}
-
-    <text>Article function doesn't work right now</text>
-
-  </View>
-
-)
-
-}
 
 
 function News({ navigation, route }) {
@@ -526,15 +491,12 @@ function News({ navigation, route }) {
 
       //  RSS.items[0] is the first article in the RSS file.
       //  each RSS.items[i] has several properties:
-      //  .title is the title of the article.
-      //  .
       //  RSS.title aka feed.articles[i].title is the title of the article.
       //  --Eric
   
       const articles = rss.items;
       setFeed({articles});
 
-      // FIXED!!! You access using feed.articles[i]
       // You access each article using feed.articles[i] --Eric
 
       
@@ -544,11 +506,6 @@ function News({ navigation, route }) {
 
       console.log("setFeed called!")
       
-     
-  
-      //  above code shows that the RSS parser is working.
-      //  However, actually rendering the articles has given me an actual migraine.
-      //  --Eric
   
       // while () {
       // console.log(rss.items[item].title);
@@ -558,25 +515,16 @@ function News({ navigation, route }) {
 
      
   
-      //this is probably not where this code should go, but it's here to show how to use the rss parser
       //above is here to show how to use the rss parser
 
 
     });
     return () => {
-      // this is cleanup function, will call just on component will unmount
-      // you can clear your events listeners or any async calls here
+     
     }
 
   }, []);
 
-
-  
-
-
-
-  // these are hardcoded placeholders until someone
-  // manages to implement the rss parser. --Eric
   return (
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
         {/* don't encapsulate ScrollView, apparently that turns it into a standard View instead and you can't scroll */}
@@ -585,7 +533,6 @@ function News({ navigation, route }) {
 
          {console.log("LOADED: ", loaded)}
 
-         {loaded ? (console.log(feed.articles[0])) : (console.log("what"))}
          {loaded ? (console.log((feed.articles[0].links[0].url))) : (console.log("News Return Function: Loaded is false"))}
 
          {/* Above will print an article into the console, so you know how to access
@@ -598,7 +545,6 @@ function News({ navigation, route }) {
              title={article.title}
              description={article.published}
              titleNumberOfLines={10} /><Divider /></>
-      ))) : ( // show loading indicator when isLoading is true
       ))) : ( // while Loaded is false, this will show the ActivityIndicator below. --Eric
       <ActivityIndicator size="large" style={{marginTop:50}} />
     )}
