@@ -497,10 +497,10 @@ function News() {
             key={index}
             
             title={`${article.date} | ${article.region}`}
-            titleStyle={{ fontFamily: 'Arial', fontSize: 12, marginBottom: 5}}
+            titleStyle={{fontSize: 12, marginBottom: 5}}
 
             description={article.title}
-            descriptionStyle={{ fontFamily: 'Arial', fontSize: 17, fontWeight: 'bold', paddingRight: 12 }}
+            descriptionStyle={{fontSize: 17, fontWeight: 'bold', paddingRight: 12 }}
 
             descriptionNumberOfLines={2}
             onPress={() => Linking.openURL(article.link)}
