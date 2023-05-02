@@ -440,125 +440,87 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
+import cheerio from 'cheerio';
 
+function News() {
+  const [articles, setArticles] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
-function News({ navigation, route }) {
-  const screen = route.name
+  async function loadArticles() {
+    const response = await fetch('https://www.army.mil/news');
+    const htmlString = await response.text();
 
-  const articles = []
+    const $ = cheerio.load(htmlString);
 
-  async function loadGraphicCards(desiredlink) {
-    const searchUrl = `desiredlink`;
-    const response = await fetch(searchUrl);   // fetch page
-  
-    const htmlString = await response.text();  // get response text
-  
-    console.log (htmlString);
-    return htmlString;
+    const articles = [];
+
+    $('.news-item').each((index, element) => {
+      const title = $(element).find('.title a').text();
+      const date = $(element).find('.date').text();
+      const regions = $(element).find('.sections a');
+      let region = "";
+      if (regions.length > 0) {
+        const regionArray = [];
+        regions.each((index, element) => {
+          regionArray.push($(element).text());
+        });
+        region = regionArray.join(', ');
+      } else {
+        region = "Unknown District";
+}
+      const imageUrl = $(element).find('.image-wrap img').attr('src');
+      const scrapedLink = $(element).find('.more a').attr('href');
+      const link = `https://www.army.mil${scrapedLink}`;
+
+      articles.push({
+        title,
+        date,
+        region,
+        imageUrl,
+        link,
+      });
+    });
+
+    setArticles(articles);
+    setLoaded(true);
   }
 
-// made this function to help work out how to get first image from each link.
-// We can get the links from each RSS article, but we
-// need a way to get the first rich-text-img-link image 
-// from each webpage. --Eric
-  
-  
-
-    
-      const [feed, setFeed] = useState({ items: [""]})
-      const [loaded, setLoaded] = useState(false)
-
-     
-
-
-   useEffect(() => {
-
-    fetch("https://www.army.mil/rss/static/143.xml")
-    .then((response) => response.text())
-    .then((responseData) => rssParser.parse(responseData))
-    .then((rss) => {
-      console.log(rss.title);
-      console.log(rss.items.length);
-  
-      //  how it works:
-      //  first, the code fetches the RSS file.
-      //  then, the code parses the RSS file which is referred to as response.
-      //  then, the code creates an array of articles from the textified data ResponseData.
-      //  ResponseData is now called rss and is passed to an arrow function.
-      // The arrow function sets feed to contain the array of articles.
-
-      //  That array is RSS.items. When accessing feed, you use feed.articles[i].someVariable for each respective article
-
-      //  RSS.items[0] is the first article in the RSS file.
-      //  each RSS.items[i] has several properties:
-      //  RSS.title aka feed.articles[i].title is the title of the article.
-      //  --Eric
-  
-      const articles = rss.items;
-      setFeed({articles});
-
-      // You access each article using feed.articles[i] --Eric
-
-      
-
-      if (setFeed != [""]) {setLoaded(true);};
-      
-
-      console.log("setFeed called!")
-      
-  
-      // while () {
-      // console.log(rss.items[item].title);
-      // console.log(rss.items[item].description);
-      // console.log(rss.items[item]);
-      // };
-
-     
-  
-      //above is here to show how to use the rss parser
-
-
-    });
-    return () => {
-     
-    }
-
+  useEffect(() => {
+    loadArticles();
   }, []);
 
   return (
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
-        {/* don't encapsulate ScrollView, apparently that turns it into a standard View instead and you can't scroll */}
-        <View style={{marginTop: 10}}>
-          <View style={{marginBottom: 8}}>
+    <ScrollView>
+      {loaded ? (
+        articles.map((article, index) => (
+          <List.Item style={{borderBottomWidth: 2, borderColor: "#ffcc01"}}
+            key={index}
+            
+            title={`${article.date} | ${article.region}`}
+            titleStyle={{ fontFamily: 'Arial', fontSize: 12, marginBottom: 5}}
 
+            description={article.title}
+            descriptionStyle={{ fontFamily: 'Arial', fontSize: 17, fontWeight: 'bold', paddingRight: 12 }}
 
-
-         {loaded ? (console.log((feed.articles[0]))) : (console.log("News not Loaded yet"))}
-
-         {/* Above will print the newest article into the console, so you know how to access
-         feed.articles[i].whateverVariable you're accessing for each article --Eric*/}
-
-         {loaded ? (feed.articles?.map((article, index) => (
-          <><List.Item button onPress={() => {Linking.openURL(article.links[0].url);}}
-           key={index}
-          
-             title={article.title}
-             description={article.published}
-             titleNumberOfLines={10}
-            //  In order for an article to have an image, a url must be placed in an item's enclosure property.
-            //  <enclosure url="https://www.w3schools.com/images/w3schools_green.jpg"
-            //  type="image/jpg" />
-             right={props => <List.Image variant='image' style={styles.newsImage} resizeMode={'cover'} source={{ uri: article.enclosure?.url }} />} /><Divider /></>
-
-      ))) : ( // while Loaded is false, this will show the ActivityIndicator below. --Eric
-      <ActivityIndicator size="large" style={{marginTop:50}} />
-    )}
-          </View>
-        </View>
-      </ScrollView>
+            descriptionNumberOfLines={2}
+            onPress={() => Linking.openURL(article.link)}
+            right={(props) => (
+              <List.Image
+                {...props}
+                source={{ uri: article.imageUrl }}
+                style={{ width: 100, height: 100, borderRadius: 10}}
+              />
+            )}
+          />
+        ))
+      ) : (
+        <ActivityIndicator size="large" style={{ marginTop: 50 }} />
+      )}
+    </ScrollView>
   );
-  
 }
+
+
 function About({ navigation, route }) {
   const theme = useTheme();
   const screen = route.name
