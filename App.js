@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Animated, Platform, Appearance, ImageBackground, Linking, Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { Searchbar } from 'react-native-paper';
 import * as rssParser from 'react-native-rss-parser';
 import Constants from "expo-constants"
 import * as SplashScreen from 'expo-splash-screen';
@@ -445,6 +446,15 @@ import cheerio from 'cheerio';
 function News() {
   const [articles, setArticles] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const onChangeSearch = query => setSearchQuery(query);
+
+  const scrollY = React.useRef(new Animated.Value(0)).current;
+  const translateY = scrollY.interpolate({
+    inputRange: [0, 50],
+    outputRange: [0, -50],
+    extrapolateRight: 'clamp',
+  });
 
   async function loadArticles() {
     const response = await fetch('https://www.army.mil/news');
@@ -467,7 +477,7 @@ function News() {
         region = regionArray.join(', ');
       } else {
         region = "Unknown District";
-}
+      }
       const imageUrl = $(element).find('.image-wrap img').attr('src');
       const scrapedLink = $(element).find('.more a').attr('href');
       const link = `https://www.army.mil${scrapedLink}`;
@@ -489,34 +499,62 @@ function News() {
     loadArticles();
   }, []);
 
-  return (
-    <ScrollView>
-      {loaded ? (
-        articles.map((article, index) => (
-          <List.Item style={{borderBottomWidth: 2, borderColor: "#ffcc01"}}
-            key={index}
-            
-            title={`${article.date} | ${article.region}`}
-            titleStyle={{fontSize: 12, marginBottom: 5}}
+  const filteredArticles = articles.filter(article => {
+    const searchLower = searchQuery.toLowerCase();
+    const titleLower = article.title.toLowerCase();
+    const dateLower = article.date.toLowerCase();
+    const regionLower = article.region.toLowerCase();
+    return (
+      titleLower.includes(searchLower) ||
+      dateLower.includes(searchLower) ||
+      regionLower.includes(searchLower)
+    );
+  });
 
-            description={article.title}
-            descriptionStyle={{fontSize: 17, fontWeight: 'bold', paddingRight: 12 }}
+return (
+    <View style={{ flex: 1 }}>
+      <Animated.View style={{ transform: [{ translateY }] }}>
+        <Searchbar
+          placeholder="Search News"
+          onChangeText={onChangeSearch}
+          value={searchQuery}
+        />
+      </Animated.View>
+      <ScrollView>
+        {loaded ? (
+          articles
+          .filter(
+            article =>
+              article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              article.date.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              article.region.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+          .map((article, index) => (
+            <List.Item style={{borderBottomWidth: 2, borderColor: "#ffcc01"}}
+              key={index}
+              
+              title={`${article.date} | ${article.region}`}
+              titleStyle={{fontSize: 12, marginBottom: 5}}
 
-            descriptionNumberOfLines={2}
-            onPress={() => Linking.openURL(article.link)}
-            right={(props) => (
-              <List.Image
-                {...props}
-                source={{ uri: article.imageUrl }}
-                style={{ width: 100, height: 100, borderRadius: 10}}
-              />
-            )}
-          />
-        ))
-      ) : (
-        <ActivityIndicator size="large" style={{ marginTop: 50 }} />
-      )}
-    </ScrollView>
+              description={article.title}
+              descriptionStyle={{fontSize: 17, fontWeight: 'bold', paddingRight: 12 }}
+
+              descriptionNumberOfLines={2}
+              onPress={() => Linking.openURL(article.link)}
+              right={(props) => (
+                <List.Image
+                  {...props}
+                  source={{ uri: article.imageUrl }}
+                  style={{ width: 100, height: 100, borderRadius: 10}}
+                />
+              )}
+            />
+          ))
+        ) : (
+          <ActivityIndicator size="large" style={{ marginTop: 50 }} />
+        )}
+      </ScrollView>
+    </View>
   );
 }
 
