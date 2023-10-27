@@ -327,7 +327,7 @@ function HomeScreen({ navigation, route }) {
                   titleVariant="titleLarge"
                   titleStyle={{color: "#221f20"}}
                   subtitleStyle={{color: "#221f20"}}
-                  subtitle="&quot;The Ten Toughest Days in the Army&quot;"
+                  subtitle="&quot;Gateway to the 101&quot;"
                   right={(props) => <Image source={require("./assets/AssaultBadgeClear.png")}
                     style={{
                       width: 60,
